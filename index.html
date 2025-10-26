@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thesis Project — Data-Driven Decision Support</title>
+  <!-- Computer Modern Roman webfont (black/white theme only) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/computer-modern-web-font@1.0.0/css/cmun-roman.min.css">
+  <style>
+    :root{
+      --bg: #ffffff; /* white */
+      --fg: #000000; /* black */
+      --muted:#222;
+      --line:#000;
+      --overlay: rgba(0,0,0,0.96);
+      --accent:#000; /* keep monochrome */
+      --font-serif:'CMU Serif', 'Computer Modern Roman', 'Times New Roman', serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    *{box-sizing:border-box}
+    html, body { height: 100%; }
+    body{
+      margin:0; padding:0; background:var(--bg); color:var(--fg);
+      font-family: var(--font-serif);
+      letter-spacing: 0.01em;
+    }
+    a{ color: var(--fg); text-decoration: none; border-bottom: 1px solid var(--line); }
+    a:hover{ opacity: .7; }
+
+    /* Header + Menu */
+    .header{
+      position:fixed; top:0; left:0; right:0; height:64px; display:flex; align-items:center; justify-content:flex-end; padding:0 16px; z-index:5; background:transparent;
+    }
+    .menu-btn{ cursor:pointer; width:40px; height:40px; border:1px solid var(--line); border-radius:999px; display:flex; align-items:center; justify-content:center; background:#fff; }
+    .menu-icon, .menu-icon::before, .menu-icon::after{ content:""; display:block; width:18px; height:2px; background:#000; position:relative; transition:transform .3s ease, opacity .3s ease; }
+    .menu-icon::before{ position:absolute; top:-6px; }
+    .menu-icon::after{ position:absolute; top:6px; }
+
+    /* Fullscreen overlay menu */
+    .overlay{ position:fixed; inset:0; background:var(--overlay); color:#fff; display:none; align-items:center; justify-content:center; z-index:10; }
+    .overlay.open{ display:flex; animation: fadeIn .25s ease; }
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    .overlay-nav{ text-align:center; }
+    .overlay-nav a{ display:block; font-size: clamp(28px, 5vw, 48px); color:#fff; margin:18px 0; border:none; }
+
+    /* Landing page */
+    .landing{
+      height:100vh; width:100vw; display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center; padding:0 24px; overflow:hidden; /* unscrollable */
+    }
+    .title{ font-size: clamp(28px, 5vw, 54px); max-width: 960px; line-height:1.15; margin:0 0 16px; }
+    .subtitle{ font-size: clamp(16px, 2.2vw, 22px); opacity:.9; margin:0 0 28px; }
+    .cta{ display:flex; gap:16px; flex-wrap:wrap; justify-content:center; }
+    .btn{ border:1px solid var(--line); padding:12px 18px; text-transform:uppercase; letter-spacing:.06em; font-size: 13px; background:#fff; }
+    .btn:hover{ background:#000; color:#fff; }
+
+    /* Footer logos */
+    .logos{ position:fixed; bottom:18px; left:0; right:0; display:flex; justify-content:center; align-items:center; gap:28px; filter: grayscale(1) contrast(1.2); opacity:.9; }
+    .logos img{ height:26px; opacity:.85; }
+
+    /* Page containers for sections */
+    main{ min-height:100vh; width:100%; }
+    .page{ display:none; padding:96px 24px 48px; max-width:1100px; margin:0 auto; }
+    .page.active{ display:block; }
+    h1{ font-weight:400; font-size:32px; margin:0 0 16px; }
+    h2{ font-weight:400; font-size:22px; margin:24px 0 8px; }
+    .muted{ color:#333; }
+    hr{ border:none; border-top:1px solid #000; margin:24px 0; }
+
+    /* Documents viewer */
+    .grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap:16px; }
+    .card{ border:1px solid #000; padding:14px; background:#fff; display:flex; flex-direction:column; gap:8px; }
+    .card .name{ font-size:16px; }
+    .viewer{ border:1px solid #000; height:70vh; background:#fff; }
+    .file-list{ list-style:none; padding:0; margin:0; }
+    .file-list li{ padding:8px 0; border-bottom:1px solid #000; display:flex; justify-content:space-between; align-items:center; }
+
+    /* Code/text preview */
+    pre{ background:#fff; border:1px solid #000; padding:12px; overflow:auto; font-family: var(--font-mono); font-size:13px; line-height:1.5; }
+
+    /* Chat (Demo) */
+    .chat-wrap{ max-width:760px; margin:0 auto; }
+    .chat-box{ border:1px solid #000; height:60vh; overflow:auto; padding:16px; background:#fff; }
+    .msg{ margin:10px 0; }
+    .msg.me{ text-align:right; }
+    .msg .bubble{ display:inline-block; border:1px solid #000; padding:8px 12px; background:#fff; }
+    .msg.me .bubble{ background:#000; color:#fff; }
+    .chat-input{ display:flex; gap:8px; margin-top:12px; }
+    .chat-input input{ flex:1; border:1px solid #000; padding:10px 12px; font-family:var(--font-serif); }
+    .chat-input button{ border:1px solid #000; background:#fff; padding:10px 14px; text-transform:uppercase; letter-spacing:.06em; }
+    .chat-input button:hover{ background:#000; color:#fff; }
+
+    /* Hide landing when navigating */
+    .hidden{ display:none !important; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <button class="menu-btn" id="openMenu" aria-label="Open Menu"><span class="menu-icon"></span></button>
+  </header>
+
+  <!-- Fullscreen overlay menu -->
+  <div class="overlay" id="overlay">
+    <nav class="overlay-nav">
+      <a href="#/documents" data-route>Documents</a>
+      <a href="#/models" data-route>Models</a>
+      <a href="#/demo" data-route>Demo</a>
+    </nav>
+  </div>
+
+  <!-- Landing (unscrollable) -->
+  <section class="landing" id="landing">
+    <h1 class="title">Data-Driven Decision Support in Systems Engineering</h1>
+    <p class="subtitle">Through Linked Descriptive and Analytical Models</p>
+    <div class="cta">
+      <a class="btn" href="#/documents">Open Documents</a>
+      <a class="btn" href="#/models">Open Models</a>
+      <a class="btn" href="#/demo">Open Demo</a>
+    </div>
+  </section>
+
+  <!-- Logos footer (place your files in assets/logos/) -->
+  <div class="logos">
+    <img src="assets/logos/tue-black.svg" alt="TU/e Logo (BW)">
+    <img src="assets/logos/tno-esi-black.svg" alt="TNO-ESI Logo (BW)">
+    <img src="assets/logos/incose-black.svg" alt="INCOSE Logo (BW)">
+  </div>
+
+  <!-- Pages -->
+  <main>
+    <!-- Documents Page -->
+    <section class="page" id="page-docs" aria-labelledby="docsTitle">
+      <h1 id="docsTitle">Documents</h1>
+      <p class="muted">All files listed from the <code>/docs</code> folder of this repository. Click to preview PDFs inline or open text files.</p>
+      <hr>
+      <div id="docsList" class="grid" aria-live="polite"></div>
+      <h2>Preview</h2>
+      <div id="docViewer" class="viewer"></div>
+    </section>
+
+    <!-- Models Page -->
+    <section class="page" id="page-models" aria-labelledby="modelsTitle">
+      <h1 id="modelsTitle">Models</h1>
+      <p class="muted">SysML models and related assets from the <code>/models</code> folder.</p>
+      <hr>
+      <div id="modelsList" class="grid" aria-live="polite"></div>
+      <h2>Preview</h2>
+      <div id="modelViewer" class="viewer"></div>
+    </section>
+
+    <!-- Demo Page (Chat) -->
+    <section class="page" id="page-demo" aria-labelledby="demoTitle">
+      <h1 id="demoTitle">Demo — LLM Chat</h1>
+      <div class="chat-wrap">
+        <div id="chatBox" class="chat-box" aria-live="polite"></div>
+        <div class="chat-input">
+          <input id="chatInput" type="text" placeholder="Type a message…" />
+          <button id="sendBtn">Send</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // ===== CONFIG =====
+    // Replace these with your real repo details
+    const GITHUB_USER = 'sadra-hub';               // <-- your GitHub username
+    const GITHUB_REPO = 'YOUR_REPO_NAME';          // <-- repository name
+    const BRANCH      = 'main';                    // or 'master'
+
+    // Webhook for demo chat
+    const WEBHOOK = 'https://backend.systein.nl/webhook/thesis';
+
+    // ===== ROUTER & MENU =====
+    const overlay = document.getElementById('overlay');
+    const openMenuBtn = document.getElementById('openMenu');
+    openMenuBtn.addEventListener('click', () => overlay.classList.add('open'));
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay || e.target.matches('[data-route]')) {
+        overlay.classList.remove('open');
+      }
+    });
+
+    const landing = document.getElementById('landing');
+    const pages = {
+      documents: document.getElementById('page-docs'),
+      models: document.getElementById('page-models'),
+      demo: document.getElementById('page-demo')
+    };
+
+    function setRoute() {
+      const hash = location.hash.replace('#/','');
+      // Hide all pages
+      Object.values(pages).forEach(p => p.classList.remove('active'));
+      // Default = landing
+      landing.classList.remove('hidden');
+      if (hash && pages[hash]) {
+        landing.classList.add('hidden');
+        pages[hash].classList.add('active');
+        if (hash === 'documents') loadDocs();
+        if (hash === 'models') loadModels();
+      }
+    }
+    window.addEventListener('hashchange', setRoute);
+    window.addEventListener('load', setRoute);
+
+    // ===== GITHUB API HELPERS =====
+    function ghContentsPath(path){
+      return `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${path}`;
+    }
+    function rawGitURL(path){
+      return `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${BRANCH}/${path}`;
+    }
+
+    function createCard(name, path, isBinary){
+      const card = document.createElement('div');
+      card.className = 'card';
+      const title = document.createElement('div');
+      title.className = 'name';
+      title.textContent = name;
+      const openBtn = document.createElement('a');
+      openBtn.href = rawGitURL(path);
+      openBtn.target = '_blank';
+      openBtn.textContent = 'Open';
+      const viewBtn = document.createElement('button');
+      viewBtn.textContent = 'Preview';
+      viewBtn.className = 'btn';
+      viewBtn.style.width = '100%';
+      viewBtn.addEventListener('click', () => previewFile(path, isBinary, path.startsWith('docs/') ? 'docViewer' : 'modelViewer'));
+      card.appendChild(title);
+      const row = document.createElement('div');
+      row.style.display='flex'; row.style.gap='8px';
+      row.appendChild(openBtn); row.appendChild(viewBtn);
+      card.appendChild(row);
+      return card;
+    }
+
+    async function listFolder(path){
+      const res = await fetch(ghContentsPath(path));
+      if (!res.ok) throw new Error('GitHub API error: ' + res.status);
+      return res.json();
+    }
+
+    async function loadDocs(){
+      const mount = document.getElementById('docsList');
+      mount.innerHTML = '';
+      try{
+        const items = await listFolder('docs');
+        items
+          .filter(it => it.type === 'file')
+          .forEach(it => {
+            const name = it.name;
+            const path = `docs/${name}`;
+            const isBinary = /(pdf|png|jpg|jpeg|svg)$/i.test(name);
+            mount.appendChild(createCard(name, path, isBinary));
+          });
+      }catch(err){
+        mount.innerHTML = `<div class="card">Unable to list /docs. Configure GITHUB_USER/REPO or ensure the folder exists.<br><code>${err.message}</code></div>`;
+      }
+    }
+
+    async function loadModels(){
+      const mount = document.getElementById('modelsList');
+      mount.innerHTML = '';
+      try{
+        const items = await listFolder('models');
+        items
+          .filter(it => it.type === 'file')
+          .forEach(it => {
+            const name = it.name;
+            const path = `models/${name}`;
+            // treat non-binary (e.g., .sysml, .txt) as text preview; images/svg as binary
+            const isBinary = /(png|jpg|jpeg|svg|pdf)$/i.test(name);
+            mount.appendChild(createCard(name, path, isBinary));
+          });
+      }catch(err){
+        mount.innerHTML = `<div class="card">Unable to list /models. Configure GITHUB_USER/REPO or ensure the folder exists.<br><code>${err.message}</code></div>`;
+      }
+    }
+
+    async function previewFile(path, isBinary, viewerId){
+      const viewer = document.getElementById(viewerId);
+      viewer.innerHTML = '';
+      const url = rawGitURL(path);
+      if (isBinary){
+        // For PDFs and images, embed directly
+        if (/pdf$/i.test(path)){
+          const iframe = document.createElement('iframe');
+          iframe.src = url;
+          iframe.style.width = '100%';
+          iframe.style.height = '100%';
+          iframe.style.border = 'none';
+          viewer.appendChild(iframe);
+        } else {
+          const img = document.createElement('img');
+          img.src = url; img.alt = path; img.style.maxWidth='100%'; img.style.maxHeight='100%';
+          viewer.appendChild(img);
+        }
+      } else {
+        // Fetch text content and render in <pre>
+        try{
+          const res = await fetch(url);
+          const text = await res.text();
+          const pre = document.createElement('pre');
+          pre.textContent = text;
+          viewer.appendChild(pre);
+        }catch(err){
+          viewer.innerHTML = `<div class='card'>Failed to load file.<br><code>${err.message}</code></div>`
+        }
+      }
+    }
+
+    // ===== DEMO CHAT =====
+    const chatBox = document.getElementById('chatBox');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+
+    function addMsg(text, me=false){
+      const wrap = document.createElement('div');
+      wrap.className = 'msg' + (me ? ' me' : '');
+      const b = document.createElement('div');
+      b.className = 'bubble'; b.textContent = text;
+      wrap.appendChild(b); chatBox.appendChild(wrap); chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    async function sendMessage(){
+      const msg = chatInput.value.trim();
+      if(!msg) return;
+      addMsg(msg, true);
+      chatInput.value='';
+      try{
+        // Send GET with message parameter
+        const url = new URL(WEBHOOK);
+        url.searchParams.set('message', msg);
+        const res = await fetch(url.toString(), { method: 'GET' });
+        let reply = '';
+        const ct = res.headers.get('content-type') || '';
+        if(ct.includes('application/json')){
+          const data = await res.json();
+          reply = data.response || data.result || JSON.stringify(data);
+        } else {
+          reply = await res.text();
+        }
+        addMsg(reply || '[No response]');
+      }catch(err){
+        addMsg('[Error] ' + err.message);
+      }
+    }
+
+    sendBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') sendMessage(); });
+  </script>
+</body>
+</html>
