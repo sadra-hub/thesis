@@ -1,4 +1,4 @@
-WEBVTT
+The following is the trnascription of this video: https://ieeesystemscouncil.org/event/lecture/sysc-odl-linking-data-and-models-digital-engineering-and-analytics-tom-mcdermott
 
 1
 00:00:03.845 --> 00:00:07.415
