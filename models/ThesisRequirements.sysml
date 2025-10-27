@@ -1,12 +1,6 @@
 // SysML v2 textual notation — Administrative & Planning Requirements
 // for the MSc AI&ES graduation project (45 ECTS, 32 weeks)
 
-// Notes:
-// - Uses simple time in 'day' and 'week' based on ISQ::time.
-// - Where exact calendar dates are needed, store them as attributes and
-//   constrain their differences (in days/weeks).
-// - Replace placeholder booleans/integers with live values from your workflow tooling.
-
 package ThesisAdminAndPlanningRequirements {
     private import RequirementDerivation::*;
     private import ISQ::*;
