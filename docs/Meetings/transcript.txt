@@ -1,0 +1,4729 @@
+WEBVTT
+
+1
+00:00:03.845 --> 00:00:07.415
+Welcome to I System Council Education Committee.
+
+2
+00:00:08.255 --> 00:00:09.575
+Distinguished online lecture program
+
+3
+00:00:15.135 --> 00:00:16.165
+About the system council.
+
+4
+00:00:16.265 --> 00:00:19.205
+The system council was framed in 2005 with an ambition
+
+5
+00:00:19.205 --> 00:00:22.605
+to promote, encourage, and support technical academic
+
+6
+00:00:22.745 --> 00:00:25.125
+and application aspects of system engineering
+
+7
+00:00:25.425 --> 00:00:27.725
+and system of systems in system thinking
+
+8
+00:00:27.905 --> 00:00:29.325
+to address global challenges.
+
+9
+00:00:29.635 --> 00:00:31.765
+Currently, the system council has collaborated.
+
+10
+00:00:31.865 --> 00:00:34.525
+We are having, uh, different areas of expertise,
+
+11
+00:00:34.525 --> 00:00:36.765
+which include system of systems, system thinking,
+
+12
+00:00:37.185 --> 00:00:39.405
+robust design system, engineering, system modeling,
+
+13
+00:00:39.405 --> 00:00:43.125
+product transition, system strategy, system architecture,
+
+14
+00:00:43.235 --> 00:00:46.245
+product design, product management, risk assessment,
+
+15
+00:00:46.545 --> 00:00:47.845
+and mission assurance.
+
+16
+00:00:48.955 --> 00:00:51.485
+Currently, the executive committee, Andy Chan,
+
+17
+00:00:51.485 --> 00:00:53.565
+from Onic Enterprise is the president,
+
+18
+00:00:53.945 --> 00:00:56.325
+and the past president was Wall Downing from
+
+19
+00:00:56.395 --> 00:00:57.805
+Southwest Research Institute.
+
+20
+00:00:58.225 --> 00:01:01.365
+We are vice President for publication fabs, vice President
+
+21
+00:01:01.445 --> 00:01:04.605
+for finance, vice President for technical operation.
+
+22
+00:01:04.775 --> 00:01:07.645
+Andre Oler and treasurer is Steven Lee.
+
+23
+00:01:08.065 --> 00:01:11.525
+And Vice president for conference is Paolo from Italy.
+
+24
+00:01:11.955 --> 00:01:15.365
+Vice President for membership Service is bna Pasky.
+
+25
+00:01:15.415 --> 00:01:19.835
+Dukan and secretary is Jon Wong about, uh,
+
+26
+00:01:19.895 --> 00:01:21.035
+the education committee.
+
+27
+00:01:21.035 --> 00:01:22.755
+Currently we have been fostering
+
+28
+00:01:22.815 --> 00:01:25.475
+and coordinating educational initiatives
+
+29
+00:01:25.895 --> 00:01:30.195
+for creating an high quality, uh, tutorial materials,
+
+30
+00:01:30.385 --> 00:01:32.995
+educational works in system engineering.
+
+31
+00:01:33.455 --> 00:01:35.595
+Our initiatives are focused towards the protection
+
+32
+00:01:35.595 --> 00:01:38.035
+and distribution of quality tutorial, develop
+
+33
+00:01:38.135 --> 00:01:40.675
+by our own experts in the system,
+
+34
+00:01:40.955 --> 00:01:43.795
+engineering from the council, and it'll be hosted in IE
+
+35
+00:01:43.795 --> 00:01:47.795
+system council resource center, specialized meetings in
+
+36
+00:01:48.715 --> 00:01:50.195
+workshops, dedicated conferences
+
+37
+00:01:50.695 --> 00:01:53.275
+or related to the educational activities of the system,
+
+38
+00:01:53.515 --> 00:01:57.075
+engineering for the students accessibilities recommendation
+
+39
+00:01:57.075 --> 00:01:59.195
+for educational materials such as books
+
+40
+00:01:59.295 --> 00:02:01.155
+and technical educational programs
+
+41
+00:02:01.415 --> 00:02:03.955
+or our current initiatives to oversight
+
+42
+00:02:04.375 --> 00:02:07.475
+and direction of the educational resources made available
+
+43
+00:02:07.685 --> 00:02:10.785
+electronic form about membership societies.
+
+44
+00:02:11.265 --> 00:02:14.145
+IE system council is collaborated with IEE electronic,
+
+45
+00:02:14.285 --> 00:02:15.585
+so Society, IEE,
+
+46
+00:02:15.585 --> 00:02:18.985
+industrial Electronic Society Systems Council, uh,
+
+47
+00:02:18.985 --> 00:02:23.145
+control System, society and Transportation Society Power
+
+48
+00:02:23.165 --> 00:02:25.065
+and Energy Societies and et cetera.
+
+49
+00:02:25.675 --> 00:02:27.145
+About the council expansion,
+
+50
+00:02:27.165 --> 00:02:30.985
+we are about 28 plus session chapters, 27 students chapters
+
+51
+00:02:31.705 --> 00:02:34.785
+19 countries in all one to 10 IE region
+
+52
+00:02:35.355 --> 00:02:37.545
+about publication IE system journal
+
+53
+00:02:37.685 --> 00:02:40.825
+as establishes a journal system journal in 2007
+
+54
+00:02:41.175 --> 00:02:43.105
+with an imper factor of 4.4
+
+55
+00:02:43.445 --> 00:02:46.225
+and medium time for publication is less than seven weeks.
+
+56
+00:02:46.805 --> 00:02:48.665
+We also have co-sponsored publication,
+
+57
+00:02:48.665 --> 00:02:50.585
+which includes journals on mini generation
+
+58
+00:02:50.645 --> 00:02:53.265
+for air space system, open journal
+
+59
+00:02:53.385 --> 00:02:55.905
+of system engineering system engineering, body of
+
+60
+00:02:56.495 --> 00:02:59.560
+tion on big data transaction on cloud computing,
+
+61
+00:02:59.560 --> 00:03:00.720
+transaction on privacy.
+
+62
+00:03:01.225 --> 00:03:03.565
+And if you're subscribed to our newsletters,
+
+63
+00:03:03.695 --> 00:03:08.605
+which reaches more than 38,000 subscribers, boards
+
+64
+00:03:08.605 --> 00:03:11.965
+of system council, it has fully sponsored conferences in
+
+65
+00:03:11.965 --> 00:03:15.845
+three version siscon International System Conference happens
+
+66
+00:03:16.065 --> 00:03:17.805
+in North American states.
+
+67
+00:03:18.605 --> 00:03:21.565
+I-E-S-S-E International Symposium on system engineering
+
+68
+00:03:21.595 --> 00:03:25.005
+happens in all IEE, Europe, Africa, and Middle East
+
+69
+00:03:25.545 --> 00:03:28.205
+and Rasi, which is an international conference on recent
+
+70
+00:03:28.315 --> 00:03:29.965
+advancement system engineering.
+
+71
+00:03:29.995 --> 00:03:33.205
+Science engineering happens in Asia Pacific region
+
+72
+00:03:34.065 --> 00:03:35.335
+about a distinguished lecture program,
+
+73
+00:03:35.815 --> 00:03:37.735
+distinguished lecture program as an ambition
+
+74
+00:03:38.005 --> 00:03:42.055
+with an objective to access the experts within the council
+
+75
+00:03:42.115 --> 00:03:43.735
+in the field of system engineering.
+
+76
+00:03:44.125 --> 00:03:46.855
+Currently we have more than 20 plus distinguished lecturers
+
+77
+00:03:47.005 --> 00:03:50.975
+with various expertise and different bio, uh, geolocations.
+
+78
+00:03:51.355 --> 00:03:52.815
+If you want to organize, uh,
+
+79
+00:03:53.135 --> 00:03:55.895
+physical distinguished lecture at your IE chapters,
+
+80
+00:03:56.165 --> 00:03:57.175
+student chapters
+
+81
+00:03:57.395 --> 00:04:00.855
+or at your university, you can request a form in online
+
+82
+00:04:00.855 --> 00:04:04.655
+with system council about the award System Council always,
+
+83
+00:04:04.915 --> 00:04:08.775
+uh, recognize the efforts done for, uh, base paper award
+
+84
+00:04:08.775 --> 00:04:12.215
+with the system journal the certificate with $500
+
+85
+00:04:12.275 --> 00:04:14.175
+for the paper published in previous years.
+
+86
+00:04:15.045 --> 00:04:17.905
+Of course, for long service, uh, standing members
+
+87
+00:04:17.925 --> 00:04:20.905
+of the assistant council outstanding service award will be
+
+88
+00:04:20.905 --> 00:04:22.865
+given with a plague and thousand dollars
+
+89
+00:04:23.435 --> 00:04:24.705
+about Education committee.
+
+90
+00:04:24.815 --> 00:04:25.905
+Education committee.
+
+91
+00:04:25.915 --> 00:04:28.465
+Proud to announce James Ogar scholarships,
+
+92
+00:04:28.465 --> 00:04:30.785
+which is available for the candidates
+
+93
+00:04:30.965 --> 00:04:33.865
+who are doing the graduate studies in process control system
+
+94
+00:04:34.105 --> 00:04:36.865
+engineering, plant automation instrumentation measurement.
+
+95
+00:04:37.235 --> 00:04:40.065
+We'll get one prize in a year with $6,000.
+
+96
+00:04:40.805 --> 00:04:43.145
+Of course, we are giving IRP system accounts
+
+97
+00:04:43.145 --> 00:04:44.785
+and engineering undergraduate scholarship,
+
+98
+00:04:45.155 --> 00:04:47.545
+which is recognized for the first professional degree in
+
+99
+00:04:47.545 --> 00:04:48.745
+any engineering discipline.
+
+100
+00:04:49.005 --> 00:04:51.305
+Two candidates will be awarded with a cash prize
+
+101
+00:04:51.305 --> 00:04:52.825
+of $5,000 in a year.
+
+102
+00:04:53.345 --> 00:04:55.905
+IE system council engineering graduate scholarship is
+
+103
+00:04:55.905 --> 00:04:58.785
+available for, uh, pursuing graduate studies in any
+
+104
+00:04:58.985 --> 00:05:00.625
+engineering discipline for two candidates
+
+105
+00:05:00.735 --> 00:05:03.265
+with a thousand dollars of course, chapters
+
+106
+00:05:03.265 --> 00:05:05.305
+and student chapters of the year will be awarded
+
+107
+00:05:05.305 --> 00:05:07.065
+with the certificates and a thousand dollars
+
+108
+00:05:07.325 --> 00:05:08.545
+for the service to the council.
+
+109
+00:05:09.555 --> 00:05:11.505
+About the council, what we do for you,
+
+110
+00:05:11.645 --> 00:05:13.625
+we organize various IEE conferences,
+
+111
+00:05:13.725 --> 00:05:16.385
+either financially sponsored the three, three versions
+
+112
+00:05:16.385 --> 00:05:17.545
+of the system council,
+
+113
+00:05:18.045 --> 00:05:20.905
+or you can have a technical co sponsorship from us,
+
+114
+00:05:21.285 --> 00:05:22.665
+of course, publication, you can do
+
+115
+00:05:22.665 --> 00:05:24.065
+journals, conferences, et cetera.
+
+116
+00:05:24.215 --> 00:05:26.865
+Technical activities, awards, education.
+
+117
+00:05:27.005 --> 00:05:29.595
+The most important is the networking, how
+
+118
+00:05:29.595 --> 00:05:30.915
+to be involved with the system council.
+
+119
+00:05:31.055 --> 00:05:33.595
+You can become a participant if you're an IEE member.
+
+120
+00:05:33.655 --> 00:05:36.635
+You can organize conferences at your chapters region.
+
+121
+00:05:36.935 --> 00:05:39.675
+You can organize IE system council meetings, workshops,
+
+122
+00:05:39.775 --> 00:05:41.155
+and of course you can become a review
+
+123
+00:05:41.155 --> 00:05:42.475
+of the conferences and journals.
+
+124
+00:05:42.855 --> 00:05:44.435
+Get involved with your local chapters
+
+125
+00:05:44.435 --> 00:05:45.675
+for volunteer activities.
+
+126
+00:05:46.055 --> 00:05:48.555
+You can become a distinguished lecturer every year.
+
+127
+00:05:48.615 --> 00:05:50.275
+The call will come from the system council
+
+128
+00:05:50.275 --> 00:05:52.235
+through newsletters and social medias
+
+129
+00:05:52.235 --> 00:05:54.315
+and online websites where you can apply
+
+130
+00:05:54.315 --> 00:05:56.315
+and you can become an expert if you are, uh,
+
+131
+00:05:56.315 --> 00:05:58.445
+having a background on system engineering
+
+132
+00:05:58.445 --> 00:05:59.445
+and system thinking.
+
+133
+00:05:59.985 --> 00:06:02.365
+Of course, you can, uh, able to serve in the voluntary
+
+134
+00:06:02.365 --> 00:06:04.605
+as a committee members calls will announce
+
+135
+00:06:04.745 --> 00:06:06.805
+and it'll be circulated among various medias
+
+136
+00:06:07.335 --> 00:06:08.805
+about subscriptions is free.
+
+137
+00:06:08.865 --> 00:06:11.405
+And if you're a subscriber of the mailing list,
+
+138
+00:06:11.785 --> 00:06:15.205
+we are System council Updates will be reached you in time
+
+139
+00:06:16.135 --> 00:06:17.365
+about, uh, system council.
+
+140
+00:06:17.465 --> 00:06:19.565
+We have an official website, Facebook tutor
+
+141
+00:06:19.625 --> 00:06:21.885
+and LinkedIn where you can able to follow the news
+
+142
+00:06:21.945 --> 00:06:24.355
+and events about today's speaker.
+
+143
+00:06:24.975 --> 00:06:27.795
+Tom McDermot is the Chief Technology Officer
+
+144
+00:06:28.335 --> 00:06:30.075
+of the System Engineering Research Center
+
+145
+00:06:30.455 --> 00:06:32.315
+and a faculty member in the School of System
+
+146
+00:06:32.315 --> 00:06:36.715
+and Enterprises at Steven Institute of Technology in Quebec
+
+147
+00:06:36.715 --> 00:06:41.695
+and New Jersey about Meg.
+
+148
+00:06:41.695 --> 00:06:44.775
+Uh, Meg Dermot teaches system architecture system,
+
+149
+00:06:45.775 --> 00:06:47.535
+critical thinking and engineering leaderships.
+
+150
+00:06:47.995 --> 00:06:50.575
+Of course, he provides executive level consulting
+
+151
+00:06:50.795 --> 00:06:53.895
+as a system engineer on organizational expert
+
+152
+00:06:56.455 --> 00:06:58.075
+expert strategy expert.
+
+153
+00:06:58.455 --> 00:06:59.915
+He is also a fellow of, uh,
+
+154
+00:06:59.915 --> 00:07:02.515
+international Council on system engineering inco,
+
+155
+00:07:02.935 --> 00:07:05.675
+and recently completed three year as a inco director
+
+156
+00:07:05.675 --> 00:07:07.475
+of strategic integration.
+
+157
+00:07:07.855 --> 00:07:09.435
+And he's our current, uh,
+
+158
+00:07:09.435 --> 00:07:13.875
+20 26, 20 24 distinguished lecturer
+
+159
+00:07:14.055 --> 00:07:17.865
+of the system council about his talk today.
+
+160
+00:07:18.125 --> 00:07:20.105
+Uh, the title is based on linking data
+
+161
+00:07:20.365 --> 00:07:23.425
+and models in digital engineering and analytics.
+
+162
+00:07:24.345 --> 00:07:26.585
+A short summarize about his presentation, he's going
+
+163
+00:07:26.585 --> 00:07:27.985
+to discuss about the key, uh,
+
+164
+00:07:27.985 --> 00:07:31.745
+digital challenges in engineering to ensure the speed
+
+165
+00:07:31.745 --> 00:07:33.865
+and efficiency in conducting the work.
+
+166
+00:07:34.005 --> 00:07:35.545
+And regardless of the performer,
+
+167
+00:07:36.005 --> 00:07:40.465
+he will be discussing the setups and manage datas
+
+168
+00:07:40.465 --> 00:07:42.985
+and model using flexible ontologies
+
+169
+00:07:43.125 --> 00:07:46.825
+and standards for liquid data exchange confirming
+
+170
+00:07:46.825 --> 00:07:48.585
+to the worldwide web standards.
+
+171
+00:07:49.125 --> 00:07:52.145
+His presentation also concludes and includes the definition
+
+172
+00:07:52.285 --> 00:07:55.145
+and concepts for data interoperability,
+
+173
+00:07:56.105 --> 00:07:58.425
+building domain application, ologies,
+
+174
+00:07:59.025 --> 00:08:01.065
+building the tool infrastructure to support these.
+
+175
+00:08:01.415 --> 00:08:03.625
+Also some examples, modeling approach.
+
+176
+00:08:04.285 --> 00:08:06.105
+Now I handle the session to make
+
+177
+00:08:07.255 --> 00:08:09.115
+Thanks for the the kind introduction.
+
+178
+00:08:09.335 --> 00:08:12.955
+Um, so this is a, a kind of a new body of work for us.
+
+179
+00:08:12.985 --> 00:08:14.515
+Some of you have followed the work
+
+180
+00:08:14.515 --> 00:08:16.595
+that the System Engineering Research Center has been doing
+
+181
+00:08:16.595 --> 00:08:19.115
+on model centric engineering, which, uh,
+
+182
+00:08:19.115 --> 00:08:20.915
+gets into a lot more detail
+
+183
+00:08:21.695 --> 00:08:23.915
+of the mechanization of the approaches.
+
+184
+00:08:24.415 --> 00:08:27.035
+Um, I wanted to talk a little bit more about why
+
+185
+00:08:27.095 --> 00:08:29.635
+or what is the value of doing this.
+
+186
+00:08:30.015 --> 00:08:33.595
+Um, from an adoption point of view, getting these type of
+
+187
+00:08:33.615 --> 00:08:37.515
+of technologies adopted needs to link to some sort
+
+188
+00:08:37.515 --> 00:08:38.915
+of unique or new value.
+
+189
+00:08:39.535 --> 00:08:40.955
+Um, and so we've spent
+
+190
+00:08:41.585 --> 00:08:44.275
+over the past two years really working with, uh,
+
+191
+00:08:44.275 --> 00:08:45.995
+government organizations on that value.
+
+192
+00:08:46.575 --> 00:08:48.795
+So I'm gonna cover quickly who we are
+
+193
+00:08:49.055 --> 00:08:50.955
+and then talk about something known
+
+194
+00:08:50.955 --> 00:08:52.235
+as data-driven system models
+
+195
+00:08:52.335 --> 00:08:55.245
+and analysis models, talk to the value
+
+196
+00:08:55.465 --> 00:08:57.925
+and then discuss the data interoperability model
+
+197
+00:08:57.925 --> 00:08:59.285
+that we created recently.
+
+198
+00:08:59.745 --> 00:09:01.205
+Um, and then time permitting.
+
+199
+00:09:01.225 --> 00:09:03.405
+Do a quick example to show you that what
+
+200
+00:09:03.405 --> 00:09:06.685
+what we're talking about here is really can be implemented.
+
+201
+00:09:07.385 --> 00:09:10.245
+Um, so we are the system engineering research center.
+
+202
+00:09:10.295 --> 00:09:13.845
+We're a government university affiliated research center
+
+203
+00:09:13.845 --> 00:09:15.765
+working for the Department of Defense.
+
+204
+00:09:16.265 --> 00:09:18.085
+Um, we do contracted research
+
+205
+00:09:18.105 --> 00:09:20.445
+for government agencies across 26
+
+206
+00:09:20.445 --> 00:09:22.125
+universities as listed here.
+
+207
+00:09:22.745 --> 00:09:25.525
+Um, the work I'm showing you has been going on
+
+208
+00:09:25.525 --> 00:09:28.525
+for about 11 years now across six
+
+209
+00:09:28.545 --> 00:09:30.245
+or seven of these universities.
+
+210
+00:09:30.265 --> 00:09:31.965
+So it's really been a kind of a team
+
+211
+00:09:32.545 --> 00:09:33.885
+effort as we go forward.
+
+212
+00:09:35.105 --> 00:09:36.405
+So part
+
+213
+00:09:36.405 --> 00:09:40.245
+of our role is really heavily focused on the intersection
+
+214
+00:09:40.915 --> 00:09:43.405
+between, uh, government acquisition
+
+215
+00:09:44.065 --> 00:09:46.885
+and their major industrial contractors
+
+216
+00:09:46.995 --> 00:09:48.765
+that they use in this.
+
+217
+00:09:48.865 --> 00:09:52.045
+So, so think of that context as we're,
+
+218
+00:09:52.045 --> 00:09:54.085
+we're generally trying to understand,
+
+219
+00:09:54.245 --> 00:09:56.525
+particularly when we talk about digital engineering
+
+220
+00:09:56.525 --> 00:09:58.845
+and sharing data, how the government
+
+221
+00:09:58.905 --> 00:10:00.925
+and contractors share data back
+
+222
+00:10:00.925 --> 00:10:03.325
+and forth across those interfaces.
+
+223
+00:10:03.325 --> 00:10:05.845
+So that's sort of our special area of work,
+
+224
+00:10:06.265 --> 00:10:08.925
+and it expands everything from engineering up
+
+225
+00:10:08.925 --> 00:10:12.085
+through procurement, supply chain management, sustainment,
+
+226
+00:10:12.105 --> 00:10:14.085
+all the other types of functions.
+
+227
+00:10:14.945 --> 00:10:18.605
+Um, so this concept of data-driven system models
+
+228
+00:10:18.665 --> 00:10:23.365
+and analysis models, um, it really stems from a lot of work
+
+229
+00:10:23.365 --> 00:10:26.245
+that's been done in the digital engineering domain.
+
+230
+00:10:26.265 --> 00:10:28.965
+So we'll talk about model-based system engineering,
+
+231
+00:10:28.965 --> 00:10:31.205
+but we're really talking about digital engineering,
+
+232
+00:10:31.205 --> 00:10:35.285
+which is the digitalization of all of the engineering
+
+233
+00:10:35.385 --> 00:10:36.445
+and program management
+
+234
+00:10:36.445 --> 00:10:39.405
+and associated processes, um, which has a lot
+
+235
+00:10:39.405 --> 00:10:40.445
+to do with workflows.
+
+236
+00:10:40.505 --> 00:10:44.645
+And so we really wanna to focus on what is this future
+
+237
+00:10:45.205 --> 00:10:49.085
+workflow that allows, for instance, from the,
+
+238
+00:10:49.305 --> 00:10:51.685
+the defense department's digital entity strategy
+
+239
+00:10:52.305 --> 00:10:57.125
+to modernize what they do using authoritative sources
+
+240
+00:10:57.225 --> 00:10:59.005
+of system data and models.
+
+241
+00:10:59.505 --> 00:11:04.125
+Um, and so from the Kozy Vision 2025 document,
+
+242
+00:11:04.745 --> 00:11:07.765
+um, there is a kind of a statement that sums up
+
+243
+00:11:07.765 --> 00:11:08.805
+what we really want to do.
+
+244
+00:11:08.865 --> 00:11:11.485
+And so we wanna encourage formal systems modeling
+
+245
+00:11:12.345 --> 00:11:15.565
+as standard practice for specify, specifying, analyzing,
+
+246
+00:11:15.565 --> 00:11:17.005
+designing, and verifying systems.
+
+247
+00:11:17.505 --> 00:11:20.085
+So the idea here is systems models are really good at
+
+248
+00:11:20.115 --> 00:11:22.605
+capturing the, the knowledge
+
+249
+00:11:23.265 --> 00:11:25.765
+in a system design throughout the design process,
+
+250
+00:11:26.515 --> 00:11:28.685
+capturing the linkage to what,
+
+251
+00:11:28.685 --> 00:11:30.365
+what we call the digital thread.
+
+252
+00:11:30.825 --> 00:11:34.405
+So all the decisions that are made in a development process,
+
+253
+00:11:35.105 --> 00:11:38.365
+um, and in storing that over time
+
+254
+00:11:38.505 --> 00:11:40.365
+so it can be updated and adapted.
+
+255
+00:11:40.945 --> 00:11:44.685
+But the second part of this, um, is the idea of
+
+256
+00:11:45.225 --> 00:11:47.765
+the technology behind digital engineering,
+
+257
+00:11:48.575 --> 00:11:51.085
+which is really we believe making use
+
+258
+00:11:51.085 --> 00:11:54.645
+of internet driven knowledge, representation and technology.
+
+259
+00:11:54.985 --> 00:11:57.765
+So we don't have to do this by ourselves.
+
+260
+00:11:58.805 --> 00:12:00.245
+Companies like Google and Amazon
+
+261
+00:12:00.265 --> 00:12:03.805
+and many others have explored for some time now the concept
+
+262
+00:12:03.945 --> 00:12:07.125
+of, of knowledge representation through knowledge graphs,
+
+263
+00:12:07.665 --> 00:12:11.605
+um, and capturing that using internet driven standards.
+
+264
+00:12:11.765 --> 00:12:14.765
+And so that's been the heart of our approach here,
+
+265
+00:12:14.985 --> 00:12:17.925
+and we'll talk about why we do things that way and,
+
+266
+00:12:17.985 --> 00:12:19.285
+and some of the definitions.
+
+267
+00:12:19.945 --> 00:12:22.205
+Um, again, feel free to answer questions.
+
+268
+00:12:22.315 --> 00:12:24.885
+I'll monitor the q and a, so ask them in the q
+
+269
+00:12:24.885 --> 00:12:29.445
+and a, um, box, um, as we go along here, and we'll try
+
+270
+00:12:29.445 --> 00:12:31.045
+and save some time to answer these.
+
+271
+00:12:32.185 --> 00:12:36.265
+So, um, there's a, a series of papers that came out
+
+272
+00:12:36.265 --> 00:12:39.145
+of a research group in Norway proposing
+
+273
+00:12:39.375 --> 00:12:41.065
+what they called the Nexus model.
+
+274
+00:12:41.125 --> 00:12:43.905
+And so the Nexus model says that we need to create
+
+275
+00:12:44.415 --> 00:12:46.025
+data-driven system models
+
+276
+00:12:46.805 --> 00:12:49.665
+to manage our data analytics.
+
+277
+00:12:49.925 --> 00:12:53.425
+So all of us who have done any types of system engineering
+
+278
+00:12:53.425 --> 00:12:54.785
+or engineering know that,
+
+279
+00:12:55.175 --> 00:12:57.825
+that the decisions usually involve trade studies.
+
+280
+00:12:58.515 --> 00:13:01.505
+Those trade studies are linked to analysis methods,
+
+281
+00:13:01.505 --> 00:13:03.665
+which then are linked to analytical models
+
+282
+00:13:04.135 --> 00:13:05.745
+that are driven by data.
+
+283
+00:13:06.445 --> 00:13:10.225
+And you know, in the process that of doing that,
+
+284
+00:13:10.225 --> 00:13:12.505
+those things get summed up often in PowerPoint slides
+
+285
+00:13:12.525 --> 00:13:13.705
+and decisions get made.
+
+286
+00:13:14.085 --> 00:13:17.585
+Um, but those models, they become stale over time
+
+287
+00:13:17.685 --> 00:13:22.065
+and we want that linkage to always exist between
+
+288
+00:13:22.095 --> 00:13:25.305
+what we produce from the analytics and decisions and,
+
+289
+00:13:25.765 --> 00:13:30.145
+and then, um, you know, what we store and capture over time.
+
+290
+00:13:30.805 --> 00:13:33.665
+And we propose that, that we can do that as part
+
+291
+00:13:33.665 --> 00:13:35.145
+of our system modeling activity.
+
+292
+00:13:35.245 --> 00:13:37.825
+So most organizations are using system modeling
+
+293
+00:13:38.445 --> 00:13:40.545
+to capture things like the structure of a system
+
+294
+00:13:40.565 --> 00:13:43.585
+and the function of a system and its behaviors, um,
+
+295
+00:13:43.645 --> 00:13:45.385
+and the requirements for a system.
+
+296
+00:13:45.925 --> 00:13:48.465
+But we can also use the system model to capture
+
+297
+00:13:49.125 --> 00:13:52.225
+the analysis approach, the data analysis methods
+
+298
+00:13:52.605 --> 00:13:53.705
+and, and languages.
+
+299
+00:13:53.765 --> 00:13:57.465
+And so we have this opportunity to capture
+
+300
+00:13:58.005 --> 00:14:00.545
+the relationships between the system elements
+
+301
+00:14:00.545 --> 00:14:03.505
+and the decision data, which is the what,
+
+302
+00:14:03.965 --> 00:14:06.785
+but also to capture all of the necessary data
+
+303
+00:14:06.845 --> 00:14:09.785
+for the analysis, which is the why we chose
+
+304
+00:14:09.815 --> 00:14:12.145
+that particular approach or made that decision.
+
+305
+00:14:12.725 --> 00:14:16.425
+Um, and what we want that to be is a dynamic feed
+
+306
+00:14:16.515 --> 00:14:19.185
+where this data-driven system model is always operating
+
+307
+00:14:19.185 --> 00:14:22.065
+with a pipeline between the data sources
+
+308
+00:14:22.725 --> 00:14:23.865
+and the system models.
+
+309
+00:14:24.125 --> 00:14:27.745
+Um, so this concept of a data-driven system model, um,
+
+310
+00:14:28.005 --> 00:14:30.785
+is a nice conceptual framework for
+
+311
+00:14:30.815 --> 00:14:32.625
+what we want the future to look like.
+
+312
+00:14:33.245 --> 00:14:38.115
+And of course there's not, uh, well understood, um, use
+
+313
+00:14:38.255 --> 00:14:41.235
+of this, these type of methods and, and we lack tools
+
+314
+00:14:41.235 --> 00:14:43.115
+and vendors and services for doing this.
+
+315
+00:14:43.175 --> 00:14:46.795
+So, so we've been promoting tools to support that.
+
+316
+00:14:47.705 --> 00:14:50.435
+This presentation is really focused on providing some
+
+317
+00:14:50.435 --> 00:14:51.445
+of that understanding.
+
+318
+00:14:52.145 --> 00:14:55.845
+Um, so to, uh, to kind of build on this model here,
+
+319
+00:14:56.705 --> 00:14:58.485
+you can think about the concept
+
+320
+00:14:59.185 --> 00:15:02.845
+of a system operating in the real world generating data.
+
+321
+00:15:03.065 --> 00:15:05.605
+And so what, what our goal is, is to build a system
+
+322
+00:15:05.605 --> 00:15:08.285
+that provides value to some set of stakeholders,
+
+323
+00:15:08.785 --> 00:15:11.845
+and that system generates data in the real world.
+
+324
+00:15:12.225 --> 00:15:13.725
+Um, and in the past
+
+325
+00:15:13.875 --> 00:15:15.925
+that data was not necessarily even captured,
+
+326
+00:15:16.025 --> 00:15:18.165
+or if it was captured, it was never linked
+
+327
+00:15:18.595 --> 00:15:19.605
+back to the system.
+
+328
+00:15:20.225 --> 00:15:22.165
+Um, it was generated by the system,
+
+329
+00:15:22.185 --> 00:15:24.765
+but it wasn't necessarily fed back to improve the system.
+
+330
+00:15:25.185 --> 00:15:27.125
+And that's what we really want to get to.
+
+331
+00:15:28.025 --> 00:15:32.325
+Um, so we represent the system today with a system model.
+
+332
+00:15:32.345 --> 00:15:35.125
+We can create a model using the system's modeling language
+
+333
+00:15:35.475 --> 00:15:39.085
+that represents the real world system in the virtual world.
+
+334
+00:15:39.705 --> 00:15:42.165
+And that can also provide data, in fact,
+
+335
+00:15:42.165 --> 00:15:45.245
+it can provide synthetic data so that we can operate
+
+336
+00:15:46.385 --> 00:15:49.165
+the system outside of its boundaries of
+
+337
+00:15:49.165 --> 00:15:51.605
+what it would really look like in the, in the environment
+
+338
+00:15:51.605 --> 00:15:52.805
+that it's operating in.
+
+339
+00:15:53.265 --> 00:15:56.725
+So we have these two types of things that are always kind
+
+340
+00:15:56.725 --> 00:15:58.445
+of generating data for us throughout the
+
+341
+00:15:58.445 --> 00:15:59.485
+lifecycle of the system.
+
+342
+00:16:00.185 --> 00:16:01.685
+Um, and what does that data feed?
+
+343
+00:16:01.685 --> 00:16:03.325
+It feeds an analysis model.
+
+344
+00:16:03.955 --> 00:16:07.645
+That analysis model, um, also generates data,
+
+345
+00:16:07.705 --> 00:16:10.805
+but we can use it to modify the system model.
+
+346
+00:16:11.345 --> 00:16:13.165
+And so the concept is
+
+347
+00:16:13.265 --> 00:16:14.925
+how do we link all these things together?
+
+348
+00:16:15.595 --> 00:16:17.005
+Because the system model
+
+349
+00:16:17.065 --> 00:16:18.125
+and the analysis model,
+
+350
+00:16:18.395 --> 00:16:21.045
+they've typically been st stove piped into different tools.
+
+351
+00:16:21.705 --> 00:16:25.485
+Um, we have to do this, um, we have to do this
+
+352
+00:16:25.585 --> 00:16:29.125
+to execute the concept of a digital thread, which is
+
+353
+00:16:29.125 --> 00:16:30.765
+that data-driven architecture
+
+354
+00:16:30.765 --> 00:16:33.085
+that provides the knowledge basis for all this
+
+355
+00:16:33.545 --> 00:16:36.045
+as the system is built and changes over time.
+
+356
+00:16:36.705 --> 00:16:38.845
+And we have to do this to develop
+
+357
+00:16:38.845 --> 00:16:40.365
+what we call the digital twins,
+
+358
+00:16:40.695 --> 00:16:43.565
+which is the virtual representation of the system
+
+359
+00:16:44.035 --> 00:16:47.245
+that we can hook into the live system in order
+
+360
+00:16:47.345 --> 00:16:51.125
+to collect data and update it with real world experience.
+
+361
+00:16:51.505 --> 00:16:55.965
+So those two things are very much dependent on this linkage,
+
+362
+00:16:55.965 --> 00:16:59.365
+these pipelines that we can generate between
+
+363
+00:16:59.435 --> 00:17:02.645
+what we call a system model and an analysis model.
+
+364
+00:17:02.985 --> 00:17:05.485
+So that's a lot of the motivation for what we're doing.
+
+365
+00:17:06.355 --> 00:17:08.925
+It's critical in this, um, environment
+
+366
+00:17:08.985 --> 00:17:12.525
+to link the relevant information in the decision-making
+
+367
+00:17:12.525 --> 00:17:16.445
+environment, to aggregate it from multiple sources in a way
+
+368
+00:17:16.445 --> 00:17:17.685
+that's coherent and understandable,
+
+369
+00:17:18.385 --> 00:17:22.645
+and to plug into both the data repositories directly
+
+370
+00:17:22.665 --> 00:17:25.365
+and visualization tools to see those things instead
+
+371
+00:17:25.365 --> 00:17:29.445
+of just plugging into some engineering tool, for instance,
+
+372
+00:17:30.025 --> 00:17:31.885
+so that we can see the results of,
+
+373
+00:17:31.905 --> 00:17:34.365
+of trades from multiple, um, systems.
+
+374
+00:17:35.585 --> 00:17:39.325
+And what we also then need is, is to obtain as close
+
+375
+00:17:39.325 --> 00:17:43.045
+to a live view of the data as possible so we can use it
+
+376
+00:17:43.065 --> 00:17:45.205
+for impact assessment, trace studies.
+
+377
+00:17:45.825 --> 00:17:48.365
+Um, and it would be nice if we can have automatic
+
+378
+00:17:49.125 --> 00:17:50.605
+documentation capabilities so
+
+379
+00:17:50.605 --> 00:17:53.645
+that our trades were automatically di documented.
+
+380
+00:17:54.665 --> 00:17:57.325
+So that's our, that's our kind of a, a dream goal here.
+
+381
+00:17:58.205 --> 00:18:01.055
+Talking a little bit about the value of this.
+
+382
+00:18:01.235 --> 00:18:02.615
+So it has to have value,
+
+383
+00:18:02.675 --> 00:18:05.375
+and this is, I think where it's really important is
+
+384
+00:18:05.375 --> 00:18:07.855
+that the, the idea here is
+
+385
+00:18:07.855 --> 00:18:11.415
+that digital engineering is not just digitizing
+
+386
+00:18:11.845 --> 00:18:13.735
+what we've done in engineering or,
+
+387
+00:18:13.795 --> 00:18:15.095
+or digitalizing the process.
+
+388
+00:18:15.845 --> 00:18:18.975
+It's creating a new set of value for us in terms of
+
+389
+00:18:19.155 --> 00:18:21.935
+how we develop systems and how we deploy
+
+390
+00:18:21.935 --> 00:18:23.215
+and support them over time.
+
+391
+00:18:24.365 --> 00:18:25.825
+So traditionally,
+
+392
+00:18:26.285 --> 00:18:29.225
+and I'm a system engineer, I'm also a program manager,
+
+393
+00:18:29.525 --> 00:18:32.945
+but traditionally we've done these types of analyses, um,
+
+394
+00:18:33.035 --> 00:18:35.945
+using subject matter experts, SMEs
+
+395
+00:18:36.495 --> 00:18:38.345
+with in their individual tools.
+
+396
+00:18:38.445 --> 00:18:40.185
+And we don't think this is gonna go away.
+
+397
+00:18:41.045 --> 00:18:44.345
+Um, we still need the ability to provide engineering
+
+398
+00:18:44.405 --> 00:18:47.425
+and program management tools to subject matter experts
+
+399
+00:18:47.885 --> 00:18:51.265
+so they can do their disciplinary analysis at the level
+
+400
+00:18:51.325 --> 00:18:53.345
+of fidelity that they need to do that.
+
+401
+00:18:54.255 --> 00:18:56.425
+What we're really interested in is
+
+402
+00:18:56.445 --> 00:18:58.505
+how we can help the engineer, functional
+
+403
+00:18:58.525 --> 00:19:01.945
+or manager, um, integrate across all
+
+404
+00:19:01.945 --> 00:19:06.025
+of those analytical tools, um, communicate, translate, and,
+
+405
+00:19:06.045 --> 00:19:08.105
+and facilitate data flow between them.
+
+406
+00:19:08.925 --> 00:19:12.425
+So we aim to, to remove some of the stove pipes.
+
+407
+00:19:13.045 --> 00:19:15.225
+Um, there's a number of challenges there.
+
+408
+00:19:15.405 --> 00:19:18.065
+So right now there's lots of different software tools.
+
+409
+00:19:18.065 --> 00:19:19.105
+Which ones do you pick?
+
+410
+00:19:19.615 --> 00:19:22.705
+There's lack of tool integration and interoperability.
+
+411
+00:19:22.805 --> 00:19:26.785
+So all the tools can have different, um, syntaxes.
+
+412
+00:19:27.365 --> 00:19:31.625
+Um, they can have proprietary or non-proprietary interfaces.
+
+413
+00:19:31.895 --> 00:19:34.105
+They can use different names and terminologies.
+
+414
+00:19:34.845 --> 00:19:37.425
+Um, all those things prevent us from being truly
+
+415
+00:19:37.525 --> 00:19:39.865
+interoperability in the land of data.
+
+416
+00:19:40.525 --> 00:19:42.185
+Um, much less the land of models.
+
+417
+00:19:42.845 --> 00:19:46.545
+Um, they lack consistency in in methods and processes.
+
+418
+00:19:46.885 --> 00:19:50.345
+So we don't really want to change an engineering method
+
+419
+00:19:50.365 --> 00:19:53.585
+or process, but we wanna make sure an update that's made
+
+420
+00:19:53.585 --> 00:19:58.225
+by one engineer is propagated to other models, um, as close
+
+421
+00:19:58.225 --> 00:19:59.545
+to real time as possible.
+
+422
+00:20:00.245 --> 00:20:03.145
+Um, because they're not connected,
+
+423
+00:20:03.435 --> 00:20:06.105
+every time we make a small change somewhere in one model,
+
+424
+00:20:06.525 --> 00:20:08.785
+we often have to manually transition
+
+425
+00:20:08.785 --> 00:20:10.185
+that into the other models.
+
+426
+00:20:10.365 --> 00:20:12.905
+And so that creates a lot of work for us, um,
+
+427
+00:20:13.005 --> 00:20:15.145
+and it forces us to be less strategic.
+
+428
+00:20:15.205 --> 00:20:19.265
+So the job of the system engineer over time has really been
+
+429
+00:20:19.265 --> 00:20:23.025
+to facilitate and overcome all these, these, um, issues.
+
+430
+00:20:23.365 --> 00:20:24.625
+And they've traditionally done it
+
+431
+00:20:24.725 --> 00:20:28.805
+by do using things like I DFO methods
+
+432
+00:20:28.945 --> 00:20:31.445
+or things like that to show the relationship
+
+433
+00:20:31.445 --> 00:20:32.805
+between the engineering amount
+
+434
+00:20:33.365 --> 00:20:36.485
+analysis in a document form, not in a tool.
+
+435
+00:20:37.105 --> 00:20:39.765
+The system ML language helps us put it into a tool,
+
+436
+00:20:40.505 --> 00:20:42.725
+but it's still being used too much just to,
+
+437
+00:20:42.865 --> 00:20:44.125
+to do documentation.
+
+438
+00:20:45.735 --> 00:20:50.045
+So what we want is this elimination of of stovepipes.
+
+439
+00:20:50.045 --> 00:20:54.085
+We want the engineer functional manager to do reasoning
+
+440
+00:20:54.085 --> 00:20:56.645
+and optimization and trade-off analysis.
+
+441
+00:20:57.225 --> 00:21:00.325
+Um, and then they want, want them to be able to feed that up
+
+442
+00:21:00.325 --> 00:21:04.085
+to a strategic level decision maker who is exploring
+
+443
+00:21:04.085 --> 00:21:06.125
+and making decisions on, on trade-offs.
+
+444
+00:21:06.225 --> 00:21:09.245
+And so, we'll, we'll use the term linked data a lot,
+
+445
+00:21:09.245 --> 00:21:12.445
+but what we believe is we can harness what the
+
+446
+00:21:13.165 --> 00:21:16.365
+internet has done, um, in its technology space
+
+447
+00:21:17.225 --> 00:21:21.245
+to use a linked data platform to integrate across all
+
+448
+00:21:21.245 --> 00:21:23.925
+of these different types of analysis tools.
+
+449
+00:21:24.465 --> 00:21:28.165
+Um, and so we'll, we'll show you some examples of how we do
+
+450
+00:21:28.165 --> 00:21:30.965
+that, but we're gonna talk, uh, quite a bit about the theory
+
+451
+00:21:31.065 --> 00:21:33.205
+of this link data platform
+
+452
+00:21:33.225 --> 00:21:36.445
+before we, um, show any examples of it in this presentation.
+
+453
+00:21:37.145 --> 00:21:40.465
+Um, so in a,
+
+454
+00:21:40.525 --> 00:21:43.545
+in a program called System Engineering Modernization, um,
+
+455
+00:21:44.425 --> 00:21:47.305
+a colleague of ours at at Georgia Tech had drawn this really
+
+456
+00:21:47.495 --> 00:21:50.945
+nice little graphic that shows what the real problem is, um,
+
+457
+00:21:51.405 --> 00:21:52.985
+and how we might overcome it.
+
+458
+00:21:53.205 --> 00:21:56.105
+So if you imagine that I am a system engineer
+
+459
+00:21:56.125 --> 00:21:59.705
+and I'm responsible for a trade, that trade
+
+460
+00:22:00.265 --> 00:22:02.185
+analysis is gonna go through a trade space
+
+461
+00:22:02.185 --> 00:22:05.135
+that uses multiple tools, um,
+
+462
+00:22:05.315 --> 00:22:09.855
+and those multiple tools are gonna get, uh, input output
+
+463
+00:22:10.455 --> 00:22:13.575
+analysis, input, output analysis, all the way up to the time
+
+464
+00:22:13.575 --> 00:22:15.855
+where I actually show a PowerPoint
+
+465
+00:22:16.285 --> 00:22:19.455
+what the decision space is and to the decision makers.
+
+466
+00:22:19.955 --> 00:22:22.935
+Um, and that process of extracting data
+
+467
+00:22:22.995 --> 00:22:26.615
+and moving it between tools has usually been done
+
+468
+00:22:26.675 --> 00:22:28.655
+by the human as the glue.
+
+469
+00:22:29.395 --> 00:22:30.855
+And that's what we wanna overcome.
+
+470
+00:22:31.125 --> 00:22:34.375
+What we wanna overcome is that manual process,
+
+471
+00:22:34.755 --> 00:22:38.415
+and we wanna do that by creating a data model as a, as a,
+
+472
+00:22:38.875 --> 00:22:40.375
+the glue for data sharing.
+
+473
+00:22:40.835 --> 00:22:44.775
+Um, and so what we don't want to do is necessarily change
+
+474
+00:22:45.845 --> 00:22:49.565
+the digital artifacts, the artifacts that are generated.
+
+475
+00:22:49.625 --> 00:22:53.125
+We don't want a cad representation in a CAD tool
+
+476
+00:22:53.225 --> 00:22:55.765
+to go into some other massive tool
+
+477
+00:22:55.935 --> 00:22:57.885
+where it's represented as something different.
+
+478
+00:22:57.905 --> 00:23:01.685
+We want to preserve the tool use for what it's,
+
+479
+00:23:01.755 --> 00:23:03.285
+it's most effective at.
+
+480
+00:23:03.705 --> 00:23:05.645
+Um, and we don't want PowerPoints to go away
+
+481
+00:23:05.905 --> 00:23:08.485
+or that end analysis to go away.
+
+482
+00:23:08.905 --> 00:23:11.605
+We just want everything to be automatically updated,
+
+483
+00:23:11.745 --> 00:23:14.365
+all those artifacts to be automatically updated as the,
+
+484
+00:23:14.945 --> 00:23:16.685
+as the program progresses.
+
+485
+00:23:17.185 --> 00:23:20.765
+Um, and so this concept of a digital artifact
+
+486
+00:23:21.715 --> 00:23:23.205
+doesn't change very much.
+
+487
+00:23:23.495 --> 00:23:26.285
+Those things, um, will stay the same.
+
+488
+00:23:27.025 --> 00:23:28.645
+We just need to transition them
+
+489
+00:23:28.715 --> 00:23:30.005
+into different types of views.
+
+490
+00:23:30.755 --> 00:23:33.125
+What we're really proposing is the thing in the diamond,
+
+491
+00:23:33.125 --> 00:23:37.325
+which is the linked data model, the what, the process that
+
+492
+00:23:37.875 --> 00:23:39.925
+that links the inputs
+
+493
+00:23:39.925 --> 00:23:42.525
+and outputs of these tools together in a consistent way.
+
+494
+00:23:43.265 --> 00:23:45.965
+And so link data is defined as data that is structured
+
+495
+00:23:45.965 --> 00:23:47.365
+to form logical connections
+
+496
+00:23:47.365 --> 00:23:49.565
+with other data based on shared relevance.
+
+497
+00:23:50.065 --> 00:23:54.245
+Um, and so the technologies for that are all, uh, open
+
+498
+00:23:54.305 --> 00:23:56.365
+and available on the worldwide web.
+
+499
+00:23:57.185 --> 00:23:58.205
+So this is our goal.
+
+500
+00:23:58.465 --> 00:23:59.845
+Our goal is to do this, not
+
+501
+00:23:59.995 --> 00:24:01.925
+because it's a different way to model things.
+
+502
+00:24:02.145 --> 00:24:03.525
+The goal is to do this is
+
+503
+00:24:03.525 --> 00:24:04.965
+because it will make our job
+
+504
+00:24:06.115 --> 00:24:09.045
+much more efficient in the development of systems,
+
+505
+00:24:09.365 --> 00:24:11.125
+particularly complex systems,
+
+506
+00:24:11.665 --> 00:24:14.285
+and it'll make the speed of development much faster
+
+507
+00:24:15.025 --> 00:24:18.405
+and it'll introduce reusability of models
+
+508
+00:24:18.465 --> 00:24:22.965
+and data into the equation so things can, um, be updated
+
+509
+00:24:23.595 --> 00:24:24.925
+more easily over time.
+
+510
+00:24:26.035 --> 00:24:28.815
+So this is, um, sort of the, the end item
+
+511
+00:24:28.815 --> 00:24:31.135
+that we would wanna see today.
+
+512
+00:24:31.135 --> 00:24:33.015
+This is, we call it a bunch of soda straws
+
+513
+00:24:33.135 --> 00:24:35.335
+'cause we're looking into each of these tools individually.
+
+514
+00:24:35.755 --> 00:24:37.375
+We want a fully integrated workflow.
+
+515
+00:24:38.665 --> 00:24:41.525
+So the key to doing this is, is commercial link data.
+
+516
+00:24:41.745 --> 00:24:45.765
+Um, so if you're familiar with the W three c,
+
+517
+00:24:45.785 --> 00:24:48.925
+the worldwide web standards, Tim Berners Lee founded much
+
+518
+00:24:48.925 --> 00:24:51.085
+of this stuff and he's described
+
+519
+00:24:51.085 --> 00:24:52.885
+what he's called the five star link data.
+
+520
+00:24:53.425 --> 00:24:57.485
+Um, so star one is, is you make it available on the web.
+
+521
+00:24:57.955 --> 00:25:01.965
+Imagine all your engineering availables was able, was, um,
+
+522
+00:25:02.315 --> 00:25:05.045
+available on the web, ignore the open license.
+
+523
+00:25:05.265 --> 00:25:07.485
+You can do this in a controlled fashion using
+
+524
+00:25:07.545 --> 00:25:08.685
+the same technologies.
+
+525
+00:25:08.945 --> 00:25:12.365
+But, but the idea is that all the data has to be available
+
+526
+00:25:12.665 --> 00:25:15.525
+to be open to anybody who needs to use it.
+
+527
+00:25:16.385 --> 00:25:19.125
+So any of those engineering functions in your program, any
+
+528
+00:25:19.125 --> 00:25:21.565
+of those program management functions with a need
+
+529
+00:25:21.565 --> 00:25:23.845
+to know should have access to that open data.
+
+530
+00:25:24.585 --> 00:25:26.885
+You get two stars if it's machine readable.
+
+531
+00:25:27.945 --> 00:25:31.125
+So it's not, uh, manual, it's not printed out,
+
+532
+00:25:31.345 --> 00:25:34.685
+but it's structured in a way that it can be read
+
+533
+00:25:34.985 --> 00:25:36.645
+and interpreted by a machine.
+
+534
+00:25:37.305 --> 00:25:40.565
+You get three stars if you use a non-proprietary format,
+
+535
+00:25:41.425 --> 00:25:43.605
+for example, CSV instead of Excel.
+
+536
+00:25:44.345 --> 00:25:47.885
+Um, you get four stars if you use open standards available
+
+537
+00:25:48.035 --> 00:25:49.845
+from the W three C or similar.
+
+538
+00:25:50.065 --> 00:25:53.805
+So tools or formats like RDF for data store
+
+539
+00:25:53.985 --> 00:25:58.885
+and sparkle for, for querying data are, are things that
+
+540
+00:25:59.475 --> 00:26:03.405
+then allow you to let other people point into your stuff.
+
+541
+00:26:04.065 --> 00:26:07.045
+And then you get five stars if you actually build your link
+
+542
+00:26:07.045 --> 00:26:09.645
+data model where you allow other people's
+
+543
+00:26:09.645 --> 00:26:10.765
+data to provide context.
+
+544
+00:26:10.865 --> 00:26:14.485
+And so, you know, this concept of link data, um,
+
+545
+00:26:15.425 --> 00:26:18.885
+is very applicable to engineering, it's very applicable
+
+546
+00:26:18.885 --> 00:26:21.605
+to program management, all of these disciplines just as much
+
+547
+00:26:21.625 --> 00:26:25.365
+as it's applicable to the development of websites
+
+548
+00:26:25.385 --> 00:26:27.645
+and product sales and other things like that.
+
+549
+00:26:28.305 --> 00:26:32.245
+So our work has really been focused on this philosophy
+
+550
+00:26:32.345 --> 00:26:36.365
+of promoting the link data approach, um, to do that.
+
+551
+00:26:38.735 --> 00:26:41.715
+So this all comes together in what's known as
+
+552
+00:26:41.815 --> 00:26:44.085
+as a decision analysis data model.
+
+553
+00:26:44.545 --> 00:26:46.565
+And so we're at the point now where this concept
+
+554
+00:26:46.705 --> 00:26:48.805
+of a decision analysis data model is
+
+555
+00:26:48.925 --> 00:26:49.965
+starting to get more standardized.
+
+556
+00:26:49.965 --> 00:26:52.445
+And I'll show you some artifacts of that,
+
+557
+00:26:52.945 --> 00:26:54.565
+um, in these slides.
+
+558
+00:26:55.185 --> 00:26:59.605
+So imagine your, uh, uh, government,
+
+559
+00:27:00.065 --> 00:27:03.965
+um, program manager or you're a defense contractor
+
+560
+00:27:04.905 --> 00:27:08.205
+and you've got this massive amount of, of data
+
+561
+00:27:08.305 --> 00:27:10.325
+and models that are available for you
+
+562
+00:27:10.545 --> 00:27:11.685
+and you've gotta manage.
+
+563
+00:27:12.105 --> 00:27:13.565
+And so they could be mission models,
+
+564
+00:27:13.635 --> 00:27:14.965
+they could be capability models,
+
+565
+00:27:15.075 --> 00:27:16.725
+they could be component models,
+
+566
+00:27:16.835 --> 00:27:20.125
+they could be verification models, uh,
+
+567
+00:27:20.245 --> 00:27:22.645
+they can be cost models or schedule models.
+
+568
+00:27:22.715 --> 00:27:26.765
+They could be risk models, they could be reliability models.
+
+569
+00:27:27.105 --> 00:27:31.165
+All these sorts of things, um, are being created
+
+570
+00:27:31.785 --> 00:27:32.845
+and analyzed
+
+571
+00:27:33.995 --> 00:27:35.295
+and they're create being
+
+572
+00:27:35.295 --> 00:27:37.135
+created, analyzed in two dimensions.
+
+573
+00:27:37.275 --> 00:27:39.135
+One is the government side
+
+574
+00:27:39.875 --> 00:27:41.135
+or the contractor side
+
+575
+00:27:41.135 --> 00:27:44.095
+that's setting the requirements if you're not in government.
+
+576
+00:27:44.315 --> 00:27:46.735
+And then on the other side, it is the supplier,
+
+577
+00:27:47.155 --> 00:27:49.095
+the contractor that's satisfying those
+
+578
+00:27:49.095 --> 00:27:50.935
+requirements with the design.
+
+579
+00:27:51.435 --> 00:27:52.895
+Um, and so the data
+
+580
+00:27:53.675 --> 00:27:57.495
+and the digital data layer for that is being stored in kind
+
+581
+00:27:57.615 --> 00:27:58.815
+of stovepipe data devices.
+
+582
+00:27:59.195 --> 00:28:03.375
+And so we don't necessarily want to change any
+
+583
+00:28:03.375 --> 00:28:07.375
+of this stuff shown on the slide, we just wanna make sure
+
+584
+00:28:07.375 --> 00:28:10.175
+that we can use that data
+
+585
+00:28:10.315 --> 00:28:14.495
+and link it together based on the data access policy
+
+586
+00:28:14.495 --> 00:28:15.975
+that we choose to implement.
+
+587
+00:28:16.635 --> 00:28:20.895
+And so what our thesis is, is that we can use system models
+
+588
+00:28:21.635 --> 00:28:23.735
+to facilitate the exchange of data.
+
+589
+00:28:24.435 --> 00:28:29.285
+So if you think of, if you've done system models, um, then
+
+590
+00:28:30.505 --> 00:28:32.925
+if we, if we've done, if you've used system models
+
+591
+00:28:33.025 --> 00:28:35.725
+to do things like define your work breakdown structure,
+
+592
+00:28:35.755 --> 00:28:36.885
+your structure of your system
+
+593
+00:28:36.985 --> 00:28:39.605
+or your behavioral capabilities, um,
+
+594
+00:28:40.315 --> 00:28:43.525
+then you can also use those system models to define, define
+
+595
+00:28:43.585 --> 00:28:45.245
+how you're gonna link those things to data.
+
+596
+00:28:49.695 --> 00:28:51.275
+So, so how do we do this?
+
+597
+00:28:51.695 --> 00:28:54.425
+Um, so we've built a,
+
+598
+00:28:54.485 --> 00:28:57.945
+the circ standard digital data architecture using something
+
+599
+00:28:57.965 --> 00:29:00.785
+we define as a digital engineering framework for integration
+
+600
+00:29:00.785 --> 00:29:01.785
+and interoperability.
+
+601
+00:29:02.215 --> 00:29:05.385
+It's a foundational digital operator AR architecture.
+
+602
+00:29:05.965 --> 00:29:09.505
+Um, and so if, if you think about
+
+603
+00:29:10.835 --> 00:29:13.545
+three ways to access your data
+
+604
+00:29:13.605 --> 00:29:16.985
+and your models, one of the ways, the traditional way that
+
+605
+00:29:16.985 --> 00:29:19.625
+to do that in the engineering domain is through
+
+606
+00:29:19.625 --> 00:29:21.865
+what we call a specified model interface.
+
+607
+00:29:22.915 --> 00:29:26.455
+So that's using a tool, a tool like Magic Draw
+
+608
+00:29:26.635 --> 00:29:30.895
+or a tool like Daso CAT or, or Kat
+
+609
+00:29:30.995 --> 00:29:34.495
+or some other tool like that to capture your design.
+
+610
+00:29:34.915 --> 00:29:36.055
+Um, and so
+
+611
+00:29:36.055 --> 00:29:37.855
+that specified model interface we
+
+612
+00:29:37.855 --> 00:29:39.095
+don't think is gonna go away.
+
+613
+00:29:39.355 --> 00:29:42.125
+The disciplines are still gonna work in their native tools
+
+614
+00:29:42.155 --> 00:29:43.325
+that they're familiar with,
+
+615
+00:29:43.985 --> 00:29:47.685
+but what we want is we want the data inside those tools
+
+616
+00:29:48.545 --> 00:29:53.295
+to be, um, exposed out to the rest of the world
+
+617
+00:29:53.685 --> 00:29:55.575
+through a application program interface.
+
+618
+00:29:55.595 --> 00:29:57.735
+And if we can make that compatible with, for instance,
+
+619
+00:29:57.755 --> 00:30:01.615
+the rest, um, standard that's on, on the web, then
+
+620
+00:30:01.615 --> 00:30:03.695
+that is something that would be really useful for us.
+
+621
+00:30:04.975 --> 00:30:09.195
+We typically do our data analytics either in those tools
+
+622
+00:30:09.455 --> 00:30:11.315
+or in a, in a data format.
+
+623
+00:30:12.055 --> 00:30:15.755
+Um, and so we still want the direct interface to the data
+
+624
+00:30:16.455 --> 00:30:17.635
+to be accessible to us.
+
+625
+00:30:17.775 --> 00:30:21.315
+In fact, if we can always operate in a direct interface
+
+626
+00:30:21.315 --> 00:30:24.875
+for the data in our visualization tools, then
+
+627
+00:30:24.875 --> 00:30:27.595
+what we get out the other side is something more flexible in
+
+628
+00:30:27.595 --> 00:30:30.595
+terms of how we build these decision artifacts
+
+629
+00:30:30.595 --> 00:30:32.275
+that represent trade studies.
+
+630
+00:30:32.625 --> 00:30:34.515
+Because we can operate, you know,
+
+631
+00:30:34.515 --> 00:30:36.195
+just basically on the data.
+
+632
+00:30:37.145 --> 00:30:38.395
+What we really brought
+
+633
+00:30:38.395 --> 00:30:40.835
+to the world in this architecture is this concept
+
+634
+00:30:40.895 --> 00:30:42.155
+of a mapping interface.
+
+635
+00:30:42.215 --> 00:30:45.515
+So it's a new function if you want to call it
+
+636
+00:30:45.515 --> 00:30:47.835
+that system engineers to need to do.
+
+637
+00:30:47.895 --> 00:30:50.195
+And it can be done in a system L authoring tool
+
+638
+00:30:50.485 --> 00:30:52.315
+where we describe the mapping
+
+639
+00:30:53.065 --> 00:30:54.595
+between the data and the models.
+
+640
+00:30:54.655 --> 00:30:58.275
+And that mapping is, is related to our decisions.
+
+641
+00:30:59.235 --> 00:31:02.695
+Um, I'll show you an example, a tool called IOIF,
+
+642
+00:31:02.695 --> 00:31:04.935
+which is our interoperability integration framework,
+
+643
+00:31:04.935 --> 00:31:08.255
+which we developed for the US Army is an implementation
+
+644
+00:31:08.275 --> 00:31:09.695
+of this data architecture.
+
+645
+00:31:10.515 --> 00:31:15.135
+It uses computational enabled ontologies to support
+
+646
+00:31:15.135 --> 00:31:16.215
+that data linkage.
+
+647
+00:31:16.355 --> 00:31:18.655
+So at the bottom level, this concept
+
+648
+00:31:18.795 --> 00:31:20.575
+of an ontology aligned data
+
+649
+00:31:21.275 --> 00:31:24.575
+can be fed into an automatic reasoners, um,
+
+650
+00:31:24.995 --> 00:31:28.455
+and, um, that then can be fed up this chain
+
+651
+00:31:29.205 --> 00:31:32.295
+into these tool interfaces if you want to call them that.
+
+652
+00:31:33.285 --> 00:31:36.105
+And so what we do is we use this thing called a model
+
+653
+00:31:36.105 --> 00:31:37.505
+interface specification diagram.
+
+654
+00:31:37.725 --> 00:31:39.225
+So this is like a new diagram
+
+655
+00:31:39.535 --> 00:31:42.105
+that system engineers would create, um,
+
+656
+00:31:42.295 --> 00:31:45.945
+that is specifically designed in a systems modeling language
+
+657
+00:31:46.925 --> 00:31:51.745
+to link the value properties of the system under analysis up
+
+658
+00:31:51.965 --> 00:31:55.025
+to the higher level system or mission objectives.
+
+659
+00:31:55.045 --> 00:31:59.825
+And so you can think of this as I want my UAV
+
+660
+00:31:59.845 --> 00:32:02.425
+to have a range of X miles, right?
+
+661
+00:32:03.005 --> 00:32:07.825
+Um, so sometimes things like that don't exist
+
+662
+00:32:07.825 --> 00:32:09.305
+outside of the analysis module.
+
+663
+00:32:09.845 --> 00:32:11.985
+Um, so if you think of something as simple
+
+664
+00:32:12.045 --> 00:32:15.385
+as calculating an aircraft range, well, there's a bunch
+
+665
+00:32:15.385 --> 00:32:18.705
+of value properties that define range weight of the vehicle,
+
+666
+00:32:20.065 --> 00:32:22.985
+distance travel, amount of fuel character characterize,
+
+667
+00:32:23.045 --> 00:32:25.025
+or the amount of battery live.
+
+668
+00:32:25.205 --> 00:32:26.905
+So you have two different types of systems
+
+669
+00:32:26.905 --> 00:32:28.385
+that can provide range.
+
+670
+00:32:28.965 --> 00:32:31.625
+Um, many different things feed in that formula.
+
+671
+00:32:32.485 --> 00:32:35.385
+On the mission objective side, you know, you know,
+
+672
+00:32:35.445 --> 00:32:37.305
+can you test explicitly for range?
+
+673
+00:32:37.365 --> 00:32:40.090
+If I say the UAV will have a range of 600 miles,
+
+674
+00:32:40.585 --> 00:32:42.885
+is it gonna fall out of the sky every time
+
+675
+00:32:42.885 --> 00:32:43.965
+it gets 600 miles?
+
+676
+00:32:43.965 --> 00:32:47.325
+Well, you don't want to use your physical assets to do that.
+
+677
+00:32:47.545 --> 00:32:51.485
+So you have to preserve these analysis models forever
+
+678
+00:32:51.625 --> 00:32:55.445
+and ever, and then you can, you can, um, capture them
+
+679
+00:32:55.545 --> 00:32:57.005
+and prove them into guidelines.
+
+680
+00:32:57.345 --> 00:32:59.805
+And so this whole concept of
+
+681
+00:33:00.635 --> 00:33:03.405
+capturing your analysis methodology,
+
+682
+00:33:03.985 --> 00:33:08.675
+the reasons why you picked that parameter, um, in a,
+
+683
+00:33:08.675 --> 00:33:09.715
+in a model-based format,
+
+684
+00:33:09.935 --> 00:33:11.595
+become pretty apparent when you think about it.
+
+685
+00:33:11.595 --> 00:33:12.635
+We've done this all the time.
+
+686
+00:33:13.405 --> 00:33:16.195
+We're just saying you need to formalize this
+
+687
+00:33:16.975 --> 00:33:20.635
+and you can define these model interface specification
+
+688
+00:33:21.595 --> 00:33:24.875
+diagrams, these connectivities between these parameters, um,
+
+689
+00:33:25.455 --> 00:33:27.235
+and, and do that in a systems model.
+
+690
+00:33:27.295 --> 00:33:29.795
+And so this provides us our mapping interface
+
+691
+00:33:30.825 --> 00:33:32.085
+in the DEF two model.
+
+692
+00:33:32.425 --> 00:33:37.085
+Um, and so at this point in time, uh, in Cozy had a, a
+
+693
+00:33:37.725 --> 00:33:40.895
+digital, uh, analysis data model working group
+
+694
+00:33:41.835 --> 00:33:43.695
+that's been defining how to use this.
+
+695
+00:33:44.185 --> 00:33:47.735
+We've been somewhat ahead of that process in terms
+
+696
+00:33:47.735 --> 00:33:48.935
+of our implementation.
+
+697
+00:33:49.475 --> 00:33:51.735
+Um, but we have sort of a basis for this.
+
+698
+00:33:52.435 --> 00:33:56.975
+So you probably recognize this flow as a way
+
+699
+00:33:57.035 --> 00:33:59.535
+to do a decision analysis in a program.
+
+700
+00:34:00.115 --> 00:34:04.735
+You start with a a, a value, a set of key parameters,
+
+701
+00:34:04.755 --> 00:34:06.415
+you call 'em for each alternatives.
+
+702
+00:34:06.415 --> 00:34:07.575
+That's 6.6 here.
+
+703
+00:34:08.035 --> 00:34:11.455
+Um, you work back to an evaluation process to communicate
+
+704
+00:34:11.645 --> 00:34:14.095
+with the participants how you're gonna run the trades.
+
+705
+00:34:14.095 --> 00:34:18.775
+To do that, um, you determine descriptive value measures.
+
+706
+00:34:19.355 --> 00:34:22.455
+So those would typically be requirements range is x
+
+707
+00:34:22.955 --> 00:34:25.695
+and then you determine predictive value measures,
+
+708
+00:34:25.755 --> 00:34:29.295
+how we're gonna calculate x, that's six four and six five.
+
+709
+00:34:29.765 --> 00:34:32.015
+Then you go and obtain the data and models
+
+710
+00:34:32.075 --> 00:34:35.175
+and simulations that allow you to actually calculate X,
+
+711
+00:34:35.175 --> 00:34:36.495
+which is 6.3.
+
+712
+00:34:37.275 --> 00:34:39.135
+Um, and then to do your trades,
+
+713
+00:34:39.755 --> 00:34:41.455
+you determine the value functions
+
+714
+00:34:41.455 --> 00:34:44.895
+and weights for each of those parameters.
+
+715
+00:34:45.235 --> 00:34:47.135
+Um, and then you conduct your trades.
+
+716
+00:34:47.135 --> 00:34:50.615
+And so then we get this idea of an analysis of alternatives
+
+717
+00:34:50.965 --> 00:34:52.375
+that comes out the other end.
+
+718
+00:34:53.035 --> 00:34:54.855
+So if you're in systems engineering,
+
+719
+00:34:54.855 --> 00:34:56.335
+you've probably done this flow,
+
+720
+00:34:57.365 --> 00:34:58.465
+but the idea here is
+
+721
+00:34:58.465 --> 00:35:01.545
+that we can capture this whole flow in the models.
+
+722
+00:35:01.965 --> 00:35:03.265
+Um, and the key part
+
+723
+00:35:03.265 --> 00:35:06.585
+of this is actually this mapping interface between
+
+724
+00:35:07.175 --> 00:35:09.865
+descriptive measures, predictive value measures,
+
+725
+00:35:10.405 --> 00:35:12.185
+and where in the data models
+
+726
+00:35:12.245 --> 00:35:15.105
+and simulations those things are capturing their data.
+
+727
+00:35:16.025 --> 00:35:18.405
+And so they've in, in the,
+
+728
+00:35:18.405 --> 00:35:20.325
+in cozier standardizing on this concept
+
+729
+00:35:20.425 --> 00:35:24.245
+of an assessment flow diagram that came from the circ work
+
+730
+00:35:24.665 --> 00:35:28.045
+to do that, it's a formal model defining the pathway
+
+731
+00:35:28.155 --> 00:35:30.525
+between lower level technical parameters
+
+732
+00:35:30.525 --> 00:35:33.525
+and high higher level decision making concerns.
+
+733
+00:35:33.945 --> 00:35:35.725
+So a key output of this presentation
+
+734
+00:35:35.785 --> 00:35:39.405
+and a key output of why we should look at this, this, uh,
+
+735
+00:35:39.405 --> 00:35:43.565
+information is we need to start thinking in the engineering
+
+736
+00:35:43.565 --> 00:35:45.845
+and program management domains in these large complex
+
+737
+00:35:45.845 --> 00:35:50.485
+systems of capturing these analysis diagrams, right?
+
+738
+00:35:50.485 --> 00:35:52.885
+Capturing in a formal systems model so
+
+739
+00:35:52.885 --> 00:35:55.565
+that they're preserved in our knowledge base.
+
+740
+00:35:56.425 --> 00:35:58.885
+And so these become part of our system modeling process.
+
+741
+00:36:01.275 --> 00:36:04.735
+And what that allows us then to do is take this DEF two
+
+742
+00:36:05.555 --> 00:36:08.575
+and tie together these different types of analyses.
+
+743
+00:36:09.155 --> 00:36:12.135
+So we can build our system model and analysis models and,
+
+744
+00:36:12.135 --> 00:36:16.375
+and BSC, we can have all the different disciplines
+
+745
+00:36:17.575 --> 00:36:20.275
+run their engineering analysis, um,
+
+746
+00:36:20.375 --> 00:36:23.835
+and capture those into what we call ontology aligned data.
+
+747
+00:36:24.655 --> 00:36:28.115
+And then we can do the actual visual analysis of that data,
+
+748
+00:36:28.655 --> 00:36:33.115
+um, looking inside the data instead of actually having
+
+749
+00:36:33.215 --> 00:36:35.515
+to build a PowerPoint that explains
+
+750
+00:36:35.855 --> 00:36:38.475
+how these different analysis came out of each tool.
+
+751
+00:36:39.135 --> 00:36:40.835
+And that's the, the dream state
+
+752
+00:36:40.865 --> 00:36:42.715
+that we've been demonstrating
+
+753
+00:36:42.735 --> 00:36:44.595
+and that we would like everybody to get to.
+
+754
+00:36:48.195 --> 00:36:51.015
+So what you get in the end is you get this concept
+
+755
+00:36:51.075 --> 00:36:53.615
+of a mapping interface, the concept
+
+756
+00:36:53.675 --> 00:36:55.855
+of a direct interface to data.
+
+757
+00:36:56.515 --> 00:36:59.375
+Uh, and in the middle of that, this happy, happy humans
+
+758
+00:37:00.285 --> 00:37:05.175
+that don't have to rerun manually a bunch of data collection
+
+759
+00:37:05.175 --> 00:37:08.655
+and analysis every time their analysis changes.
+
+760
+00:37:08.875 --> 00:37:11.575
+So this direct interface, whatever it is,
+
+761
+00:37:11.795 --> 00:37:16.325
+is automatically updated by following the routing
+
+762
+00:37:16.325 --> 00:37:19.245
+or the mapping of the parameters that exist in
+
+763
+00:37:19.245 --> 00:37:20.285
+that mapping interface.
+
+764
+00:37:20.745 --> 00:37:22.805
+So you get a, a lot of useful automation
+
+765
+00:37:22.805 --> 00:37:24.085
+that come comes out of this.
+
+766
+00:37:27.575 --> 00:37:29.395
+So in order to do this,
+
+767
+00:37:29.395 --> 00:37:31.675
+the work we've been doing lately is focused on, well,
+
+768
+00:37:31.675 --> 00:37:33.835
+what's the data interoperability model for this?
+
+769
+00:37:34.345 --> 00:37:36.515
+Because it doesn't exist today.
+
+770
+00:37:37.545 --> 00:37:39.885
+And so in work we've been doing with the Air Force,
+
+771
+00:37:39.975 --> 00:37:42.205
+we've been trying to capture this, this is kind
+
+772
+00:37:42.205 --> 00:37:44.325
+of the theoretical aspect of this talk.
+
+773
+00:37:45.025 --> 00:37:48.085
+Um, so if you think about a layered view
+
+774
+00:37:48.085 --> 00:37:51.245
+of data interoperability, where we mostly are today is,
+
+775
+00:37:51.585 --> 00:37:55.825
+is one we're building foundational assets.
+
+776
+00:37:56.125 --> 00:38:00.865
+So an IT system that lets us exchange store and access data,
+
+777
+00:38:01.325 --> 00:38:03.225
+and we're purchasing that IT system
+
+778
+00:38:03.285 --> 00:38:04.545
+and the tools to do that.
+
+779
+00:38:05.165 --> 00:38:08.425
+Um, and then we're using that in a dynamic form
+
+780
+00:38:08.805 --> 00:38:12.825
+to update our data in terms of our analysis,
+
+781
+00:38:12.825 --> 00:38:16.665
+usually within a specific tool, not across tools,
+
+782
+00:38:16.765 --> 00:38:18.985
+but usually within a specific tool.
+
+783
+00:38:19.685 --> 00:38:22.385
+Um, and then some of us are actually defining the governance
+
+784
+00:38:22.385 --> 00:38:23.465
+and management for that.
+
+785
+00:38:23.885 --> 00:38:27.465
+And so you might say, what, what's two, three and four?
+
+786
+00:38:27.465 --> 00:38:29.025
+We're missing some layers in this.
+
+787
+00:38:29.165 --> 00:38:31.865
+And so those, those are what we really call the data
+
+788
+00:38:32.405 --> 00:38:33.665
+interoperability layers.
+
+789
+00:38:34.405 --> 00:38:37.325
+So we're thinking about what's our environment look like?
+
+790
+00:38:37.325 --> 00:38:38.565
+What tools are we gonna buy?
+
+791
+00:38:38.665 --> 00:38:40.685
+But let's not think about that for a minute.
+
+792
+00:38:41.265 --> 00:38:44.205
+And let's talk about a richer data interoperability
+
+793
+00:38:44.255 --> 00:38:48.085
+definition, which has a structural aspect.
+
+794
+00:38:48.625 --> 00:38:52.405
+So what are the formats, what are the schemas that allow
+
+795
+00:38:52.425 --> 00:38:55.125
+for machine readability of data out of any tool
+
+796
+00:38:55.125 --> 00:38:56.205
+that we want to have?
+
+797
+00:38:56.385 --> 00:38:59.835
+And what are the standards for that, this semantic layer?
+
+798
+00:38:59.975 --> 00:39:02.755
+So how do we ensure common consistent data meeting
+
+799
+00:39:02.755 --> 00:39:05.915
+and relationships between tools, which is a matter
+
+800
+00:39:05.915 --> 00:39:09.235
+of reasoning about the semantics of, of what those are.
+
+801
+00:39:10.255 --> 00:39:11.955
+And then how do our workflows change?
+
+802
+00:39:12.015 --> 00:39:13.915
+How do we define these new workflows
+
+803
+00:39:14.745 --> 00:39:19.195
+like we saw in the decision analysis model that, um,
+
+804
+00:39:19.405 --> 00:39:24.235
+allow us to do this, this, um, process, if you want to call
+
+805
+00:39:24.235 --> 00:39:26.035
+that in the context of our work.
+
+806
+00:39:26.615 --> 00:39:28.915
+Um, and so we've been working on this levels
+
+807
+00:39:28.935 --> 00:39:30.915
+of data in our applicability model
+
+808
+00:39:31.535 --> 00:39:34.115
+and we've been doing it somewhat as a prescriptive
+
+809
+00:39:34.115 --> 00:39:38.115
+or a a, a overcoming of the symptoms of our, our want
+
+810
+00:39:38.115 --> 00:39:41.555
+to buy tools, uh, and say, Hey, let's take a step back
+
+811
+00:39:42.295 --> 00:39:46.435
+and understand what we need to do to actually connect all
+
+812
+00:39:46.435 --> 00:39:49.035
+that rich data that we have developed over all these years
+
+813
+00:39:49.255 --> 00:39:54.195
+and our systems, um, in a reasonable way that's standard so
+
+814
+00:39:54.195 --> 00:39:57.075
+that we can manage it using these types
+
+815
+00:39:57.075 --> 00:39:58.395
+of data architectures.
+
+816
+00:39:58.975 --> 00:40:02.635
+And so if I, if I lay that on top of the DEF two standard,
+
+817
+00:40:03.295 --> 00:40:05.445
+um, what we're saying is
+
+818
+00:40:05.445 --> 00:40:08.765
+that the foundational language level that we need
+
+819
+00:40:08.765 --> 00:40:11.605
+to exchange store and access data using ontology aligned
+
+820
+00:40:11.605 --> 00:40:16.125
+data, which implies things like a standard RDF format
+
+821
+00:40:16.265 --> 00:40:20.965
+to store data graph databases, uh, certain translations
+
+822
+00:40:21.105 --> 00:40:24.125
+to IT tools that are not necessarily
+
+823
+00:40:24.145 --> 00:40:27.205
+as prevalent in the engineering environment today
+
+824
+00:40:27.265 --> 00:40:28.845
+or the program management environments,
+
+825
+00:40:28.865 --> 00:40:30.365
+but they are present on the web.
+
+826
+00:40:31.265 --> 00:40:35.365
+Um, and then we need to define the workflows to use
+
+827
+00:40:36.265 --> 00:40:39.585
+all three of these interfaces, direct mapping
+
+828
+00:40:39.685 --> 00:40:41.505
+and specified modeling interfaces.
+
+829
+00:40:41.525 --> 00:40:45.545
+So those two things are part of what we're promoting, um,
+
+830
+00:40:45.645 --> 00:40:47.465
+but the semantic layer is really important.
+
+831
+00:40:47.485 --> 00:40:49.105
+So bring the coffee cup back up.
+
+832
+00:40:49.685 --> 00:40:50.985
+And so that implies
+
+833
+00:40:51.735 --> 00:40:55.425
+that my ontology online data uses RDF standards in order.
+
+834
+00:40:55.445 --> 00:40:59.705
+So I can do actually semantic interoperability across data.
+
+835
+00:40:59.765 --> 00:41:01.785
+And that's not the only standard you might want to use,
+
+836
+00:41:02.005 --> 00:41:05.585
+but we're sort of promoting the use of common web standards.
+
+837
+00:41:06.565 --> 00:41:09.185
+Um, so to go back to this cup, then I need
+
+838
+00:41:09.185 --> 00:41:10.665
+to standardize on the data format.
+
+839
+00:41:10.805 --> 00:41:14.345
+So I need to get all of my tools to be able
+
+840
+00:41:14.345 --> 00:41:16.745
+to expose their data in consistent
+
+841
+00:41:17.385 --> 00:41:18.425
+standardized data formats,
+
+842
+00:41:18.425 --> 00:41:21.625
+and we need to work to define what those are, um,
+
+843
+00:41:22.085 --> 00:41:24.305
+for our data visualization and management tools,
+
+844
+00:41:24.405 --> 00:41:27.265
+but also for our engineering tool APIs.
+
+845
+00:41:27.885 --> 00:41:30.185
+Um, so that's a, working with vendors
+
+846
+00:41:30.885 --> 00:41:32.185
+to make sure that that all happens.
+
+847
+00:41:32.845 --> 00:41:35.245
+And going back to the coffee cup, you know,
+
+848
+00:41:35.275 --> 00:41:38.645
+that standardization just gets me something
+
+849
+00:41:38.645 --> 00:41:40.845
+that would be on the web or,
+
+850
+00:41:41.345 --> 00:41:45.455
+or machine readable, so one and two stars.
+
+851
+00:41:46.155 --> 00:41:50.815
+Um, and then beyond that in non-proprietary formats so
+
+852
+00:41:50.815 --> 00:41:52.135
+that I can access it
+
+853
+00:41:52.135 --> 00:41:54.295
+and operate it direct on, on it directly.
+
+854
+00:41:54.835 --> 00:41:56.815
+So that's the kind of the one,
+
+855
+00:41:56.835 --> 00:41:58.055
+two, and three and four stars.
+
+856
+00:41:58.515 --> 00:42:00.655
+But what we want in the end is really this mapping
+
+857
+00:42:00.925 --> 00:42:03.655
+interface, which gives us the five star, it allows us
+
+858
+00:42:03.655 --> 00:42:04.815
+to link things together
+
+859
+00:42:06.055 --> 00:42:08.075
+and we need to make all that dynamic
+
+860
+00:42:08.575 --> 00:42:10.755
+so it can be all updated in real time.
+
+861
+00:42:12.125 --> 00:42:14.065
+And then we need to define the new
+
+862
+00:42:14.065 --> 00:42:15.225
+governance and management.
+
+863
+00:42:15.225 --> 00:42:19.145
+And so what we're struggling with today is this concept of,
+
+864
+00:42:19.405 --> 00:42:21.585
+of engineering on the web, if you wanna call it
+
+865
+00:42:21.585 --> 00:42:22.705
+that, or linking data.
+
+866
+00:42:23.335 --> 00:42:24.625
+It's a change management process.
+
+867
+00:42:24.845 --> 00:42:26.945
+So there's a consistent, you know,
+
+868
+00:42:26.945 --> 00:42:29.545
+there's a significant cultural change to doing this,
+
+869
+00:42:30.805 --> 00:42:32.745
+you know, primarily 'cause the functions
+
+870
+00:42:32.745 --> 00:42:34.945
+and disciplines don't really want to share their data.
+
+871
+00:42:35.685 --> 00:42:37.105
+Um, they need to learn to do that,
+
+872
+00:42:37.325 --> 00:42:39.505
+but also they don't really understand
+
+873
+00:42:39.685 --> 00:42:41.905
+how these tools can be hooked together.
+
+874
+00:42:43.655 --> 00:42:46.985
+Um, so our architecture, um,
+
+875
+00:42:47.795 --> 00:42:49.345
+looks pretty simple.
+
+876
+00:42:49.455 --> 00:42:51.745
+Like, like the side side on the right here.
+
+877
+00:42:51.855 --> 00:42:53.265
+It's an enterprise data layer,
+
+878
+00:42:53.875 --> 00:42:55.625
+which stores structured unstructured
+
+879
+00:42:55.625 --> 00:42:58.665
+and document format data using RDF
+
+880
+00:42:59.365 --> 00:43:00.745
+as the transformation layer,
+
+881
+00:43:00.795 --> 00:43:03.145
+which then goes into a link data repository,
+
+882
+00:43:03.145 --> 00:43:05.745
+which is a quad store, it's known as today,
+
+883
+00:43:05.745 --> 00:43:06.865
+or a triple store.
+
+884
+00:43:07.485 --> 00:43:10.745
+Um, that, so it can be represented as a graph, uh,
+
+885
+00:43:10.745 --> 00:43:13.105
+linked on the web that's accessible
+
+886
+00:43:13.165 --> 00:43:17.345
+by some linked data require, um, client, which talks
+
+887
+00:43:17.405 --> 00:43:21.785
+to the data using the concept of A URI, um, uh,
+
+888
+00:43:22.145 --> 00:43:24.865
+a universal, uh, reference for that data.
+
+889
+00:43:25.165 --> 00:43:28.625
+So these are web standards that you can build out.
+
+890
+00:43:28.805 --> 00:43:30.545
+And so ideally we want to get to this.
+
+891
+00:43:31.205 --> 00:43:34.465
+And so we've been promoting, um, work that's been done
+
+892
+00:43:34.465 --> 00:43:36.345
+by NASA Professional Lab on
+
+893
+00:43:36.345 --> 00:43:38.785
+what they call the flexo MMS architecture,
+
+894
+00:43:39.275 --> 00:43:41.265
+which is a potential standard for this.
+
+895
+00:43:42.055 --> 00:43:43.745
+It's different than our six layers,
+
+896
+00:43:43.885 --> 00:43:48.545
+but the six layers of theirs identify what types of tools
+
+897
+00:43:49.365 --> 00:43:52.745
+you would want to do in order to build this type
+
+898
+00:43:52.745 --> 00:43:57.345
+of a data architecture that integrates across, um,
+
+899
+00:43:57.785 --> 00:44:00.025
+engineering models, system models, and decision models.
+
+900
+00:44:00.765 --> 00:44:02.765
+So I won't go into details here,
+
+901
+00:44:02.785 --> 00:44:04.645
+but you can go look at this on the web.
+
+902
+00:44:04.945 --> 00:44:07.045
+Um, and, uh, you know,
+
+903
+00:44:07.045 --> 00:44:09.405
+please participate if you're interested in this stuff
+
+904
+00:44:09.405 --> 00:44:12.165
+with NASA on developing out this architecture.
+
+905
+00:44:12.165 --> 00:44:14.725
+It's in a very important set of standards
+
+906
+00:44:14.745 --> 00:44:16.725
+for us in the engineering community to get to.
+
+907
+00:44:18.295 --> 00:44:19.715
+So I promised an example.
+
+908
+00:44:20.305 --> 00:44:23.555
+I'll take, um, you know, five to seven minutes, for example
+
+909
+00:44:23.655 --> 00:44:27.595
+before we, um, open it up and, and talk to the questions.
+
+910
+00:44:28.375 --> 00:44:29.635
+So how do I implement this?
+
+911
+00:44:29.655 --> 00:44:32.365
+So first I'll tell you that Mark Blackburn
+
+912
+00:44:32.365 --> 00:44:37.245
+and Stevens does a, a much deeper dive into how
+
+913
+00:44:37.245 --> 00:44:39.645
+to implement this, um, than I do.
+
+914
+00:44:39.985 --> 00:44:43.525
+Um, so we'll see some references in his, um,
+
+915
+00:44:43.755 --> 00:44:45.445
+contact information at the end.
+
+916
+00:44:46.025 --> 00:44:49.005
+So we can do another hour on a deep dive
+
+917
+00:44:49.005 --> 00:44:51.365
+or even more in that on how, you know,
+
+918
+00:44:51.385 --> 00:44:52.645
+we would implement this
+
+919
+00:44:53.225 --> 00:44:56.365
+and how we built out this tool that we used with the Army
+
+920
+00:44:56.865 --> 00:44:59.125
+to implement this type of data architecture.
+
+921
+00:44:59.665 --> 00:45:02.005
+I'm just gonna give you kind of a taste of how you
+
+922
+00:45:02.645 --> 00:45:06.925
+actually define these mapping interfaces, um, in a, in a set
+
+923
+00:45:06.925 --> 00:45:07.925
+of engineering tools.
+
+924
+00:45:09.385 --> 00:45:12.365
+So in the work that we've done with the Army,
+
+925
+00:45:12.615 --> 00:45:15.045
+we've had this public catapult case study.
+
+926
+00:45:15.185 --> 00:45:19.885
+So this is a, uh, it's a army armament center public example
+
+927
+00:45:20.245 --> 00:45:21.325
+'cause they do armament.
+
+928
+00:45:22.225 --> 00:45:23.445
+Um, and, uh,
+
+929
+00:45:23.585 --> 00:45:26.445
+and we needed a public example model that we can use,
+
+930
+00:45:27.665 --> 00:45:29.485
+but it's also a fairly complex system.
+
+931
+00:45:29.585 --> 00:45:31.365
+So if you imagine that you need
+
+932
+00:45:31.365 --> 00:45:33.725
+to launch a projectile from this catapult
+
+933
+00:45:34.145 --> 00:45:38.505
+to hit a moving target, then there's a lot of physics
+
+934
+00:45:38.645 --> 00:45:41.065
+and there's a lot of functional, um, set
+
+935
+00:45:41.065 --> 00:45:42.105
+of stuff that has to do.
+
+936
+00:45:42.165 --> 00:45:43.385
+And we'll just show you an example
+
+937
+00:45:43.405 --> 00:45:45.585
+of the physics-based approach right now.
+
+938
+00:45:46.365 --> 00:45:49.425
+So, um, so we looked at kind of three scenarios.
+
+939
+00:45:49.505 --> 00:45:52.225
+A baseline, a requirement change in mechanical part change.
+
+940
+00:45:52.225 --> 00:45:55.665
+In this modeling activity we had to capture the physics
+
+941
+00:45:55.805 --> 00:45:56.865
+of the catapult,
+
+942
+00:45:57.515 --> 00:45:59.935
+and then we had to capture the environment,
+
+943
+00:45:59.955 --> 00:46:01.815
+the ballistic environment that operates in.
+
+944
+00:46:02.355 --> 00:46:05.455
+And then we had to capture the terminal ballistics
+
+945
+00:46:05.555 --> 00:46:07.375
+to see if we could actually hit the target
+
+946
+00:46:08.115 --> 00:46:10.855
+and then capture several kind of key parameters.
+
+947
+00:46:11.475 --> 00:46:13.175
+And so we have design inputs,
+
+948
+00:46:13.175 --> 00:46:15.295
+we have mission level operational inputs,
+
+949
+00:46:15.295 --> 00:46:18.215
+we have external environment inputs, we have a bunch
+
+950
+00:46:18.215 --> 00:46:20.575
+of parameters that need to be passed between models.
+
+951
+00:46:21.195 --> 00:46:24.455
+And then we have a, a an analysis of alternatives, time
+
+952
+00:46:24.455 --> 00:46:26.855
+to output, all represented in this model.
+
+953
+00:46:27.235 --> 00:46:29.295
+So it's a kind of a simple system,
+
+954
+00:46:29.435 --> 00:46:34.295
+but it's a, it's a meeting medium to complex actual set
+
+955
+00:46:34.295 --> 00:46:35.735
+of models to be able to predict
+
+956
+00:46:36.125 --> 00:46:39.255
+that you could launch from a catapult, a project tile
+
+957
+00:46:39.255 --> 00:46:40.375
+to hit a moving target.
+
+958
+00:46:42.815 --> 00:46:45.915
+So how do we represent this in a systems modeling language?
+
+959
+00:46:45.945 --> 00:46:48.195
+This is just the image from from the system
+
+960
+00:46:48.355 --> 00:46:49.755
+ML that's done here.
+
+961
+00:46:49.935 --> 00:46:53.075
+So, so the concept here is a catapult system.
+
+962
+00:46:53.785 --> 00:46:57.075
+That catapult system has a set of parameters, length, width,
+
+963
+00:46:57.075 --> 00:46:58.795
+height, weight, repair, time and cost.
+
+964
+00:46:59.135 --> 00:47:03.435
+And then it has a decomposition down into a set
+
+965
+00:47:03.435 --> 00:47:06.835
+of components that have, um, other parameters.
+
+966
+00:47:07.375 --> 00:47:09.635
+Um, and so one of the things I think you can start
+
+967
+00:47:09.635 --> 00:47:11.315
+to notice here is
+
+968
+00:47:11.315 --> 00:47:15.295
+that we can have a very consistent terminology, um,
+
+969
+00:47:15.315 --> 00:47:19.255
+and that consistent terminology across these parameters,
+
+970
+00:47:19.355 --> 00:47:21.615
+if we maintain it, um,
+
+971
+00:47:22.075 --> 00:47:24.975
+can form a computational ontology of what the system is.
+
+972
+00:47:24.995 --> 00:47:26.295
+So we can start to think about
+
+973
+00:47:26.295 --> 00:47:28.135
+how we build out this link data model.
+
+974
+00:47:28.595 --> 00:47:29.805
+Um, so a,
+
+975
+00:47:29.925 --> 00:47:33.085
+a concept like weight is very consistently used across
+
+976
+00:47:33.355 --> 00:47:36.525
+different abstraction levels, uh, of this system.
+
+977
+00:47:37.025 --> 00:47:39.925
+And that can be captured as terminology in, in the model.
+
+978
+00:47:40.145 --> 00:47:42.645
+So part of this effort has been to use how to capture
+
+979
+00:47:42.645 --> 00:47:43.725
+that, which I'll show you in a minute.
+
+980
+00:47:44.425 --> 00:47:49.365
+Um, so we use stereotypes, um,
+
+981
+00:47:49.915 --> 00:47:51.965
+tags, which I'll show you in order to do that.
+
+982
+00:47:52.625 --> 00:47:57.285
+Um, so this IOIF tool allows you to sort of manage all that.
+
+983
+00:47:58.105 --> 00:48:01.525
+Um, that catapult system is actually part of a bigger model.
+
+984
+00:48:01.585 --> 00:48:03.285
+So in order to do our analysis,
+
+985
+00:48:03.865 --> 00:48:06.845
+we can't just look at the catapult system, um,
+
+986
+00:48:07.185 --> 00:48:08.445
+and its parameters.
+
+987
+00:48:08.865 --> 00:48:12.045
+We also have to look at all of the artillery system
+
+988
+00:48:13.035 --> 00:48:15.525
+that have this whole concept
+
+989
+00:48:15.745 --> 00:48:19.045
+of hitting a moving target embedded in it, things like range
+
+990
+00:48:19.145 --> 00:48:23.485
+and things like, um, the circular error probability of of,
+
+991
+00:48:23.825 --> 00:48:27.245
+of, um, project tile on target.
+
+992
+00:48:27.465 --> 00:48:30.725
+So we have to actually link it in to do the analysis to
+
+993
+00:48:31.245 --> 00:48:32.885
+a larger artillery system model.
+
+994
+00:48:33.345 --> 00:48:35.605
+Um, but then we have to actually link it into a larger
+
+995
+00:48:35.765 --> 00:48:39.845
+catapult mission model to look at things like flight time
+
+996
+00:48:39.985 --> 00:48:42.205
+or cost or other aspects like that.
+
+997
+00:48:42.385 --> 00:48:45.685
+And so you can kind of see that we're already building out,
+
+998
+00:48:46.185 --> 00:48:49.365
+um, at least four levels of abstraction, maybe more than
+
+999
+00:48:49.365 --> 00:48:52.045
+that into our system model as we do this.
+
+1000
+00:48:52.385 --> 00:48:55.365
+So our ontology or our taxonomy, um,
+
+1001
+00:48:55.375 --> 00:48:57.365
+parameters is rapidly increasing.
+
+1002
+00:48:57.805 --> 00:48:59.765
+Wouldn't it be nice if we could store
+
+1003
+00:48:59.945 --> 00:49:01.685
+and reuse these permanently?
+
+1004
+00:49:01.865 --> 00:49:05.085
+And that's really what the formal system model allows us
+
+1005
+00:49:05.085 --> 00:49:09.165
+to do, um, at each level of abstraction that we have here.
+
+1006
+00:49:09.865 --> 00:49:11.525
+Um, so this is sort of the concept
+
+1007
+00:49:12.185 --> 00:49:15.205
+and then we capture the actual ontology
+
+1008
+00:49:15.825 --> 00:49:19.965
+in system L one today as a set of stereotypes.
+
+1009
+00:49:20.425 --> 00:49:25.295
+Um, so you can think of, I'm taking all of this taxonomy
+
+1010
+00:49:25.395 --> 00:49:27.375
+and I'm defining what these things mean.
+
+1011
+00:49:27.875 --> 00:49:31.095
+Um, and I am programming it as a formal ontology
+
+1012
+00:49:31.955 --> 00:49:34.015
+in something like the ontology web language
+
+1013
+00:49:34.235 --> 00:49:35.575
+or web ontology language,
+
+1014
+00:49:35.675 --> 00:49:39.615
+but I also can capture it as parameters
+
+1015
+00:49:40.395 --> 00:49:41.695
+in my system ML model
+
+1016
+00:49:42.195 --> 00:49:45.075
+and maintain that data structure,
+
+1017
+00:49:45.095 --> 00:49:46.155
+if you want to call it that.
+
+1018
+00:49:46.385 --> 00:49:49.755
+It's effectively a data model as a set
+
+1019
+00:49:49.815 --> 00:49:53.035
+of model elements in my formal system model.
+
+1020
+00:49:53.535 --> 00:49:55.875
+So system modeling is actually quite useful for this.
+
+1021
+00:49:56.375 --> 00:49:58.315
+Um, system ML version two,
+
+1022
+00:49:58.805 --> 00:50:01.195
+which has just been released will provide a
+
+1023
+00:50:01.195 --> 00:50:02.235
+specified language for this.
+
+1024
+00:50:02.235 --> 00:50:04.115
+So we don't have to use stereotypes anymore.
+
+1025
+00:50:04.535 --> 00:50:08.275
+Um, we'll actually be able to code those things in a,
+
+1026
+00:50:08.355 --> 00:50:10.475
+a software language as formal parameters.
+
+1027
+00:50:10.935 --> 00:50:15.475
+Um, so we can both do this to, to capture it forever,
+
+1028
+00:50:15.535 --> 00:50:18.395
+but it also allows us to define our trade studies
+
+1029
+00:50:19.015 --> 00:50:21.675
+and interpret those using semantic reasoning
+
+1030
+00:50:21.735 --> 00:50:23.275
+so we can match things together.
+
+1031
+00:50:24.135 --> 00:50:27.935
+Um, so that then goes into
+
+1032
+00:50:28.565 --> 00:50:30.015
+this decision mapping.
+
+1033
+00:50:30.315 --> 00:50:33.495
+So these model interface specification diagrams,
+
+1034
+00:50:33.985 --> 00:50:37.255
+which we define in system L using a parametric diagram.
+
+1035
+00:50:37.955 --> 00:50:41.295
+Um, so you can think about your decision model,
+
+1036
+00:50:41.305 --> 00:50:43.695
+which could be implemented in a completely different tool,
+
+1037
+00:50:44.635 --> 00:50:47.895
+um, is being defined by sets of parameters
+
+1038
+00:50:47.895 --> 00:50:50.135
+that are maintained in your formal system model
+
+1039
+00:50:50.675 --> 00:50:54.295
+and forever leaned into your decision analysis model.
+
+1040
+00:50:54.835 --> 00:50:56.775
+Um, so that's the next step.
+
+1041
+00:50:56.775 --> 00:50:58.815
+And then the last step is integrating it together.
+
+1042
+00:51:00.005 --> 00:51:03.025
+And so in this particular case for this catapult model,
+
+1043
+00:51:03.565 --> 00:51:07.305
+we have all of the, the mission system
+
+1044
+00:51:07.325 --> 00:51:12.105
+and environmentally related parameters defined in cml.
+
+1045
+00:51:14.185 --> 00:51:16.205
+And so the yellow blocks are the C ML
+
+1046
+00:51:16.325 --> 00:51:17.805
+elements and value properties.
+
+1047
+00:51:17.825 --> 00:51:21.125
+So we also have the mission level parameters defined
+
+1048
+00:51:21.985 --> 00:51:26.245
+in csml, but as you can see, the actual simulation,
+
+1049
+00:51:26.985 --> 00:51:30.405
+the actual parametric analysis simulation is a fire
+
+1050
+00:51:30.455 --> 00:51:32.845
+simulation that's run in matlab.
+
+1051
+00:51:33.665 --> 00:51:37.125
+Um, and it's connected
+
+1052
+00:51:37.125 --> 00:51:40.325
+with a fire error model in a XY model
+
+1053
+00:51:40.825 --> 00:51:42.485
+that's defined in Python,
+
+1054
+00:51:44.235 --> 00:51:48.775
+and then it's visualized partly in a geometry model
+
+1055
+00:51:49.035 --> 00:51:50.935
+that's developed in the Creo tool.
+
+1056
+00:51:51.515 --> 00:51:54.935
+So what we get out of this, as long as these tools
+
+1057
+00:51:55.795 --> 00:52:00.735
+can expose their data is we get a completely tool agnostic
+
+1058
+00:52:02.045 --> 00:52:04.305
+way to represent an analysis.
+
+1059
+00:52:04.965 --> 00:52:09.805
+The engineers can still work in their tools of choice, um,
+
+1060
+00:52:10.905 --> 00:52:13.685
+but the connectivity is always captured
+
+1061
+00:52:14.185 --> 00:52:18.205
+and can be run in a visualization environment consistently
+
+1062
+00:52:18.475 --> 00:52:21.605
+despite the other tools that our people are working in.
+
+1063
+00:52:22.225 --> 00:52:25.835
+Um, so just to show
+
+1064
+00:52:25.895 --> 00:52:28.875
+how this is being used in this particular case, you can see
+
+1065
+00:52:29.305 --> 00:52:32.435
+that the geometry model or the operator aiming model
+
+1066
+00:52:32.455 --> 00:52:35.435
+or in the ballistic simulation, those things can be run in,
+
+1067
+00:52:35.895 --> 00:52:38.155
+um, the engineering space,
+
+1068
+00:52:38.535 --> 00:52:41.555
+but you still have the system engineer
+
+1069
+00:52:42.015 --> 00:52:44.515
+and the team doing the trade space
+
+1070
+00:52:44.615 --> 00:52:47.395
+to see the results at the system level using
+
+1071
+00:52:47.485 --> 00:52:48.795
+these type of technologies.
+
+1072
+00:52:49.175 --> 00:52:53.835
+Um, and then we visualize this in our IOIF tool so
+
+1073
+00:52:53.835 --> 00:52:56.755
+that IOIF tool not only connects these different things
+
+1074
+00:52:57.075 --> 00:52:59.195
+together across multiple tools,
+
+1075
+00:52:59.455 --> 00:53:01.435
+but it also does model management.
+
+1076
+00:53:02.095 --> 00:53:05.115
+Um, so you can have multiple runs of these models.
+
+1077
+00:53:06.275 --> 00:53:08.575
+And so what you get is a set of visualizations.
+
+1078
+00:53:08.635 --> 00:53:09.815
+You can do value graphs.
+
+1079
+00:53:10.475 --> 00:53:13.255
+The really cool tool I think in all this is you can explore
+
+1080
+00:53:13.275 --> 00:53:17.175
+the actual link data graph so you can see all how all
+
+1081
+00:53:17.175 --> 00:53:18.735
+of your parameters are connected in the other.
+
+1082
+00:53:18.795 --> 00:53:20.135
+And so you can play around
+
+1083
+00:53:20.635 --> 00:53:23.855
+and do analysis by changing one parameter at a time,
+
+1084
+00:53:23.915 --> 00:53:26.885
+seeing all the other parameters that it affects.
+
+1085
+00:53:27.425 --> 00:53:28.925
+Um, and then you can do this
+
+1086
+00:53:29.505 --> 00:53:31.925
+as a model management concept in multiple runs.
+
+1087
+00:53:33.665 --> 00:53:35.125
+All right, so question time.
+
+1088
+00:53:35.305 --> 00:53:37.775
+So, um, all
+
+1089
+00:53:37.775 --> 00:53:40.575
+of this work has been documented in this handbook on
+
+1090
+00:53:40.575 --> 00:53:41.895
+digital engineering with ontologies.
+
+1091
+00:53:42.715 --> 00:53:46.215
+Um, it's a free open resource, um, so
+
+1092
+00:53:46.215 --> 00:53:47.975
+that QR code links to that.
+
+1093
+00:53:48.765 --> 00:53:51.095
+It's also documented in chapters one through four
+
+1094
+00:53:51.095 --> 00:53:52.775
+of the book that we wrote in the circ.
+
+1095
+00:53:52.875 --> 00:53:54.375
+And then the in cozy paper
+
+1096
+00:53:55.035 --> 00:53:56.775
+on the decision analysis data model
+
+1097
+00:53:56.835 --> 00:53:58.015
+is actually open source two.
+
+1098
+00:53:58.035 --> 00:53:59.035
+So there's link for that.
+
+1099
+00:54:00.825 --> 00:54:02.845
+Um, thanks, uh, Meg
+
+1100
+00:54:03.505 --> 00:54:05.405
+for your wonderful presentation on these, uh,
+
+1101
+00:54:05.925 --> 00:54:08.605
+advanced concepts on, uh, information technologies,
+
+1102
+00:54:09.235 --> 00:54:11.045
+cybersecurity, cyber resilience.
+
+1103
+00:54:11.345 --> 00:54:12.965
+We have some questions from the audience.
+
+1104
+00:54:13.025 --> 00:54:16.725
+Um, uh, how do we achieve any stars
+
+1105
+00:54:17.515 --> 00:54:19.765
+when working within a difference network?
+
+1106
+00:54:20.905 --> 00:54:24.995
+Farmers like AP 2 39, et cetera needed.
+
+1107
+00:54:26.885 --> 00:54:31.025
+So I'm not specifically familiar with format like AP 2 39,
+
+1108
+00:54:31.215 --> 00:54:32.225
+that that format.
+
+1109
+00:54:32.605 --> 00:54:36.825
+Um, I think, you know, what we're promoting is not
+
+1110
+00:54:36.825 --> 00:54:38.705
+that this has to be published open on the web.
+
+1111
+00:54:38.705 --> 00:54:41.545
+What we're promoting is the use of web technologies
+
+1112
+00:54:42.075 --> 00:54:46.065
+which can be hosted behind a government secure firewall,
+
+1113
+00:54:46.645 --> 00:54:47.665
+if you want to call it that.
+
+1114
+00:54:47.805 --> 00:54:50.065
+So, so the tool, so like, um,
+
+1115
+00:54:50.065 --> 00:54:52.185
+government's running on Amazon cloud
+
+1116
+00:54:52.725 --> 00:54:54.145
+for their gov networks quite a bit.
+
+1117
+00:54:54.605 --> 00:54:58.625
+Um, a tool like Amazon Network net Tune allows you
+
+1118
+00:54:58.625 --> 00:55:00.905
+to build this link data store
+
+1119
+00:55:01.745 --> 00:55:04.165
+in the existing government cloud as a tool
+
+1120
+00:55:04.165 --> 00:55:06.205
+that's available in that environment.
+
+1121
+00:55:06.825 --> 00:55:10.405
+So we're talking about hosting these concepts on those.
+
+1122
+00:55:12.515 --> 00:55:15.535
+Uh, the next question was, uh, great talk. Thank you.
+
+1123
+00:55:16.385 --> 00:55:20.715
+This approach seems to better be a better job of, uh,
+
+1124
+00:55:20.915 --> 00:55:22.515
+treating data explicitly.
+
+1125
+00:55:23.755 --> 00:55:27.695
+My question is about de for improving cyber resilience.
+
+1126
+00:55:28.595 --> 00:55:32.905
+First question, have you considered how you could use this
+
+1127
+00:55:32.965 --> 00:55:37.305
+to better represent cyber resilience against integrity
+
+1128
+00:55:37.485 --> 00:55:40.225
+and confidentiality cyber attacks?
+
+1129
+00:55:40.365 --> 00:55:45.275
+Second question. I wonder if there are cyber defense
+
+1130
+00:55:45.275 --> 00:55:48.875
+analytics that could be in included in the system model
+
+1131
+00:55:49.405 --> 00:55:53.235
+using this paradigm both to defense, defend
+
+1132
+00:55:53.235 --> 00:55:57.555
+and preserve the system and to improve its resilience?
+
+1133
+00:55:57.905 --> 00:55:59.115
+It's a big question. I'm sorry.
+
+1134
+00:56:00.065 --> 00:56:03.955
+Yeah, so, um, so I know Jimmy, Jimmy, the,
+
+1135
+00:56:04.185 --> 00:56:05.475
+there's another talk
+
+1136
+00:56:05.475 --> 00:56:08.315
+that we could do on cyber resilience modeling using these
+
+1137
+00:56:08.325 --> 00:56:09.435
+types of approaches
+
+1138
+00:56:09.825 --> 00:56:11.595
+that it would take another hour to go through.
+
+1139
+00:56:12.095 --> 00:56:13.915
+Um, maybe, maybe I'll offer that up,
+
+1140
+00:56:13.975 --> 00:56:16.595
+but the answer to the question is yes, right?
+
+1141
+00:56:17.295 --> 00:56:22.025
+We can, um, we can use this type of architecture
+
+1142
+00:56:22.245 --> 00:56:25.885
+to represent data on cyber attacks both from the external,
+
+1143
+00:56:26.905 --> 00:56:29.325
+so Miters attack framework.
+
+1144
+00:56:29.585 --> 00:56:32.645
+Um, we've used that as a, a way to model
+
+1145
+00:56:32.705 --> 00:56:34.245
+how an attacker gets into the system.
+
+1146
+00:56:34.395 --> 00:56:37.085
+They've actually built an oncology for that now.
+
+1147
+00:56:37.265 --> 00:56:40.405
+Um, so we can, you know, come up
+
+1148
+00:56:40.405 --> 00:56:42.125
+with an architecture to support that.
+
+1149
+00:56:42.625 --> 00:56:45.085
+Um, we can use model-based system engineering
+
+1150
+00:56:45.085 --> 00:56:46.885
+to represent the trace based analysis.
+
+1151
+00:56:46.905 --> 00:56:49.965
+So what we've been doing is representing, um,
+
+1152
+00:56:49.975 --> 00:56:52.845
+cyber resilience patterns as models.
+
+1153
+00:56:53.345 --> 00:56:56.165
+And those things can be part of your link data architecture.
+
+1154
+00:56:56.385 --> 00:56:57.645
+So you can call them up.
+
+1155
+00:56:58.305 --> 00:57:00.685
+Um, and I didn't really mention this,
+
+1156
+00:57:00.865 --> 00:57:02.885
+but the next step we're doing is,
+
+1157
+00:57:02.985 --> 00:57:04.845
+is actually gonna be trying to use, uh,
+
+1158
+00:57:05.125 --> 00:57:07.365
+artificial intelligence, particularly large language models
+
+1159
+00:57:07.865 --> 00:57:10.205
+to help you select those patterns.
+
+1160
+00:57:10.475 --> 00:57:11.965
+Sort of a cognitive assistance.
+
+1161
+00:57:11.985 --> 00:57:15.285
+So once you get into this link data environment, you know,
+
+1162
+00:57:15.285 --> 00:57:19.525
+you're opening up a world of, of automation applications
+
+1163
+00:57:20.315 --> 00:57:22.565
+from commercial technologies that are, um,
+
+1164
+00:57:22.795 --> 00:57:25.045
+that are being used by these tools today.
+
+1165
+00:57:25.625 --> 00:57:28.845
+So yeah, this can be applied to any type of models, um,
+
+1166
+00:57:29.035 --> 00:57:31.205
+just don't really have time to show those today.
+
+1167
+00:57:33.935 --> 00:57:36.955
+Um, thank you very much. Uh, Tom Mc, uh, there not
+
+1168
+00:57:36.975 --> 00:57:38.395
+for your wonderful presentation.
+
+1169
+00:57:39.215 --> 00:57:40.915
+Oh, again, there is a question. Um,
+
+1170
+00:57:43.025 --> 00:57:44.025
+I was just saying he wants.
+
+1171
+00:57:49.215 --> 00:57:52.465
+Okay. Um, thank you Meg Domar again
+
+1172
+00:57:52.465 --> 00:57:53.665
+for your wonderful presentation.
+
+1173
+00:57:54.245 --> 00:57:57.345
+Uh, on behalf of System Council is officers
+
+1174
+00:57:57.485 --> 00:57:58.585
+and committee members.
+
+1175
+00:57:59.245 --> 00:58:00.865
+I'm from the education committee.
+
+1176
+00:58:01.245 --> 00:58:02.705
+We express our since thanks
+
+1177
+00:58:02.765 --> 00:58:03.985
+and we are proud to have you
+
+1178
+00:58:03.985 --> 00:58:06.105
+as a our distinguished lecturer in the council.
+
+1179
+00:58:06.635 --> 00:58:08.185
+Thank you. And we look forward
+
+1180
+00:58:08.325 --> 00:58:10.385
+to see in the next presentation of the
+
+1181
+00:58:11.145 --> 00:58:12.305
+Distinguished Online Lecture Program.
+
+1182
+00:58:12.775 --> 00:58:13.785
+Have a nice day. Bye.

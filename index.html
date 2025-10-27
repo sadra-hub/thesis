@@ -93,7 +93,7 @@
 
     /* Models overlay (license note) */
     .license-overlay{
-      position:absolute; inset:0; background:var(--lightgray); border:1px dashed #000; display:flex; align-items:center; justify-content:center; text-align:center; padding:24px;
+      position:absolute; inset:0; background:var(--lightgray); border:1px dashed #000; align-items:center; justify-content:center; text-align:center; padding:24px;
       font-size:16px; line-height:1.5;
     }
     .license-overlay img{ height:28px; display:block; margin:8px auto 0; filter:grayscale(1); }
@@ -182,7 +182,7 @@
     const BRANCH      = 'master';
 
     // Webhooks
-    const WEBHOOK_CHAT   = 'https://backend.systein.nl/webhook/thesis-chat';
+    const WEBHOOK_CHAT   = 'https://backend.systein.nl/webhook-test/thesis-chat';
     const WEBHOOK_REPORT = 'https://backend.systein.nl/webhook/thesis-report';
 
     // ===== ROUTER & MENU =====
@@ -250,20 +250,13 @@
       const title = document.createElement('div');
       title.className = 'name';
       title.textContent = name;
-      const openBtn = document.createElement('a');
-      openBtn.href = rawGitURL(path);
-      openBtn.target = '_blank';
-      openBtn.textContent = 'Open';
       const viewBtn = document.createElement('button');
       viewBtn.textContent = 'Preview';
       viewBtn.className = 'btn';
       viewBtn.style.width = '100%';
       viewBtn.addEventListener('click', () => previewFile(path, isBinary, path.startsWith('docs/') ? 'docViewer' : 'modelViewer'));
       card.appendChild(title);
-      const row = document.createElement('div');
-      row.style.display='flex'; row.style.gap='8px';
-      row.appendChild(openBtn); row.appendChild(viewBtn);
-      card.appendChild(row);
+      card.appendChild(viewBtn);
       return card;
     }
 
@@ -278,16 +271,44 @@
       mount.innerHTML = '';
       try{
         const items = await listFolder('docs');
-        items
-          .filter(it => it.type === 'file')
-          .forEach(it => {
+        const dirs = items.filter(it => it.type === 'dir');
+        const rootFiles = items.filter(it => it.type === 'file');
+
+        // helper to render a section
+        const renderSection = (titleText, files, basePath='docs') => {
+          const section = document.createElement('section');
+          const h2 = document.createElement('h2');
+          h2.textContent = titleText;
+          const grid = document.createElement('div');
+          grid.className = 'grid';
+          files.filter(it => it.type === 'file').forEach(it => {
             const name = it.name;
-            const path = `docs/${name}`;
+            const path = `${basePath}/${name}`;
             const isBinary = /(pdf|png|jpg|jpeg|svg)$/i.test(name);
-            mount.appendChild(createCard(name, path, isBinary));
+            grid.appendChild(createCard(name, path, isBinary));
           });
+          section.appendChild(h2);
+          section.appendChild(grid);
+          mount.appendChild(section);
+        };
+
+        if (rootFiles.length){
+          renderSection('General', rootFiles, 'docs');
+        }
+
+        for (const dir of dirs){
+          try{
+            const files = await listFolder(`docs/${dir.name}`);
+            renderSection(dir.name, files, `docs/${dir.name}`);
+          }catch(e){
+            const errCard = document.createElement('div');
+            errCard.className = 'card';
+            errCard.innerHTML = `<strong>${dir.name}</strong><br/>Unable to list directory.<br><code>${e.message}</code>`;
+            mount.appendChild(errCard);
+          }
+        }
       }catch(err){
-        mount.innerHTML = `<div class="card">Unable to list /docs. Configure GITHUB_USER/REPO or ensure the folder exists.<br><code>${err.message}</code></div>`;
+        mount.innerHTML = `<div class=\"card\">Unable to list /docs. Configure GITHUB_USER/REPO or ensure the folder exists.<br><code>${err.message}</code></div>`;
       }
     }
 
@@ -313,7 +334,7 @@
       modelViewer.innerHTML = '';
       const overlay = document.createElement('div');
       overlay.className = 'license-overlay';
-      overlay.innerHTML = `Academic Licence pending from Tom Sawyer<br/><img src="assets/logos/tom-sawyer-black.png" alt="Tom Sawyer">`;
+      overlay.innerHTML = `Models will be viewed under an Academic Licence pending for approval from Tom Sawyer<br/><img src="assets/logos/tom-sawyer-black.png" alt="Tom Sawyer">`;
       modelViewer.appendChild(overlay);
     }
 
@@ -321,33 +342,40 @@
       const viewer = document.getElementById(viewerId);
       viewer.innerHTML = '';
       const url = rawGitURL(path);
-      if (isBinary){
-        // For PDFs and images, embed robustly
-        if (/pdf$/i.test(path)){
-          // Try <object> (often works better with raw.githubusercontent)
-          const obj = document.createElement('object');
-          obj.type = 'application/pdf';
-          obj.data = url + '#toolbar=1&view=FitH';
-          obj.style.width = '100%';
-          obj.style.height = '100%';
-          obj.innerHTML = `<div style="padding:12px;">PDF preview unavailable. <a href="${url}" target="_blank">Open in new tab</a></div>`;
-          viewer.appendChild(obj);
+
+      // Always try to stream content and render via Blob URLs to avoid browser download behavior
+      try{
+        if (isBinary){
+          const res = await fetch(url, { cache: 'no-store' });
+          if(!res.ok) throw new Error('Failed to fetch file: ' + res.status);
+          const blob = await res.blob();
+          const blobUrl = URL.createObjectURL(blob);
+
+          if (/pdf$/i.test(path)){
+            // Use <iframe> for better PDF rendering & toolbar support
+            const iframe = document.createElement('iframe');
+            iframe.src = blobUrl + '#toolbar=1&view=FitH';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.border = 'none';
+            viewer.appendChild(iframe);
+          } else {
+            // Image preview
+            const img = document.createElement('img');
+            img.src = blobUrl; img.alt = path; img.style.maxWidth='100%'; img.style.maxHeight='100%';
+            viewer.appendChild(img);
+          }
         } else {
-          const img = document.createElement('img');
-          img.src = url; img.alt = path; img.style.maxWidth='100%'; img.style.maxHeight='100%';
-          viewer.appendChild(img);
-        }
-      } else {
-        // Fetch text content and render in <pre>
-        try{
-          const res = await fetch(url, {cache:'no-store'});
+          // Text content
+          const res = await fetch(url, { cache:'no-store' });
+          if(!res.ok) throw new Error('Failed to fetch file: ' + res.status);
           const text = await res.text();
           const pre = document.createElement('pre');
           pre.textContent = text;
           viewer.appendChild(pre);
-        }catch(err){
-          viewer.innerHTML = `<div class='card'>Failed to load file.<br><code>${err.message}</code></div>`
         }
+      }catch(err){
+        viewer.innerHTML = `<div class='card'>Preview unavailable. <a href='${url}' target='_blank'>Open in new tab</a><br><code>${err.message}</code></div>`;
       }
     }
 
