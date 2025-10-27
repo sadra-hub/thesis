@@ -16,6 +16,7 @@
       --accent:#000; /* keep monochrome */
       --font-serif:'CMU Serif', 'Computer Modern Roman', 'Times New Roman', serif;
       --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --lightgray:#f2f2f2;
     }
     *{box-sizing:border-box}
     html, body { height: 100%; }
@@ -24,6 +25,7 @@
       font-family: var(--font-serif);
       letter-spacing: 0.01em;
     }
+    body.no-scroll{ overflow:hidden; }
     a{ color: var(--fg); text-decoration: none; border-bottom: 1px solid var(--line); }
     a:hover{ opacity: .7; }
 
@@ -41,11 +43,11 @@
     .overlay.open{ display:flex; animation: fadeIn .25s ease; }
     @keyframes fadeIn{from{opacity:0}to{opacity:1}}
     .overlay-nav{ text-align:center; }
-    .overlay-nav a{ display:block; font-size: clamp(28px, 5vw, 48px); color:#fff; margin:18px 0; border:none; }
+    .overlay-nav a{ display:block; font-size: clamp(40px, 8vw, 86px); color:#fff; margin:18px 0; border:none; letter-spacing:.04em; }
 
     /* Landing page */
     .landing{
-      height:100vh; width:100vw; display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center; padding:0 24px; overflow:hidden; /* unscrollable */
+      height:100vh; width:100vw; display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center; padding:0 24px; overflow:hidden; /* enforce unscrollable */
     }
     .title{ font-size: clamp(28px, 5vw, 54px); max-width: 960px; line-height:1.15; margin:0 0 16px; }
     .subtitle{ font-size: clamp(16px, 2.2vw, 22px); opacity:.9; margin:0 0 28px; }
@@ -53,7 +55,7 @@
     .btn{ border:1px solid var(--line); padding:12px 18px; text-transform:uppercase; letter-spacing:.06em; font-size: 13px; background:#fff; }
     .btn:hover{ background:#000; color:#fff; }
 
-    /* Footer logos */
+    /* Footer logos (home only) */
     .logos{ position:fixed; bottom:18px; left:0; right:0; display:flex; justify-content:center; align-items:center; gap:28px; filter: grayscale(1) contrast(1.2); opacity:.9; }
     .logos img{ height:26px; opacity:.85; }
 
@@ -89,8 +91,17 @@
     .chat-input button{ border:1px solid #000; background:#fff; padding:10px 14px; text-transform:uppercase; letter-spacing:.06em; }
     .chat-input button:hover{ background:#000; color:#fff; }
 
-    /* Hide landing when navigating */
+    /* Models overlay (license note) */
+    .license-overlay{
+      position:absolute; inset:0; background:var(--lightgray); border:1px dashed #000; display:flex; align-items:center; justify-content:center; text-align:center; padding:24px;
+      font-size:16px; line-height:1.5;
+    }
+    .license-overlay img{ height:28px; display:block; margin:8px auto 0; filter:grayscale(1); }
+
+    /* Utilities */
     .hidden{ display:none !important; }
+    .relative{ position:relative; }
+    .right-actions{ float:right; }
   </style>
 </head>
 <body>
@@ -101,6 +112,7 @@
   <!-- Fullscreen overlay menu -->
   <div class="overlay" id="overlay">
     <nav class="overlay-nav">
+      <a href="#/home" data-route>Home</a>
       <a href="#/documents" data-route>Documents</a>
       <a href="#/models" data-route>Models</a>
       <a href="#/demo" data-route>Demo</a>
@@ -118,11 +130,13 @@
     </div>
   </section>
 
-  <!-- Logos footer (place your files in assets/logos/) -->
-  <div class="logos">
+  <!-- Logos footer (home only) -->
+  <div class="logos" id="logos">
     <img src="assets/logos/tue-black.png" alt="TU/e Logo (BW)">
     <img src="assets/logos/tno-esi-black.svg" alt="TNO-ESI Logo (BW)">
     <img src="assets/logos/incose-black.png" alt="INCOSE Logo (BW)">
+    <img src="assets/logos/tom-sawyer-black.png" alt="Tom Sawyer Logo (BW)">
+    <img src="assets/logos/syside-black.png" alt="SysIDE Logo (BW)">
   </div>
 
   <!-- Pages -->
@@ -144,12 +158,13 @@
       <hr>
       <div id="modelsList" class="grid" aria-live="polite"></div>
       <h2>Preview</h2>
-      <div id="modelViewer" class="viewer"></div>
+      <div id="modelViewer" class="viewer relative"></div>
     </section>
 
     <!-- Demo Page (Chat) -->
     <section class="page" id="page-demo" aria-labelledby="demoTitle">
-      <h1 id="demoTitle">Demo — LLM Chat</h1>
+      <h1 id="demoTitle">Demo — LLM Chat <span class="right-actions"><button id="reportBtn" class="btn" style="margin-left:12px;">Generate latest report</button></span></h1>
+      <p class="muted">Use this chat to ask questions about the project. Messages are routed to the backend and responses include updates so you can track progress and understand the system decisions over time.</p>
       <div class="chat-wrap">
         <div id="chatBox" class="chat-box" aria-live="polite"></div>
         <div class="chat-input">
@@ -166,12 +181,14 @@
     const GITHUB_REPO = 'thesis';
     const BRANCH      = 'master';
 
-    // Webhook for demo chat
-    const WEBHOOK = 'https://backend.systein.nl/webhook/thesis';
+    // Webhooks
+    const WEBHOOK_CHAT   = 'https://backend.systein.nl/webhook-test/thesis-chat';
+    const WEBHOOK_REPORT = 'https://backend.systein.nl/webhook/thesis-report';
 
     // ===== ROUTER & MENU =====
     const overlay = document.getElementById('overlay');
     const openMenuBtn = document.getElementById('openMenu');
+    const logos = document.getElementById('logos');
     openMenuBtn.addEventListener('click', () => overlay.classList.add('open'));
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay || e.target.matches('[data-route]')) {
@@ -186,14 +203,31 @@
       demo: document.getElementById('page-demo')
     };
 
-    function setRoute() {
-      const hash = location.hash.replace('#/','');
-      // Hide all pages
+    function showHome(){
       Object.values(pages).forEach(p => p.classList.remove('active'));
-      // Default = landing
       landing.classList.remove('hidden');
-      if (hash && pages[hash]) {
-        landing.classList.add('hidden');
+      logos.classList.remove('hidden');
+      document.body.classList.add('no-scroll');
+    }
+
+    function setRoute() {
+      const raw = location.hash.replace('#/','');
+      const hash = raw || 'home';
+      // Hide all content pages
+      Object.values(pages).forEach(p => p.classList.remove('active'));
+      // Default home
+      if (hash === 'home'){
+        landing.classList.remove('hidden');
+        logos.classList.remove('hidden');
+        document.body.classList.add('no-scroll');
+        return;
+      }
+      // Non-home
+      landing.classList.add('hidden');
+      logos.classList.add('hidden');
+      document.body.classList.remove('no-scroll');
+
+      if (pages[hash]){
         pages[hash].classList.add('active');
         if (hash === 'documents') loadDocs();
         if (hash === 'models') loadModels();
@@ -274,6 +308,13 @@
       }catch(err){
         mount.innerHTML = `<div class="card">Unable to list /models. Configure GITHUB_USER/REPO or ensure the folder exists.<br><code>${err.message}</code></div>`;
       }
+      // License overlay covering the preview for now
+      const modelViewer = document.getElementById('modelViewer');
+      modelViewer.innerHTML = '';
+      const overlay = document.createElement('div');
+      overlay.className = 'license-overlay';
+      overlay.innerHTML = `Academic Licence pending from Tom Sawyer<br/><img src="assets/logos/tom-sawyer-black.png" alt="Tom Sawyer">`;
+      modelViewer.appendChild(overlay);
     }
 
     async function previewFile(path, isBinary, viewerId){
@@ -281,14 +322,16 @@
       viewer.innerHTML = '';
       const url = rawGitURL(path);
       if (isBinary){
-        // For PDFs and images, embed directly
+        // For PDFs and images, embed robustly
         if (/pdf$/i.test(path)){
-          const iframe = document.createElement('iframe');
-          iframe.src = url;
-          iframe.style.width = '100%';
-          iframe.style.height = '100%';
-          iframe.style.border = 'none';
-          viewer.appendChild(iframe);
+          // Try <object> (often works better with raw.githubusercontent)
+          const obj = document.createElement('object');
+          obj.type = 'application/pdf';
+          obj.data = url + '#toolbar=1&view=FitH';
+          obj.style.width = '100%';
+          obj.style.height = '100%';
+          obj.innerHTML = `<div style="padding:12px;">PDF preview unavailable. <a href="${url}" target="_blank">Open in new tab</a></div>`;
+          viewer.appendChild(obj);
         } else {
           const img = document.createElement('img');
           img.src = url; img.alt = path; img.style.maxWidth='100%'; img.style.maxHeight='100%';
@@ -297,7 +340,7 @@
       } else {
         // Fetch text content and render in <pre>
         try{
-          const res = await fetch(url);
+          const res = await fetch(url, {cache:'no-store'});
           const text = await res.text();
           const pre = document.createElement('pre');
           pre.textContent = text;
@@ -327,8 +370,8 @@
       addMsg(msg, true);
       chatInput.value='';
       try{
-        // Send GET with message parameter
-        const url = new URL(WEBHOOK);
+        // Send GET with message parameter to chat webhook
+        const url = new URL(WEBHOOK_CHAT);
         url.searchParams.set('message', msg);
         const res = await fetch(url.toString(), { method: 'GET' });
         let reply = '';
@@ -347,6 +390,35 @@
 
     sendBtn.addEventListener('click', sendMessage);
     chatInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') sendMessage(); });
+
+    // ===== REPORT GENERATION =====
+    const reportBtn = document.getElementById('reportBtn');
+    if (reportBtn){
+      reportBtn.addEventListener('click', async ()=>{
+        const original = reportBtn.textContent;
+        reportBtn.textContent = 'Generating…';
+        reportBtn.disabled = true;
+        try{
+          const url = new URL(WEBHOOK_REPORT);
+          const res = await fetch(url.toString(), { method: 'GET' });
+          if(!res.ok) throw new Error('Report request failed: ' + res.status);
+          const blob = await res.blob();
+          const ct = res.headers.get('content-type') || 'application/octet-stream';
+          const ext = ct.includes('pdf') ? 'pdf' : (ct.includes('zip') ? 'zip' : 'bin');
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = `thesis-report.${ext}`;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        }catch(err){
+          alert('Could not generate report: ' + err.message);
+        }finally{
+          reportBtn.textContent = original;
+          reportBtn.disabled = false;
+        }
+      });
+    }
   </script>
 </body>
 </html>
