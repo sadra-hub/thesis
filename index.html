@@ -4,104 +4,65 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Thesis Project — Data-Driven Decision Support</title>
-  <!-- Computer Modern Roman webfont (black/white theme only) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/computer-modern-web-font@1.0.0/css/cmun-roman.min.css">
   <style>
     :root{
-      --bg: #ffffff; /* white */
-      --fg: #000000; /* black */
-      --muted:#222;
-      --line:#000;
-      --overlay: rgba(0,0,0,0.96);
-      --accent:#000; /* keep monochrome */
-      --font-serif:'CMU Serif', 'Computer Modern Roman', 'Times New Roman', serif;
+      --bg:#fff; --fg:#000; --overlay:rgba(0,0,0,.96); --line:#000; --lightgray:#f2f2f2;
+      --font-serif:'CMU Serif','Computer Modern Roman','Times New Roman',serif;
       --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --lightgray:#f2f2f2;
     }
     *{box-sizing:border-box}
-    html, body { height: 100%; }
-    body{
-      margin:0; padding:0; background:var(--bg); color:var(--fg);
-      font-family: var(--font-serif);
-      letter-spacing: 0.01em;
-    }
-    body.no-scroll{ overflow:hidden; }
-    a{ color: var(--fg); text-decoration: none; border-bottom: 1px solid var(--line); }
-    a:hover{ opacity: .7; }
-
-    /* Header + Menu */
-    .header{
-      position:fixed; top:0; left:0; right:0; height:64px; display:flex; align-items:center; justify-content:flex-end; padding:0 16px; z-index:5; background:transparent;
-    }
-    .menu-btn{ cursor:pointer; width:40px; height:40px; border:1px solid var(--line); border-radius:999px; display:flex; align-items:center; justify-content:center; background:#fff; }
-    .menu-icon, .menu-icon::before, .menu-icon::after{ content:""; display:block; width:18px; height:2px; background:#000; position:relative; transition:transform .3s ease, opacity .3s ease; }
-    .menu-icon::before{ position:absolute; top:-6px; }
-    .menu-icon::after{ position:absolute; top:6px; }
-
-    /* Fullscreen overlay menu */
-    .overlay{ position:fixed; inset:0; background:var(--overlay); color:#fff; display:none; align-items:center; justify-content:center; z-index:10; }
-    .overlay.open{ display:flex; animation: fadeIn .25s ease; }
+    html,body{height:100%}
+    body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-serif);}
+    body.no-scroll{overflow:hidden}
+    a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--line)}
+    a:hover{opacity:.7}
+    .header{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center;justify-content:flex-end;padding:0 16px;z-index:5}
+    .menu-btn{cursor:pointer;width:40px;height:40px;border:1px solid var(--line);border-radius:999px;display:flex;align-items:center;justify-content:center;background:#fff}
+    .menu-icon,.menu-icon::before,.menu-icon::after{content:"";display:block;width:18px;height:2px;background:#000;position:relative;transition:transform .3s ease,opacity .3s ease}
+    .menu-icon::before{position:absolute;top:-6px}
+    .menu-icon::after{position:absolute;top:6px}
+    .overlay{position:fixed;inset:0;background:var(--overlay);color:#fff;display:none;align-items:center;justify-content:center;z-index:10}
+    .overlay.open{display:flex;animation:fadeIn .25s ease}
     @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-    .overlay-nav{ text-align:center; }
-    .overlay-nav a{ display:block; font-size: clamp(40px, 8vw, 86px); color:#fff; margin:18px 0; border:none; letter-spacing:.04em; }
-
-    /* Landing page */
-    .landing{
-      height:100vh; width:100vw; display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center; padding:0 24px; overflow:hidden; /* enforce unscrollable */
-    }
-    .title{ font-size: clamp(28px, 5vw, 54px); max-width: 960px; line-height:1.15; margin:0 0 16px; }
-    .subtitle{ font-size: clamp(16px, 2.2vw, 22px); opacity:.9; margin:0 0 28px; }
-    .cta{ display:flex; gap:16px; flex-wrap:wrap; justify-content:center; }
-    .btn{ border:1px solid var(--line); padding:12px 18px; text-transform:uppercase; letter-spacing:.06em; font-size: 13px; background:#fff; }
-    .btn:hover{ background:#000; color:#fff; }
-
-    /* Footer logos (home only) */
-    .logos{ position:fixed; bottom:18px; left:0; right:0; display:flex; justify-content:center; align-items:center; gap:28px; filter: grayscale(1) contrast(1.2); opacity:.9; }
-    .logos img{ height:26px; opacity:.85; }
-
-    /* Page containers for sections */
-    main{ min-height:100vh; width:100%; }
-    .page{ display:none; padding:96px 24px 48px; max-width:1100px; margin:0 auto; }
-    .page.active{ display:block; }
-    h1{ font-weight:400; font-size:32px; margin:0 0 16px; }
-    h2{ font-weight:400; font-size:22px; margin:24px 0 8px; }
-    .muted{ color:#333; }
-    hr{ border:none; border-top:1px solid #000; margin:24px 0; }
-
-    /* Documents viewer */
-    .grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap:16px; }
-    .card{ border:1px solid #000; padding:14px; background:#fff; display:flex; flex-direction:column; gap:8px; }
-    .card .name{ font-size:16px; }
-    .viewer{ border:1px solid #000; height:70vh; background:#fff; }
-    .file-list{ list-style:none; padding:0; margin:0; }
-    .file-list li{ padding:8px 0; border-bottom:1px solid #000; display:flex; justify-content:space-between; align-items:center; }
-
-    /* Code/text preview */
-    pre{ background:#fff; border:1px solid #000; padding:12px; overflow:auto; font-family: var(--font-mono); font-size:13px; line-height:1.5; }
-
-    /* Chat (Demo) */
-    .chat-wrap{ max-width:760px; margin:0 auto; }
-    .chat-box{ border:1px solid #000; height:60vh; overflow:auto; padding:16px; background:#fff; }
-    .msg{ margin:10px 0; }
-    .msg.me{ text-align:right; }
-    .msg .bubble{ display:inline-block; border:1px solid #000; padding:8px 12px; background:#fff; }
-    .msg.me .bubble{ background:#000; color:#fff; }
-    .chat-input{ display:flex; gap:8px; margin-top:12px; }
-    .chat-input input{ flex:1; border:1px solid #000; padding:10px 12px; font-family:var(--font-serif); }
-    .chat-input button{ border:1px solid #000; background:#fff; padding:10px 14px; text-transform:uppercase; letter-spacing:.06em; }
-    .chat-input button:hover{ background:#000; color:#fff; }
-
-    /* Models overlay (license note) */
-    .license-overlay{
-      position:absolute; inset:0; background:var(--lightgray); border:1px dashed #000; align-items:center; justify-content:center; text-align:center; padding:24px;
-      font-size:16px; line-height:1.5;
-    }
-    .license-overlay img{ height:28px; display:block; margin:8px auto 0; filter:grayscale(1); }
-
-    /* Utilities */
-    .hidden{ display:none !important; }
-    .relative{ position:relative; }
-    .right-actions{ float:right; }
+    .overlay-nav{text-align:center}
+    .overlay-nav a{display:block;font-size:clamp(40px,8vw,86px);color:#fff;margin:18px 0;border:none;letter-spacing:.04em}
+    .landing{height:100vh;width:100vw;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:0 24px;overflow:hidden}
+    .title{font-size:clamp(28px,5vw,54px);max-width:960px;line-height:1.15;margin:0 0 16px}
+    .subtitle{font-size:clamp(16px,2.2vw,22px);opacity:.9;margin:0 0 28px}
+    .cta{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+    .btn{border:1px solid var(--line);padding:12px 18px;text-transform:uppercase;letter-spacing:.06em;font-size:13px;background:#fff}
+    .btn:hover{background:#000;color:#fff}
+    .logos{position:fixed;bottom:18px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:28px;filter:grayscale(1) contrast(1.2);opacity:.9}
+    .logos img{height:26px;opacity:.85}
+    main{min-height:100vh;width:100%}
+    .page{display:none;padding:96px 24px 48px;max-width:1100px;margin:0 auto}
+    .page.active{display:block}
+    h1{font-weight:400;font-size:32px;margin:0 0 16px}
+    h2{font-weight:400;font-size:22px;margin:24px 0 8px}
+    .muted{color:#333}
+    hr{border:none;border-top:1px solid #000;margin:24px 0}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+    .card{border:1px solid #000;padding:14px;background:#fff;display:flex;flex-direction:column;gap:8px}
+    .card .name{font-size:16px}
+    .viewer{border:1px solid #000;height:70vh;background:#fff}
+    .viewer iframe,.viewer embed{width:100%;height:100%;display:block;border:none}
+    pre{background:#fff;border:1px solid #000;padding:12px;overflow:auto;font-family:var(--font-mono);font-size:13px;line-height:1.5}
+    .chat-wrap{max-width:760px;margin:0 auto}
+    .chat-box{border:1px solid #000;height:60vh;overflow:auto;padding:16px;background:#fff}
+    .msg{margin:10px 0}
+    .msg.me{text-align:right}
+    .msg .bubble{display:inline-block;border:1px solid #000;padding:8px 12px;background:#fff}
+    .msg.me .bubble{background:#000;color:#fff}
+    .chat-input{display:flex;gap:8px;margin-top:12px}
+    .chat-input input{flex:1;border:1px solid #000;padding:10px 12px;font-family:var(--font-serif)}
+    .chat-input button{border:1px solid #000;background:#fff;padding:10px 14px;text-transform:uppercase;letter-spacing:.06em}
+    .chat-input button:hover{background:#000;color:#fff}
+    .license-overlay{position:absolute;inset:0;background:var(--lightgray);border:1px dashed #000;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font-size:16px;line-height:1.5}
+    .license-overlay img{height:28px;display:block;margin:8px auto 0;filter:grayscale(1)}
+    .hidden{display:none !important}
+    .relative{position:relative}
+    .right-actions{float:right}
   </style>
 </head>
 <body>
@@ -109,7 +70,6 @@
     <button class="menu-btn" id="openMenu" aria-label="Open Menu"><span class="menu-icon"></span></button>
   </header>
 
-  <!-- Fullscreen overlay menu -->
   <div class="overlay" id="overlay">
     <nav class="overlay-nav">
       <a href="#/home" data-route>Home</a>
@@ -119,7 +79,6 @@
     </nav>
   </div>
 
-  <!-- Landing (unscrollable) -->
   <section class="landing" id="landing">
     <h1 class="title">Data-Driven Decision Support in Systems Engineering</h1>
     <p class="subtitle">Through Linked Descriptive and Analytical Models</p>
@@ -130,7 +89,6 @@
     </div>
   </section>
 
-  <!-- Logos footer (home only) -->
   <div class="logos" id="logos">
     <img src="assets/logos/tue-black.png" alt="TU/e Logo (BW)">
     <img src="assets/logos/tno-esi-black.svg" alt="TNO-ESI Logo (BW)">
@@ -139,19 +97,16 @@
     <img src="assets/logos/syside-black.png" alt="SysIDE Logo (BW)">
   </div>
 
-  <!-- Pages -->
   <main>
-    <!-- Documents Page -->
     <section class="page" id="page-docs" aria-labelledby="docsTitle">
       <h1 id="docsTitle">Documents</h1>
       <p class="muted">All files listed from the <code>/docs</code> folder of this repository. Click to preview PDFs inline or open text files.</p>
       <hr>
-      <div id="docsList" class="grid" aria-live="polite"></div>
+      <div id="docsList" aria-live="polite"></div>
       <h2>Preview</h2>
       <div id="docViewer" class="viewer"></div>
     </section>
 
-    <!-- Models Page -->
     <section class="page" id="page-models" aria-labelledby="modelsTitle">
       <h1 id="modelsTitle">Models</h1>
       <p class="muted">SysML models and related assets from the <code>/models</code> folder.</p>
@@ -161,10 +116,9 @@
       <div id="modelViewer" class="viewer relative"></div>
     </section>
 
-    <!-- Demo Page (Chat) -->
     <section class="page" id="page-demo" aria-labelledby="demoTitle">
       <h1 id="demoTitle">Demo — LLM Chat <span class="right-actions"><button id="reportBtn" class="btn" style="margin-left:12px;">Generate latest report</button></span></h1>
-      <p class="muted">Use this chat to ask questions about the project. Messages are routed to the backend and responses include updates so you can track progress and understand the system decisions over time.</p>
+      <p class="muted">Use this chat to ask questions about the project. Messages are routed to the backend and responses include updates so you can track progress and understand system decisions over time.</p>
       <div class="chat-wrap">
         <div id="chatBox" class="chat-box" aria-live="polite"></div>
         <div class="chat-input">
@@ -181,11 +135,10 @@
     const GITHUB_REPO = 'thesis';
     const BRANCH      = 'master';
 
-    // Webhooks
     const WEBHOOK_CHAT   = 'https://backend.systein.nl/webhook-test/thesis-chat';
     const WEBHOOK_REPORT = 'https://backend.systein.nl/webhook/thesis-report';
 
-    // ===== ROUTER & MENU =====
+    // ===== MENU/ROUTER =====
     const overlay = document.getElementById('overlay');
     const openMenuBtn = document.getElementById('openMenu');
     const logos = document.getElementById('logos');
@@ -203,30 +156,19 @@
       demo: document.getElementById('page-demo')
     };
 
-    function showHome(){
-      Object.values(pages).forEach(p => p.classList.remove('active'));
-      landing.classList.remove('hidden');
-      logos.classList.remove('hidden');
-      document.body.classList.add('no-scroll');
-    }
-
     function setRoute() {
       const raw = location.hash.replace('#/','');
       const hash = raw || 'home';
-      // Hide all content pages
       Object.values(pages).forEach(p => p.classList.remove('active'));
-      // Default home
       if (hash === 'home'){
         landing.classList.remove('hidden');
         logos.classList.remove('hidden');
         document.body.classList.add('no-scroll');
         return;
       }
-      // Non-home
       landing.classList.add('hidden');
       logos.classList.add('hidden');
       document.body.classList.remove('no-scroll');
-
       if (pages[hash]){
         pages[hash].classList.add('active');
         if (hash === 'documents') loadDocs();
@@ -236,7 +178,7 @@
     window.addEventListener('hashchange', setRoute);
     window.addEventListener('load', setRoute);
 
-    // ===== GITHUB API HELPERS =====
+    // ===== GITHUB HELPERS =====
     function ghContentsPath(path){
       return `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${path}`;
     }
@@ -274,7 +216,6 @@
         const dirs = items.filter(it => it.type === 'dir');
         const rootFiles = items.filter(it => it.type === 'file');
 
-        // helper to render a section
         const renderSection = (titleText, files, basePath='docs') => {
           const section = document.createElement('section');
           const h2 = document.createElement('h2');
@@ -292,10 +233,7 @@
           mount.appendChild(section);
         };
 
-        if (rootFiles.length){
-          renderSection('General', rootFiles, 'docs');
-        }
-
+        if (rootFiles.length){ renderSection('General', rootFiles, 'docs'); }
         for (const dir of dirs){
           try{
             const files = await listFolder(`docs/${dir.name}`);
@@ -317,57 +255,46 @@
       mount.innerHTML = '';
       try{
         const items = await listFolder('models');
-        items
-          .filter(it => it.type === 'file')
-          .forEach(it => {
-            const name = it.name;
-            const path = `models/${name}`;
-            // treat non-binary (e.g., .sysml, .txt) as text preview; images/svg as binary
-            const isBinary = /(png|jpg|jpeg|svg|pdf)$/i.test(name);
-            mount.appendChild(createCard(name, path, isBinary));
-          });
+        items.filter(it => it.type === 'file').forEach(it => {
+          const name = it.name;
+          const path = `models/${name}`;
+          const isBinary = /(png|jpg|jpeg|svg|pdf)$/i.test(name);
+          mount.appendChild(createCard(name, path, isBinary));
+        });
       }catch(err){
-        mount.innerHTML = `<div class="card">Unable to list /models. Configure GITHUB_USER/REPO or ensure the folder exists.<br><code>${err.message}</code></div>`;
+        mount.innerHTML = `<div class=\"card\">Unable to list /models. Configure GITHUB_USER/REPO or ensure the folder exists.<br><code>${err.message}</code></div>`;
       }
-      // License overlay covering the preview for now
       const modelViewer = document.getElementById('modelViewer');
       modelViewer.innerHTML = '';
       const overlay = document.createElement('div');
       overlay.className = 'license-overlay';
-      overlay.innerHTML = `Models will be viewed under an Academic Licence pending for approval from Tom Sawyer<br/><img src="assets/logos/tom-sawyer-black.png" alt="Tom Sawyer">`;
+      overlay.innerHTML = `Academic Licence pending from Tom Sawyer<br/><img src=\"assets/logos/tom-sawyer-black.png\" alt=\"Tom Sawyer\">`;
       modelViewer.appendChild(overlay);
     }
 
+    // ===== Robust inline preview (fixes PDF downloading) =====
     async function previewFile(path, isBinary, viewerId){
       const viewer = document.getElementById(viewerId);
       viewer.innerHTML = '';
       const url = rawGitURL(path);
-
-      // Always try to stream content and render via Blob URLs to avoid browser download behavior
       try{
         if (isBinary){
-          const res = await fetch(url, { cache: 'no-store' });
+          const res = await fetch(url, { cache:'no-store', mode:'cors' });
           if(!res.ok) throw new Error('Failed to fetch file: ' + res.status);
           const blob = await res.blob();
           const blobUrl = URL.createObjectURL(blob);
-
           if (/pdf$/i.test(path)){
-            // Use <iframe> for better PDF rendering & toolbar support
-            const iframe = document.createElement('iframe');
-            iframe.src = blobUrl + '#toolbar=1&view=FitH';
-            iframe.style.width = '100%';
-            iframe.style.height = '100%';
-            iframe.style.border = 'none';
-            viewer.appendChild(iframe);
+            const embed = document.createElement('embed');
+            embed.type = 'application/pdf';
+            embed.src = blobUrl + '#toolbar=1&view=FitH';
+            viewer.appendChild(embed);
           } else {
-            // Image preview
             const img = document.createElement('img');
             img.src = blobUrl; img.alt = path; img.style.maxWidth='100%'; img.style.maxHeight='100%';
             viewer.appendChild(img);
           }
         } else {
-          // Text content
-          const res = await fetch(url, { cache:'no-store' });
+          const res = await fetch(url, { cache:'no-store', mode:'cors' });
           if(!res.ok) throw new Error('Failed to fetch file: ' + res.status);
           const text = await res.text();
           const pre = document.createElement('pre');
@@ -379,11 +306,10 @@
       }
     }
 
-    // ===== DEMO CHAT =====
+    // ===== CHAT =====
     const chatBox = document.getElementById('chatBox');
     const chatInput = document.getElementById('chatInput');
     const sendBtn = document.getElementById('sendBtn');
-
     function addMsg(text, me=false){
       const wrap = document.createElement('div');
       wrap.className = 'msg' + (me ? ' me' : '');
@@ -391,60 +317,35 @@
       b.className = 'bubble'; b.textContent = text;
       wrap.appendChild(b); chatBox.appendChild(wrap); chatBox.scrollTop = chatBox.scrollHeight;
     }
-
     async function sendMessage(){
       const msg = chatInput.value.trim();
-      if(!msg) return;
-      addMsg(msg, true);
-      chatInput.value='';
+      if(!msg) return; addMsg(msg, true); chatInput.value='';
       try{
-        // Send GET with message parameter to chat webhook
-        const url = new URL(WEBHOOK_CHAT);
-        url.searchParams.set('message', msg);
-        const res = await fetch(url.toString(), { method: 'GET' });
-        let reply = '';
-        const ct = res.headers.get('content-type') || '';
-        if(ct.includes('application/json')){
-          const data = await res.json();
-          reply = data.response || data.result || JSON.stringify(data);
-        } else {
-          reply = await res.text();
-        }
+        const url = new URL(WEBHOOK_CHAT); url.searchParams.set('message', msg);
+        const res = await fetch(url.toString(), { method:'GET' });
+        let reply = ''; const ct = res.headers.get('content-type') || '';
+        if(ct.includes('application/json')){ const data = await res.json(); reply = data.response || data.result || JSON.stringify(data); }
+        else { reply = await res.text(); }
         addMsg(reply || '[No response]');
-      }catch(err){
-        addMsg('[Error] ' + err.message);
-      }
+      }catch(err){ addMsg('[Error] ' + err.message); }
     }
-
     sendBtn.addEventListener('click', sendMessage);
     chatInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') sendMessage(); });
 
-    // ===== REPORT GENERATION =====
+    // ===== REPORT BUTTON =====
     const reportBtn = document.getElementById('reportBtn');
     if (reportBtn){
       reportBtn.addEventListener('click', async ()=>{
-        const original = reportBtn.textContent;
-        reportBtn.textContent = 'Generating…';
-        reportBtn.disabled = true;
+        const original = reportBtn.textContent; reportBtn.textContent = 'Generating…'; reportBtn.disabled = true;
         try{
-          const url = new URL(WEBHOOK_REPORT);
-          const res = await fetch(url.toString(), { method: 'GET' });
+          const res = await fetch(WEBHOOK_REPORT, { method:'GET' });
           if(!res.ok) throw new Error('Report request failed: ' + res.status);
           const blob = await res.blob();
           const ct = res.headers.get('content-type') || 'application/octet-stream';
           const ext = ct.includes('pdf') ? 'pdf' : (ct.includes('zip') ? 'zip' : 'bin');
-          const a = document.createElement('a');
-          a.href = URL.createObjectURL(blob);
-          a.download = `thesis-report.${ext}`;
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-        }catch(err){
-          alert('Could not generate report: ' + err.message);
-        }finally{
-          reportBtn.textContent = original;
-          reportBtn.disabled = false;
-        }
+          const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `thesis-report.${ext}`; document.body.appendChild(a); a.click(); a.remove();
+        }catch(err){ alert('Could not generate report: ' + err.message); }
+        finally { reportBtn.textContent = original; reportBtn.disabled = false; }
       });
     }
   </script>
