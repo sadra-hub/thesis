@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Thesis Project — Data-Driven Decision Support</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/computer-modern-web-font@1.0.0/css/cmun-roman.min.css">
+  <!-- PDF.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <style>
     :root{
       --bg:#fff; --fg:#000; --overlay:rgba(0,0,0,.96); --line:#000; --lightgray:#f2f2f2;
@@ -31,7 +33,7 @@
     .title{font-size:clamp(28px,5vw,54px);max-width:960px;line-height:1.15;margin:0 0 16px}
     .subtitle{font-size:clamp(16px,2.2vw,22px);opacity:.9;margin:0 0 28px}
     .cta{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
-    .btn{border:1px solid var(--line);padding:12px 18px;text-transform:uppercase;letter-spacing:.06em;font-size:13px;background:#fff}
+    .btn{border:1px solid var(--line);padding:12px 18px;text-transform:uppercase;letter-spacing:.06em;font-size:13px;background:#fff;cursor:pointer}
     .btn:hover{background:#000;color:#fff}
     .logos{position:fixed;bottom:18px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:28px;filter:grayscale(1) contrast(1.2);opacity:.9}
     .logos img{height:26px;opacity:.85}
@@ -45,8 +47,11 @@
     .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
     .card{border:1px solid #000;padding:14px;background:#fff;display:flex;flex-direction:column;gap:8px}
     .card .name{font-size:16px}
-    .viewer{border:1px solid #000;height:70vh;background:#fff}
+    .viewer{border:1px solid #000;height:70vh;background:#fff;overflow:auto}
     .viewer iframe,.viewer embed{width:100%;height:100%;display:block;border:none}
+    .pdf-toolbar{display:flex;gap:8px;align-items:center;border-bottom:1px solid #000;padding:6px;background:#fff;position:sticky;top:0;z-index:1}
+    .pdf-pages{padding:8px 0}
+    canvas.pdf-page{display:block;margin:12px auto;max-width:100%;height:auto}
     pre{background:#fff;border:1px solid #000;padding:12px;overflow:auto;font-family:var(--font-mono);font-size:13px;line-height:1.5}
     .chat-wrap{max-width:760px;margin:0 auto}
     .chat-box{border:1px solid #000;height:60vh;overflow:auto;padding:16px;background:#fff}
@@ -137,6 +142,11 @@
 
     const WEBHOOK_CHAT   = 'https://backend.systein.nl/webhook-test/thesis-chat';
     const WEBHOOK_REPORT = 'https://backend.systein.nl/webhook/thesis-report';
+
+    // PDF.js worker
+    if (window['pdfjsLib']) {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    }
 
     // ===== MENU/ROUTER =====
     const overlay = document.getElementById('overlay');
@@ -272,30 +282,28 @@
       modelViewer.appendChild(overlay);
     }
 
-    // ===== Robust inline preview (fixes PDF downloading) =====
+    // ===== Robust inline preview using PDF.js =====
     async function previewFile(path, isBinary, viewerId){
       const viewer = document.getElementById(viewerId);
       viewer.innerHTML = '';
       const url = rawGitURL(path);
       try{
-        if (isBinary){
-          const res = await fetch(url, { cache:'no-store', mode:'cors' });
-          if(!res.ok) throw new Error('Failed to fetch file: ' + res.status);
+        if (isBinary && /pdf$/i.test(path)){
+          const res = await fetch(url, { cache:'no-store' });
+          if(!res.ok) throw new Error('Failed to fetch PDF: ' + res.status);
+          const buffer = await res.arrayBuffer();
+          renderPdfWithPdfJs(buffer, viewer);
+        } else if (isBinary){
+          const res = await fetch(url, { cache:'no-store' });
+          if(!res.ok) throw new Error('Failed to fetch image: ' + res.status);
           const blob = await res.blob();
           const blobUrl = URL.createObjectURL(blob);
-          if (/pdf$/i.test(path)){
-            const embed = document.createElement('embed');
-            embed.type = 'application/pdf';
-            embed.src = blobUrl + '#toolbar=1&view=FitH';
-            viewer.appendChild(embed);
-          } else {
-            const img = document.createElement('img');
-            img.src = blobUrl; img.alt = path; img.style.maxWidth='100%'; img.style.maxHeight='100%';
-            viewer.appendChild(img);
-          }
+          const img = document.createElement('img');
+          img.src = blobUrl; img.alt = path; img.style.maxWidth='100%'; img.style.maxHeight='100%';
+          viewer.appendChild(img);
         } else {
-          const res = await fetch(url, { cache:'no-store', mode:'cors' });
-          if(!res.ok) throw new Error('Failed to fetch file: ' + res.status);
+          const res = await fetch(url, { cache:'no-store' });
+          if(!res.ok) throw new Error('Failed to fetch text: ' + res.status);
           const text = await res.text();
           const pre = document.createElement('pre');
           pre.textContent = text;
@@ -304,6 +312,45 @@
       }catch(err){
         viewer.innerHTML = `<div class='card'>Preview unavailable. <a href='${url}' target='_blank'>Open in new tab</a><br><code>${err.message}</code></div>`;
       }
+    }
+
+    function renderPdfWithPdfJs(arrayBuffer, mount){
+      if (!window['pdfjsLib']){
+        mount.innerHTML = `<div class='card'>PDF.js not available.</div>`; return;
+      }
+      mount.innerHTML = '';
+      const toolbar = document.createElement('div');
+      toolbar.className = 'pdf-toolbar';
+      const zoomOut = document.createElement('button'); zoomOut.className='btn'; zoomOut.textContent='−';
+      const zoomIn  = document.createElement('button'); zoomIn.className='btn';  zoomIn.textContent='+';
+      const status  = document.createElement('span'); status.style.marginLeft='8px'; status.textContent='Loading…';
+      toolbar.appendChild(zoomOut); toolbar.appendChild(zoomIn); toolbar.appendChild(status);
+      const pagesWrap = document.createElement('div'); pagesWrap.className = 'pdf-pages';
+      mount.appendChild(toolbar); mount.appendChild(pagesWrap);
+
+      let pdfDoc = null; let scale = 1.15; let currentTask = null;
+
+      const renderAll = async () => {
+        pagesWrap.innerHTML = '';
+        status.textContent = `Pages: ${pdfDoc.numPages} — Zoom: ${(scale*100).toFixed(0)}%`;
+        for (let p=1; p<=pdfDoc.numPages; p++){
+          const page = await pdfDoc.getPage(p);
+          const viewport = page.getViewport({ scale });
+          const canvas = document.createElement('canvas'); canvas.className='pdf-page';
+          const ctx = canvas.getContext('2d');
+          canvas.width = Math.floor(viewport.width);
+          canvas.height = Math.floor(viewport.height);
+          pagesWrap.appendChild(canvas);
+          await page.render({ canvasContext: ctx, viewport }).promise;
+        }
+      };
+
+      pdfjsLib.getDocument({ data: arrayBuffer }).promise
+        .then(doc => { pdfDoc = doc; return renderAll(); })
+        .catch(err => { pagesWrap.innerHTML = `<div class='card'>Failed to render PDF.<br><code>${err.message}</code></div>`; });
+
+      zoomIn.onclick = () => { scale = Math.min(scale + 0.15, 3.0); renderAll(); };
+      zoomOut.onclick = () => { scale = Math.max(scale - 0.15, 0.5); renderAll(); };
     }
 
     // ===== CHAT =====
