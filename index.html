@@ -17,6 +17,7 @@
     html,body{height:100%}
     body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-serif);}
     body.no-scroll{overflow:hidden}
+    body.locked{overflow:hidden}
     a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--line)}
     a:hover{opacity:.7}
     .header{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center;justify-content:flex-end;padding:0 16px;z-index:5}
@@ -68,9 +69,31 @@
     .hidden{display:none !important}
     .relative{position:relative}
     .right-actions{float:right}
+    .password-gate{position:fixed;inset:0;z-index:100;background:#fff;color:#000;display:flex;align-items:center;justify-content:center;padding:24px}
+    .password-gate.hidden{display:none}
+    .password-panel{width:min(100%,360px);border:1px solid #000;padding:22px;background:#fff}
+    .password-panel h1{font-size:24px;margin:0 0 8px}
+    .password-panel p{margin:0 0 16px;line-height:1.45}
+    .password-form{display:flex;gap:8px}
+    .password-form input{min-width:0;flex:1;border:1px solid #000;padding:10px 12px;font-family:var(--font-serif);font-size:16px}
+    .password-form button{border:1px solid #000;background:#fff;padding:10px 14px;text-transform:uppercase;letter-spacing:.06em;cursor:pointer}
+    .password-form button:hover{background:#000;color:#fff}
+    .password-error{min-height:20px;margin-top:10px;color:#900}
   </style>
 </head>
-<body>
+<body class="locked">
+  <div class="password-gate" id="passwordGate" role="dialog" aria-modal="true" aria-labelledby="passwordTitle">
+    <div class="password-panel">
+      <h1 id="passwordTitle">Protected page</h1>
+      <p>Enter the password to view this thesis project.</p>
+      <form class="password-form" id="passwordForm">
+        <input id="passwordInput" type="password" autocomplete="current-password" aria-label="Password" autofocus>
+        <button type="submit">Enter</button>
+      </form>
+      <div class="password-error" id="passwordError" aria-live="polite"></div>
+    </div>
+  </div>
+
   <header class="header">
     <button class="menu-btn" id="openMenu" aria-label="Open Menu"><span class="menu-icon"></span></button>
   </header>
@@ -142,6 +165,41 @@
 
     const WEBHOOK_CHAT   = 'https://backend.systein.nl/webhook/thesis-chat';
     const WEBHOOK_REPORT = 'https://backend.systein.nl/webhook/thesis-report';
+
+    // Default password is "thesis". To change it, replace this SHA-256 hash.
+    const PASSWORD_HASH = '2863229379aa76de93620451ec65b270760a0b41971bad0d1c74f340f1cb4786';
+    const AUTH_STORAGE_KEY = 'thesis-page-authenticated';
+
+    async function sha256Hex(value){
+      const bytes = new TextEncoder().encode(value);
+      const hash = await crypto.subtle.digest('SHA-256', bytes);
+      return [...new Uint8Array(hash)].map(byte => byte.toString(16).padStart(2, '0')).join('');
+    }
+
+    function unlockPage(){
+      document.getElementById('passwordGate').classList.add('hidden');
+      document.body.classList.remove('locked');
+    }
+
+    if (sessionStorage.getItem(AUTH_STORAGE_KEY) === PASSWORD_HASH) {
+      unlockPage();
+    }
+
+    document.getElementById('passwordForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const input = document.getElementById('passwordInput');
+      const error = document.getElementById('passwordError');
+      const candidateHash = await sha256Hex(input.value);
+      if (candidateHash === PASSWORD_HASH) {
+        sessionStorage.setItem(AUTH_STORAGE_KEY, PASSWORD_HASH);
+        input.value = '';
+        error.textContent = '';
+        unlockPage();
+      } else {
+        error.textContent = 'Incorrect password.';
+        input.select();
+      }
+    });
 
     // PDF.js worker
     if (window['pdfjsLib']) {
