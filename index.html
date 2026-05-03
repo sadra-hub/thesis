@@ -166,8 +166,11 @@
     const WEBHOOK_CHAT   = 'https://backend.systein.nl/webhook/thesis-chat';
     const WEBHOOK_REPORT = 'https://backend.systein.nl/webhook/thesis-report';
 
-    // Default password is "thesis". To change it, replace this SHA-256 hash.
-    const PASSWORD_HASH = '2863229379aa76de93620451ec65b270760a0b41971bad0d1c74f340f1cb4786';
+    // Password hashes for the static page gate.
+    const PASSWORD_HASHES = [
+      'bef3a6230b06234bee3177dcb11c507809a6151478c9a673041a0b406fa9b347',
+      'ef80019aedb4dd9ed5da86c56118e3558f4af5abf4db3a94b4847d1c0735b07a'
+    ];
     const AUTH_STORAGE_KEY = 'thesis-page-authenticated';
 
     async function sha256Hex(value){
@@ -181,7 +184,7 @@
       document.body.classList.remove('locked');
     }
 
-    if (sessionStorage.getItem(AUTH_STORAGE_KEY) === PASSWORD_HASH) {
+    if (PASSWORD_HASHES.includes(sessionStorage.getItem(AUTH_STORAGE_KEY))) {
       unlockPage();
     }
 
@@ -190,8 +193,8 @@
       const input = document.getElementById('passwordInput');
       const error = document.getElementById('passwordError');
       const candidateHash = await sha256Hex(input.value);
-      if (candidateHash === PASSWORD_HASH) {
-        sessionStorage.setItem(AUTH_STORAGE_KEY, PASSWORD_HASH);
+      if (PASSWORD_HASHES.includes(candidateHash)) {
+        sessionStorage.setItem(AUTH_STORAGE_KEY, candidateHash);
         input.value = '';
         error.textContent = '';
         unlockPage();
