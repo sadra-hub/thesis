@@ -118,7 +118,11 @@
     .check-field input{margin-top:3px}
     .generate-btn{width:100%}
     .generate-btn[disabled]{opacity:.55;cursor:not-allowed}
-    .chat-panel{display:flex;flex-direction:column;padding:14px}
+    .chat-panel{display:flex;flex-direction:column;padding:14px;position:relative}
+    .chat-panel.disabled{background:var(--lightgray)}
+    .chat-panel.disabled .chat-box,.chat-panel.disabled .chat-input{opacity:.35;pointer-events:none}
+    .chat-disabled-message{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:#333;background:var(--lightgray);z-index:1}
+    .chat-panel:not(.disabled) .chat-disabled-message{display:none}
     .chat-box{border:1px solid #000;flex:1;min-height:0;overflow:auto;padding:16px;background:#fff}
     .msg{margin:10px 0}
     .msg.me{text-align:right}
@@ -257,10 +261,6 @@
                 <option value="gpt-4.1">GPT-4.1</option>
               </select>
             </div>
-            <label class="check-field" for="settingsVisualization3d">
-              <input id="settingsVisualization3d" type="checkbox">
-              <span>Use 3D visualization mode</span>
-            </label>
           </div>
           <div class="settings-actions">
             <button id="reportBtn" class="btn generate-btn">Generate Report</button>
@@ -268,7 +268,8 @@
         </aside>
         <div class="splitter" id="settingsSplitter" role="separator" aria-label="Resize settings panel"></div>
 
-        <section class="chat-panel" aria-label="Chat">
+        <section class="chat-panel disabled" id="chatPanel" aria-label="Chat">
+          <div class="chat-disabled-message">Generate a report to activate chat.</div>
           <div id="chatBox" class="chat-box" aria-live="polite"></div>
           <div class="chat-input">
             <input id="chatInput" type="text" placeholder="Type a message…" />
@@ -830,6 +831,7 @@
     }
 
     // ===== CHAT =====
+    const chatPanel = document.getElementById('chatPanel');
     const chatBox = document.getElementById('chatBox');
     const chatInput = document.getElementById('chatInput');
     const sendBtn = document.getElementById('sendBtn');
@@ -841,6 +843,7 @@
       wrap.appendChild(b); chatBox.appendChild(wrap); chatBox.scrollTop = chatBox.scrollHeight;
     }
     async function sendMessage(){
+      if (chatPanel && chatPanel.classList.contains('disabled')) return;
       const msg = chatInput.value.trim();
       if(!msg) return; addMsg(msg, true); chatInput.value='';
       try{
@@ -923,14 +926,12 @@
 
     function getReportSettings(){
       const reportMode = document.getElementById('settingsReportMode');
-      const visualization3d = document.getElementById('settingsVisualization3d');
       return {
         model: document.getElementById('settingsModel').value,
         ontology: document.getElementById('settingsOntology').value,
         reportMode: reportMode.value,
         reportModeLabel: reportMode.options[reportMode.selectedIndex].textContent,
-        aiModel: document.getElementById('settingsAiModel').value,
-        visualizationMode: visualization3d.checked ? '3D' : '2D'
+        aiModel: document.getElementById('settingsAiModel').value
       };
     }
 
@@ -938,6 +939,7 @@
       if (!reportViewer) return;
       reportViewer.innerHTML = `<div class="report-empty">${text}</div>`;
       if (reportActions) reportActions.classList.add('hidden');
+      if (chatPanel) chatPanel.classList.add('disabled');
     }
 
     function showReportPdf(blob){
@@ -952,6 +954,7 @@
       downloadReportBtn.href = reportPdfUrl;
       downloadReportBtn.download = 'thesis-report.pdf';
       reportActions.classList.remove('hidden');
+      if (chatPanel) chatPanel.classList.remove('disabled');
     }
 
     if (reportBtn){
