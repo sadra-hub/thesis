@@ -9,6 +9,24 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- vis-network: open-source dynamic graph visualization library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/10.0.0/standalone/umd/vis-network.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Three.js for GLB model previews -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    window.THREE = THREE;
+    window.OrbitControls = OrbitControls;
+    window.GLTFLoader = GLTFLoader;
+    window.dispatchEvent(new Event('three-ready'));
+  </script>
   <style>
     :root{
       --bg:#fff; --fg:#000; --overlay:rgba(0,0,0,.96); --line:#000; --lightgray:#f2f2f2;
@@ -68,6 +86,12 @@
     .viewer{border:1px solid #000;height:70vh;background:#fff;overflow:auto}
     .browser-layout .viewer{height:auto;min-height:0;flex:1;overflow:auto}
     .viewer iframe,.viewer embed{width:100%;height:100%;display:block;border:none}
+    .model-preview{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,42%);height:100%;min-height:0;overflow:hidden}
+    .model-source,.model-3d{min-height:0;overflow:auto}
+    .model-source{border-right:1px solid #000}
+    .model-3d{position:relative;background:#fff;overflow:hidden}
+    .model-3d canvas{display:block;width:100%;height:100%}
+    .model-3d-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:var(--lightgray);color:#333}
     .ontology-viewer{display:grid;grid-template-rows:minmax(0,1fr) auto;overflow:hidden}
     .ontology-graph{min-height:0;width:100%;height:100%}
     .ontology-details{border-top:1px solid #000;padding:10px 12px;background:#fff;font-size:14px;line-height:1.35;max-height:120px;overflow:auto}
@@ -118,6 +142,8 @@
       .browser-layout{grid-template-columns:1fr;grid-template-rows:minmax(140px,34%) minmax(0,1fr)}
       .file-pane{max-height:none}
       .browser-layout .viewer{height:auto}
+      .model-preview{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) minmax(260px,42%)}
+      .model-source{border-right:0;border-bottom:1px solid #000}
       .demo-page{padding-left:16px;padding-right:16px}
       .demo-layout,.demo-layout.settings-collapsed{grid-template-columns:1fr;grid-template-rows:minmax(220px,30%) 0 minmax(260px,1fr) 0 minmax(260px,1fr)}
       .splitter{display:none}
@@ -175,7 +201,7 @@
 
     <section class="page browser-page" id="page-models" aria-labelledby="modelsTitle">
       <h1 id="modelsTitle">Models</h1>
-      <p class="muted">SysML models and related assets from the <code>/models</code> folder. Developed with SysIDE.</p>
+      <p class="muted">SysML models and related assets from the <code>/models</code> folder.</p>
       <hr>
       <div class="browser-layout">
         <aside id="modelsList" class="file-pane" aria-live="polite" aria-label="Model files"></aside>
@@ -268,7 +294,10 @@
     const GITHUB_USER = 'sadra-hub';
     const GITHUB_REPO = 'thesis';
     const BRANCH      = 'master';
+    const MODEL_MANIFEST = 'models/manifest.json';
     const ONTOLOGY_MANIFEST = 'ontologies/manifest.json';
+    let modelFiles = [];
+    let currentModelPreviewCleanup = null;
 
     const WEBHOOK_CHAT   = 'https://backend.systein.nl/webhook/thesis-chat';
     const WEBHOOK_REPORT = 'https://backend.systein.nl/webhook/thesis-report';
@@ -331,6 +360,11 @@
     function repoAssetURL(path){
       return encodeURI(path);
     }
+    async function fetchRepoAsset(path, options){
+      const localRes = await fetch(repoAssetURL(path), options);
+      if (localRes.ok) return localRes;
+      return fetch(rawGitURL(path), options);
+    }
 
     function createCard(name, path, isBinary){
       const card = document.createElement('div');
@@ -370,6 +404,7 @@
         item.classList.add('active');
         document.getElementById(titleId).textContent = path;
         if (path.startsWith('ontologies/')) renderOntologyFile(path, viewerId);
+        else if (path.startsWith('models/') && /\.sysml$/i.test(path)) renderModelPair(path);
         else previewFile(path, isBinary, viewerId);
       });
       return item;
@@ -399,6 +434,17 @@
       const res = await fetch(ghContentsPath(path));
       if (!res.ok) throw new Error('GitHub API error: ' + res.status);
       return res.json();
+    }
+
+    async function getModelFiles(){
+      try{
+        const res = await fetch(repoAssetURL(MODEL_MANIFEST), { cache:'no-store' });
+        if(!res.ok) throw new Error('Failed to fetch model manifest: ' + res.status);
+        const manifest = await res.json();
+        return (manifest.files || []).map(name => ({ name, type:'file' }));
+      }catch(err){
+        return listFolder('models');
+      }
     }
 
     async function loadDocs(){
@@ -438,13 +484,128 @@
       mount.innerHTML = '';
       document.getElementById('modelViewerTitle').textContent = 'Select a model';
       try{
-        const items = await listFolder('models');
-        const files = items.filter(it => it.type === 'file' && it.name !== '.DS_Store');
+        const items = await getModelFiles();
+        modelFiles = items.filter(it => it.type === 'file' && it.name !== '.DS_Store');
+        const files = modelFiles.filter(it => /\.sysml$/i.test(it.name));
         if (files.length) mount.appendChild(createFileSection('Models', files, 'models'));
       }catch(err){
         mount.innerHTML = `<div class=\"card\">Unable to list /models. Configure GITHUB_USER/REPO or ensure the folder exists.<br><code>${err.message}</code></div>`;
       }
       document.getElementById('modelViewer').innerHTML = '';
+    }
+
+    function findMatchingGlbPath(sysmlPath){
+      const glbName = sysmlPath.split('/').pop().replace(/\.sysml$/i, '.glb');
+      const match = modelFiles.find(it => it.name.toLowerCase() === glbName.toLowerCase());
+      return match ? `models/${match.name}` : `models/${glbName}`;
+    }
+
+    async function renderModelPair(sysmlPath){
+      const viewer = document.getElementById('modelViewer');
+      if (currentModelPreviewCleanup) currentModelPreviewCleanup();
+      currentModelPreviewCleanup = null;
+      viewer.innerHTML = '';
+
+      const wrap = document.createElement('div');
+      wrap.className = 'model-preview';
+      const sourcePane = document.createElement('div');
+      sourcePane.className = 'model-source';
+      const modelPane = document.createElement('div');
+      modelPane.className = 'model-3d';
+      wrap.appendChild(sourcePane);
+      wrap.appendChild(modelPane);
+      viewer.appendChild(wrap);
+
+      try{
+        const res = await fetchRepoAsset(sysmlPath, { cache:'no-store' });
+        if(!res.ok) throw new Error('Failed to fetch SysML: ' + res.status);
+        const pre = document.createElement('pre');
+        pre.textContent = await res.text();
+        sourcePane.appendChild(pre);
+      }catch(err){
+        sourcePane.innerHTML = `<div class='card'>SysML preview unavailable.<br><code>${err.message}</code></div>`;
+      }
+
+      await renderGlbModel(findMatchingGlbPath(sysmlPath), modelPane);
+    }
+
+    async function renderGlbModel(glbPath, mount){
+      if (!window.THREE || !window.GLTFLoader || !window.OrbitControls){
+        mount.innerHTML = `<div class="model-3d-empty">3D viewer is loading.</div>`;
+        await new Promise(resolve => {
+          const timeout = setTimeout(resolve, 3000);
+          window.addEventListener('three-ready', () => {
+            clearTimeout(timeout);
+            resolve();
+          }, { once:true });
+        });
+        if (!window.THREE || !window.GLTFLoader || !window.OrbitControls){
+          mount.innerHTML = `<div class="model-3d-empty">3D viewer is unavailable.</div>`;
+          return;
+        }
+        mount.innerHTML = '';
+      }
+
+      const THREE = window.THREE;
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0xffffff);
+      const camera = new THREE.PerspectiveCamera(45, 1, 0.01, 1000);
+      const renderer = new THREE.WebGLRenderer({ antialias:true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      mount.appendChild(renderer.domElement);
+
+      const controls = new window.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+
+      scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 2.2));
+      const keyLight = new THREE.DirectionalLight(0xffffff, 1.2);
+      keyLight.position.set(3, 4, 5);
+      scene.add(keyLight);
+
+      let frameId = null;
+      const resize = () => {
+        const width = Math.max(mount.clientWidth, 1);
+        const height = Math.max(mount.clientHeight, 1);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height, false);
+      };
+      const animate = () => {
+        frameId = requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
+      };
+
+      currentModelPreviewCleanup = () => {
+        if (frameId) cancelAnimationFrame(frameId);
+        window.removeEventListener('resize', resize);
+        controls.dispose();
+        renderer.dispose();
+      };
+
+      try{
+        const gltf = await new window.GLTFLoader().loadAsync(repoAssetURL(glbPath));
+        const object = gltf.scene;
+        scene.add(object);
+
+        const box = new THREE.Box3().setFromObject(object);
+        const size = box.getSize(new THREE.Vector3());
+        const center = box.getCenter(new THREE.Vector3());
+        object.position.sub(center);
+        const maxDim = Math.max(size.x, size.y, size.z, 1);
+        camera.position.set(maxDim * 1.2, maxDim * 0.8, maxDim * 1.6);
+        camera.near = maxDim / 100;
+        camera.far = maxDim * 100;
+        camera.updateProjectionMatrix();
+        controls.target.set(0, 0, 0);
+        resize();
+        window.addEventListener('resize', resize);
+        animate();
+      }catch(err){
+        if (currentModelPreviewCleanup) currentModelPreviewCleanup();
+        currentModelPreviewCleanup = null;
+        mount.innerHTML = `<div class="model-3d-empty">Matching 3D model unavailable.<br><code>${err.message}</code></div>`;
+      }
     }
 
     async function loadOntologies(){
@@ -498,9 +659,9 @@
       if (!modelSelect.dataset.loaded){
         setSelectOptions(modelSelect, [], 'Loading models...');
         try{
-          const items = await listFolder('models');
+          const items = await getModelFiles();
           const files = items
-            .filter(it => it.type === 'file' && it.name !== '.DS_Store')
+            .filter(it => it.type === 'file' && /\.sysml$/i.test(it.name))
             .map(it => `models/${it.name}`);
           setSelectOptions(modelSelect, files, 'No models found');
           modelSelect.dataset.loaded = 'true';
@@ -593,6 +754,10 @@
 
     // ===== Robust inline preview using PDF.js =====
     async function previewFile(path, isBinary, viewerId){
+      if (viewerId === 'modelViewer' && currentModelPreviewCleanup){
+        currentModelPreviewCleanup();
+        currentModelPreviewCleanup = null;
+      }
       const viewer = document.getElementById(viewerId);
       viewer.innerHTML = '';
       const url = rawGitURL(path);
