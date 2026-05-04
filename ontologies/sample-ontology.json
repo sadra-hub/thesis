@@ -1,0 +1,28 @@
+{
+  "name": "Thesis Decision Support Ontology",
+  "description": "Sample ontology linking systems engineering artifacts, models, analyses, and decisions.",
+  "nodes": [
+    { "id": "decision-support", "label": "Decision Support", "group": "Capability", "title": "Supports traceable engineering decisions" },
+    { "id": "system-requirements", "label": "System Requirements", "group": "Artifact", "title": "Stakeholder and system requirements" },
+    { "id": "sysml-model", "label": "SysML Model", "group": "Model", "title": "Descriptive system model" },
+    { "id": "analytical-model", "label": "Analytical Model", "group": "Model", "title": "Simulation or analysis model" },
+    { "id": "knowledge-graph", "label": "Knowledge Graph", "group": "Ontology", "title": "Connected semantic representation" },
+    { "id": "trade-study", "label": "Trade Study", "group": "Analysis", "title": "Compares design alternatives" },
+    { "id": "design-alternative", "label": "Design Alternative", "group": "Concept", "title": "Candidate solution architecture" },
+    { "id": "performance-metric", "label": "Performance Metric", "group": "Metric", "title": "Quantified evaluation criterion" },
+    { "id": "risk", "label": "Risk", "group": "Concept", "title": "Potential negative outcome" },
+    { "id": "engineering-decision", "label": "Engineering Decision", "group": "Decision", "title": "Selected design or process choice" }
+  ],
+  "edges": [
+    { "from": "system-requirements", "to": "sysml-model", "label": "constrains" },
+    { "from": "sysml-model", "to": "knowledge-graph", "label": "is represented in" },
+    { "from": "analytical-model", "to": "knowledge-graph", "label": "is linked through" },
+    { "from": "knowledge-graph", "to": "decision-support", "label": "enables" },
+    { "from": "design-alternative", "to": "trade-study", "label": "is evaluated by" },
+    { "from": "trade-study", "to": "performance-metric", "label": "uses" },
+    { "from": "performance-metric", "to": "engineering-decision", "label": "informs" },
+    { "from": "risk", "to": "engineering-decision", "label": "influences" },
+    { "from": "knowledge-graph", "to": "trade-study", "label": "provides context for" },
+    { "from": "decision-support", "to": "engineering-decision", "label": "supports" }
+  ]
+}
