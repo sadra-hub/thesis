@@ -1,5 +1,5 @@
 {
-  "name": "FMEA Decision Support Ontology",
+  "name": "FMEA-Domain-Agnostic",
   "description": "Detailed ontology for Failure Mode and Effects Analysis. It is designed to help an AI model reason from system context and function to failure modes, causes, effects, controls, risk ratings, actions, evidence, and residual risk across mechanical, electrical, electronic, software, control, thermal, fluidic, chemical, material, human, process, interface, environmental, cybersecurity, data/AI, maintenance, and supply-chain failure domains.",
   "references": [
     {
