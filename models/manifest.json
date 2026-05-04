@@ -1,6 +1,8 @@
 {
   "files": [
     "flashlight.sysml",
-    "flashlight.glb"
+    "flashlight.glb",
+    "quadcopter.sysml",
+    "quadcopter.glb"
   ]
 }
