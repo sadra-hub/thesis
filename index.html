@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/computer-modern-web-font@1.0.0/css/cmun-roman.min.css">
   <!-- PDF.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- vis-network: open-source dynamic graph visualization library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/10.0.0/standalone/umd/vis-network.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <style>
     :root{
       --bg:#fff; --fg:#000; --overlay:rgba(0,0,0,.96); --line:#000; --lightgray:#f2f2f2;
@@ -39,7 +41,12 @@
     .logos img{height:26px;opacity:.85}
     main{min-height:100vh;width:100%}
     .page{display:none;padding:96px 24px 48px;max-width:1100px;margin:0 auto}
+    .page.browser-page{max-width:1400px;height:100vh;overflow:hidden;padding-top:76px;padding-bottom:24px}
     .page.active{display:block}
+    .page.browser-page.active{display:flex;flex-direction:column}
+    .browser-page h1{margin-bottom:8px}
+    .browser-page .muted{margin:0}
+    .browser-page hr{margin:14px 0}
     h1{font-weight:400;font-size:32px;margin:0 0 16px}
     h2{font-weight:400;font-size:22px;margin:24px 0 8px}
     .muted{color:#333}
@@ -47,14 +54,48 @@
     .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
     .card{border:1px solid #000;padding:14px;background:#fff;display:flex;flex-direction:column;gap:8px}
     .card .name{font-size:16px}
+    .browser-layout{display:grid;grid-template-columns:minmax(240px,320px) minmax(0,1fr);gap:16px;flex:1;min-height:0;overflow:hidden}
+    .file-pane{border:1px solid #000;background:#fff;overflow:auto;min-height:0}
+    .file-section{border-bottom:1px solid #000}
+    .file-section:last-child{border-bottom:none}
+    .file-section h2{font-size:17px;margin:0;padding:12px 14px;border-bottom:1px solid #000;background:var(--lightgray)}
+    .file-list{display:flex;flex-direction:column}
+    .file-item{appearance:none;border:0;border-bottom:1px solid #000;background:#fff;color:#000;text-align:left;padding:12px 14px;font-family:var(--font-serif);font-size:15px;line-height:1.25;cursor:pointer;overflow-wrap:anywhere}
+    .file-item:last-child{border-bottom:none}
+    .file-item:hover,.file-item.active{background:#000;color:#fff}
+    .viewer-pane{min-width:0;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+    .viewer-title{border:1px solid #000;border-bottom:none;min-height:44px;padding:11px 14px;background:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .viewer{border:1px solid #000;height:70vh;background:#fff;overflow:auto}
+    .browser-layout .viewer{height:auto;min-height:0;flex:1;overflow:auto}
     .viewer iframe,.viewer embed{width:100%;height:100%;display:block;border:none}
+    .ontology-viewer{display:grid;grid-template-rows:minmax(0,1fr) auto;overflow:hidden}
+    .ontology-graph{min-height:0;width:100%;height:100%}
+    .ontology-details{border-top:1px solid #000;padding:10px 12px;background:#fff;font-size:14px;line-height:1.35;max-height:120px;overflow:auto}
     .pdf-toolbar{display:flex;gap:8px;align-items:center;border-bottom:1px solid #000;padding:6px;background:#fff;position:sticky;top:0;z-index:1}
-    .pdf-pages{padding:8px 0}
+    .pdf-pages{padding:8px 0;overflow:auto}
     canvas.pdf-page{display:block;margin:12px auto;max-width:100%;height:auto}
-    pre{background:#fff;border:1px solid #000;padding:12px;overflow:auto;font-family:var(--font-mono);font-size:13px;line-height:1.5}
-    .chat-wrap{max-width:760px;margin:0 auto}
-    .chat-box{border:1px solid #000;height:60vh;overflow:auto;padding:16px;background:#fff}
+    pre{background:#fff;border:0;margin:0;padding:12px;overflow:visible;font-family:var(--font-mono);font-size:13px;line-height:1.5}
+    .demo-page{max-width:none;width:100%;height:100vh;overflow:hidden;padding:76px 24px 24px}
+    .demo-page.active{display:flex;flex-direction:column}
+    .demo-layout{display:grid;grid-template-columns:var(--settings-width,300px) 8px minmax(280px,1fr) 8px minmax(260px,420px);flex:1;min-height:0;overflow:hidden}
+    .demo-layout.settings-collapsed{grid-template-columns:44px 8px minmax(280px,1fr) 8px minmax(260px,420px)}
+    .settings-panel,.chat-panel,.report-panel{border:1px solid #000;background:#fff;min-height:0;overflow:hidden}
+    .settings-panel,.report-panel{display:flex;flex-direction:column}
+    .settings-panel{position:relative}
+    .settings-panel.collapsed .settings-scroll,.settings-panel.collapsed .settings-actions{display:none}
+    .settings-toggle{border:0;border-bottom:1px solid #000;background:#fff;color:#000;padding:9px 10px;font-family:var(--font-serif);font-size:15px;text-align:left;cursor:pointer}
+    .settings-panel.collapsed .settings-toggle{height:100%;border-bottom:0;writing-mode:vertical-rl;text-orientation:mixed;text-align:center}
+    .settings-scroll{padding:14px;overflow:auto;min-height:0;flex:1}
+    .settings-actions{border-top:1px solid #000;padding:12px 14px;background:#fff}
+    .field{margin-bottom:14px}
+    .field label{display:block;font-size:14px;margin-bottom:6px}
+    .field select{width:100%;border:1px solid #000;background:#fff;color:#000;padding:9px 10px;font-family:var(--font-serif);font-size:15px}
+    .check-field{display:flex;gap:8px;align-items:flex-start;margin:12px 0}
+    .check-field input{margin-top:3px}
+    .generate-btn{width:100%}
+    .generate-btn[disabled]{opacity:.55;cursor:not-allowed}
+    .chat-panel{display:flex;flex-direction:column;padding:14px}
+    .chat-box{border:1px solid #000;flex:1;min-height:0;overflow:auto;padding:16px;background:#fff}
     .msg{margin:10px 0}
     .msg.me{text-align:right}
     .msg .bubble{display:inline-block;border:1px solid #000;padding:8px 12px;background:#fff}
@@ -63,11 +104,26 @@
     .chat-input input{flex:1;border:1px solid #000;padding:10px 12px;font-family:var(--font-serif)}
     .chat-input button{border:1px solid #000;background:#fff;padding:10px 14px;text-transform:uppercase;letter-spacing:.06em}
     .chat-input button:hover{background:#000;color:#fff}
-    .license-overlay{position:absolute;inset:0;background:var(--lightgray);border:1px dashed #000;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font-size:16px;line-height:1.5}
-    .license-overlay img{height:28px;display:block;margin:8px auto 0;filter:grayscale(1)}
+    .report-viewer{flex:1;min-height:0;overflow:hidden;background:var(--lightgray);position:relative}
+    .report-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:#333}
+    .report-viewer iframe,.report-viewer embed{width:100%;height:100%;border:0;display:block;background:#fff}
+    .report-actions{border-top:1px solid #000;padding:12px 14px;background:#fff;display:flex;justify-content:flex-end}
+    .report-actions.hidden{display:none !important}
+    .splitter{background:#fff;border:1px solid #000;border-top:0;border-bottom:0;cursor:col-resize;min-height:0}
+    .splitter:hover,.splitter.dragging{background:var(--lightgray)}
     .hidden{display:none !important}
     .relative{position:relative}
     .right-actions{float:right}
+    @media (max-width: 760px){
+      .browser-layout{grid-template-columns:1fr;grid-template-rows:minmax(140px,34%) minmax(0,1fr)}
+      .file-pane{max-height:none}
+      .browser-layout .viewer{height:auto}
+      .demo-page{padding-left:16px;padding-right:16px}
+      .demo-layout,.demo-layout.settings-collapsed{grid-template-columns:1fr;grid-template-rows:minmax(220px,30%) 0 minmax(260px,1fr) 0 minmax(260px,1fr)}
+      .splitter{display:none}
+      .settings-panel.collapsed{min-height:44px}
+      .settings-panel.collapsed .settings-toggle{writing-mode:horizontal-tb;height:auto;border-bottom:0}
+    }
   </style>
 </head>
 <body>
@@ -80,6 +136,7 @@
       <a href="#/home" data-route>Home</a>
       <a href="#/documents" data-route>Documents</a>
       <a href="#/models" data-route>Models</a>
+      <a href="#/ontologies" data-route>Ontologies</a>
       <a href="#/demo" data-route>Demo</a>
     </nav>
   </div>
@@ -90,6 +147,7 @@
     <div class="cta">
       <a class="btn" href="#/documents">Open Documents</a>
       <a class="btn" href="#/models">Open Models</a>
+      <a class="btn" href="#/ontologies">Open Ontologies</a>
       <a class="btn" href="#/demo">Open Demo</a>
     </div>
   </section>
@@ -98,38 +156,109 @@
     <img src="assets/logos/tue-black.png" alt="TU/e Logo (BW)">
     <img src="assets/logos/tno-esi-black.svg" alt="TNO-ESI Logo (BW)">
     <img src="assets/logos/incose-black.png" alt="INCOSE Logo (BW)">
-    <img src="assets/logos/tom-sawyer-black.png" alt="Tom Sawyer Logo (BW)">
     <img src="assets/logos/syside-black.png" alt="SysIDE Logo (BW)">
   </div>
 
   <main>
-    <section class="page" id="page-docs" aria-labelledby="docsTitle">
+    <section class="page browser-page" id="page-docs" aria-labelledby="docsTitle">
       <h1 id="docsTitle">Documents</h1>
       <p class="muted">All files listed from the <code>/docs</code> folder of this repository. Click to preview PDFs inline or open text files.</p>
       <hr>
-      <div id="docsList" aria-live="polite"></div>
-      <h2>Preview</h2>
-      <div id="docViewer" class="viewer"></div>
+      <div class="browser-layout">
+        <aside id="docsList" class="file-pane" aria-live="polite" aria-label="Document files"></aside>
+        <section class="viewer-pane" aria-label="Document preview">
+          <div id="docViewerTitle" class="viewer-title">Select a document</div>
+          <div id="docViewer" class="viewer"></div>
+        </section>
+      </div>
     </section>
 
-    <section class="page" id="page-models" aria-labelledby="modelsTitle">
+    <section class="page browser-page" id="page-models" aria-labelledby="modelsTitle">
       <h1 id="modelsTitle">Models</h1>
-      <p class="muted">SysML models and related assets from the <code>/models</code> folder. Developed with SysIDE and Visualized by Tom Sawyer (license pending)</p>
+      <p class="muted">SysML models and related assets from the <code>/models</code> folder. Developed with SysIDE.</p>
       <hr>
-      <div id="modelsList" class="grid" aria-live="polite"></div>
-      <h2>Preview</h2>
-      <div id="modelViewer" class="viewer relative"></div>
+      <div class="browser-layout">
+        <aside id="modelsList" class="file-pane" aria-live="polite" aria-label="Model files"></aside>
+        <section class="viewer-pane" aria-label="Model preview">
+          <div id="modelViewerTitle" class="viewer-title">Select a model</div>
+          <div id="modelViewer" class="viewer relative"></div>
+        </section>
+      </div>
     </section>
 
-    <section class="page" id="page-demo" aria-labelledby="demoTitle">
-      <div class="chat-wrap">
-        <h1 id="demoTitle">Demo — LLM Chat <span class="right-actions"><button id="reportBtn" class="btn" style="margin-left:12px;">Generate latest report</button></span></h1>
-        <p class="muted">Use this chat to ask questions about the project. Messages are routed to the backend and responses include updates so you can track progress and understand system decisions over time.</p>
-        <div id="chatBox" class="chat-box" aria-live="polite"></div>
-        <div class="chat-input">
-          <input id="chatInput" type="text" placeholder="Type a message…" />
-          <button id="sendBtn">Send</button>
-        </div>
+    <section class="page browser-page" id="page-ontologies" aria-labelledby="ontologiesTitle">
+      <h1 id="ontologiesTitle">Ontologies</h1>
+      <p class="muted">Knowledge graph files from the <code>/ontologies</code> folder. JSON graphs are visualized with the open-source <code>vis-network</code> library.</p>
+      <hr>
+      <div class="browser-layout">
+        <aside id="ontologiesList" class="file-pane" aria-live="polite" aria-label="Ontology files"></aside>
+        <section class="viewer-pane" aria-label="Ontology graph viewer">
+          <div id="ontologyViewerTitle" class="viewer-title">Select an ontology</div>
+          <div id="ontologyViewer" class="viewer ontology-viewer"></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="page demo-page" id="page-demo" aria-labelledby="demoTitle">
+      <div class="demo-layout" id="demoLayout">
+        <aside class="settings-panel" id="settingsPanel" aria-label="Report settings">
+          <button id="settingsToggle" class="settings-toggle" type="button" aria-expanded="true">Settings</button>
+          <div class="settings-scroll">
+            <div class="field">
+              <label for="settingsModel">Model</label>
+              <select id="settingsModel"></select>
+            </div>
+            <div class="field">
+              <label for="settingsOntology">Ontology</label>
+              <select id="settingsOntology"></select>
+            </div>
+            <div class="field">
+              <label for="settingsReportMode">Report mode</label>
+              <select id="settingsReportMode">
+                <option value="fmea">Failure Mode and Effect Analysis</option>
+                <option value="requirements" disabled>Requirement Analysis</option>
+                <option value="interface" disabled>Interface Analysis</option>
+                <option value="trade-study" disabled>Trade Study</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="settingsAiModel">Choice of AI</label>
+              <select id="settingsAiModel">
+                <option value="gpt-5.5">GPT-5.5</option>
+                <option value="gpt-5.4">GPT-5.4</option>
+                <option value="gpt-5.4-mini">GPT-5.4 mini</option>
+                <option value="gpt-5.4-nano">GPT-5.4 nano</option>
+                <option value="gpt-4.1">GPT-4.1</option>
+              </select>
+            </div>
+            <label class="check-field" for="settingsVisualization3d">
+              <input id="settingsVisualization3d" type="checkbox">
+              <span>Use 3D visualization mode</span>
+            </label>
+          </div>
+          <div class="settings-actions">
+            <button id="reportBtn" class="btn generate-btn">Generate Report</button>
+          </div>
+        </aside>
+        <div class="splitter" id="settingsSplitter" role="separator" aria-label="Resize settings panel"></div>
+
+        <section class="chat-panel" aria-label="Chat">
+          <div id="chatBox" class="chat-box" aria-live="polite"></div>
+          <div class="chat-input">
+            <input id="chatInput" type="text" placeholder="Type a message…" />
+            <button id="sendBtn">Send</button>
+          </div>
+        </section>
+        <div class="splitter" id="reportSplitter" role="separator" aria-label="Resize report viewer"></div>
+
+        <aside class="report-panel" aria-label="Generated PDF report">
+          <div id="reportViewer" class="report-viewer">
+            <div class="report-empty">Choose the settings and generate a report.</div>
+          </div>
+          <div id="reportActions" class="report-actions hidden">
+            <a id="downloadReportBtn" class="btn" href="#" download="thesis-report.pdf">Download PDF</a>
+          </div>
+        </aside>
       </div>
     </section>
   </main>
@@ -139,6 +268,7 @@
     const GITHUB_USER = 'sadra-hub';
     const GITHUB_REPO = 'thesis';
     const BRANCH      = 'master';
+    const ONTOLOGY_MANIFEST = 'ontologies/manifest.json';
 
     const WEBHOOK_CHAT   = 'https://backend.systein.nl/webhook/thesis-chat';
     const WEBHOOK_REPORT = 'https://backend.systein.nl/webhook/thesis-report';
@@ -163,6 +293,7 @@
     const pages = {
       documents: document.getElementById('page-docs'),
       models: document.getElementById('page-models'),
+      ontologies: document.getElementById('page-ontologies'),
       demo: document.getElementById('page-demo')
     };
 
@@ -183,6 +314,8 @@
         pages[hash].classList.add('active');
         if (hash === 'documents') loadDocs();
         if (hash === 'models') loadModels();
+        if (hash === 'ontologies') loadOntologies();
+        if (hash === 'demo') loadDemoSettings();
       }
     }
     window.addEventListener('hashchange', setRoute);
@@ -194,6 +327,9 @@
     }
     function rawGitURL(path){
       return `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${BRANCH}/${path}`;
+    }
+    function repoAssetURL(path){
+      return encodeURI(path);
     }
 
     function createCard(name, path, isBinary){
@@ -212,6 +348,53 @@
       return card;
     }
 
+    function createFileItem(name, path, isBinary){
+      const item = document.createElement('button');
+      item.type = 'button';
+      item.className = 'file-item';
+      item.textContent = name;
+      item.addEventListener('click', () => {
+        let viewerId = 'modelViewer';
+        let titleId = 'modelViewerTitle';
+        let listId = 'modelsList';
+        if (path.startsWith('docs/')){
+          viewerId = 'docViewer';
+          titleId = 'docViewerTitle';
+          listId = 'docsList';
+        } else if (path.startsWith('ontologies/')){
+          viewerId = 'ontologyViewer';
+          titleId = 'ontologyViewerTitle';
+          listId = 'ontologiesList';
+        }
+        document.querySelectorAll(`#${listId} .file-item`).forEach(el => el.classList.remove('active'));
+        item.classList.add('active');
+        document.getElementById(titleId).textContent = path;
+        if (path.startsWith('ontologies/')) renderOntologyFile(path, viewerId);
+        else previewFile(path, isBinary, viewerId);
+      });
+      return item;
+    }
+
+    function createFileSection(titleText, files, basePath){
+      const section = document.createElement('section');
+      section.className = 'file-section';
+      const h2 = document.createElement('h2');
+      h2.textContent = titleText;
+      const list = document.createElement('div');
+      list.className = 'file-list';
+      files
+        .filter(it => it.type === 'file' && it.name !== '.DS_Store')
+        .forEach(it => {
+          const name = it.name;
+          const path = `${basePath}/${name}`;
+          const isBinary = /\.(pdf|png|jpe?g|svg|docx|pptx|xlsx)$/i.test(name);
+          list.appendChild(createFileItem(name, path, isBinary));
+        });
+      section.appendChild(h2);
+      section.appendChild(list);
+      return section;
+    }
+
     async function listFolder(path){
       const res = await fetch(ghContentsPath(path));
       if (!res.ok) throw new Error('GitHub API error: ' + res.status);
@@ -221,26 +404,16 @@
     async function loadDocs(){
       const mount = document.getElementById('docsList');
       mount.innerHTML = '';
+      document.getElementById('docViewerTitle').textContent = 'Select a document';
+      document.getElementById('docViewer').innerHTML = '';
       try{
         const items = await listFolder('docs');
         const dirs = items.filter(it => it.type === 'dir');
-        const rootFiles = items.filter(it => it.type === 'file');
+        const rootFiles = items.filter(it => it.type === 'file' && it.name !== '.DS_Store');
 
         const renderSection = (titleText, files, basePath='docs') => {
-          const section = document.createElement('section');
-          const h2 = document.createElement('h2');
-          h2.textContent = titleText;
-          const grid = document.createElement('div');
-          grid.className = 'grid';
-          files.filter(it => it.type === 'file').forEach(it => {
-            const name = it.name;
-            const path = `${basePath}/${name}`;
-            const isBinary = /(pdf|png|jpg|jpeg|svg)$/i.test(name);
-            grid.appendChild(createCard(name, path, isBinary));
-          });
-          section.appendChild(h2);
-          section.appendChild(grid);
-          mount.appendChild(section);
+          const visibleFiles = files.filter(it => it.type === 'file' && it.name !== '.DS_Store');
+          if (visibleFiles.length) mount.appendChild(createFileSection(titleText, visibleFiles, basePath));
         };
 
         if (rootFiles.length){ renderSection('General', rootFiles, 'docs'); }
@@ -263,23 +436,159 @@
     async function loadModels(){
       const mount = document.getElementById('modelsList');
       mount.innerHTML = '';
+      document.getElementById('modelViewerTitle').textContent = 'Select a model';
       try{
         const items = await listFolder('models');
-        items.filter(it => it.type === 'file').forEach(it => {
-          const name = it.name;
-          const path = `models/${name}`;
-          const isBinary = /(png|jpg|jpeg|svg|pdf)$/i.test(name);
-          mount.appendChild(createCard(name, path, isBinary));
-        });
+        const files = items.filter(it => it.type === 'file' && it.name !== '.DS_Store');
+        if (files.length) mount.appendChild(createFileSection('Models', files, 'models'));
       }catch(err){
         mount.innerHTML = `<div class=\"card\">Unable to list /models. Configure GITHUB_USER/REPO or ensure the folder exists.<br><code>${err.message}</code></div>`;
       }
-      const modelViewer = document.getElementById('modelViewer');
-      modelViewer.innerHTML = '';
-      const overlay = document.createElement('div');
-      overlay.className = 'license-overlay';
-      overlay.innerHTML = `Academic Licence pending from Tom Sawyer<br/><img src=\"assets/logos/tom-sawyer-black.png\" alt=\"Tom Sawyer\">`;
-      modelViewer.appendChild(overlay);
+      document.getElementById('modelViewer').innerHTML = '';
+    }
+
+    async function loadOntologies(){
+      const mount = document.getElementById('ontologiesList');
+      const viewer = document.getElementById('ontologyViewer');
+      mount.innerHTML = '';
+      viewer.innerHTML = '';
+      document.getElementById('ontologyViewerTitle').textContent = 'Select an ontology';
+      try{
+        const res = await fetch(repoAssetURL(ONTOLOGY_MANIFEST), { cache:'no-store' });
+        if(!res.ok) throw new Error('Failed to fetch ontology manifest: ' + res.status);
+        const manifest = await res.json();
+        const files = (manifest.files || []).map(name => ({ name, type: 'file' }));
+        mount.appendChild(createFileSection('Ontologies', files, 'ontologies'));
+        const first = mount.querySelector('.file-item');
+        if (first) first.click();
+      }catch(err){
+        mount.innerHTML = `<div class=\"card\">Unable to list /ontologies.<br><code>${err.message}</code></div>`;
+      }
+    }
+
+    function setSelectOptions(select, values, placeholder){
+      select.innerHTML = '';
+      if (!values.length){
+        const option = document.createElement('option');
+        option.value = '';
+        option.textContent = placeholder;
+        select.appendChild(option);
+        return;
+      }
+      values.forEach(value => {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = value;
+        select.appendChild(option);
+      });
+    }
+
+    async function getOntologyFileNames(){
+      const res = await fetch(repoAssetURL(ONTOLOGY_MANIFEST), { cache:'no-store' });
+      if(!res.ok) throw new Error('Failed to fetch ontology manifest: ' + res.status);
+      const manifest = await res.json();
+      return manifest.files || [];
+    }
+
+    async function loadDemoSettings(){
+      const modelSelect = document.getElementById('settingsModel');
+      const ontologySelect = document.getElementById('settingsOntology');
+      if (!modelSelect || !ontologySelect) return;
+
+      if (!modelSelect.dataset.loaded){
+        setSelectOptions(modelSelect, [], 'Loading models...');
+        try{
+          const items = await listFolder('models');
+          const files = items
+            .filter(it => it.type === 'file' && it.name !== '.DS_Store')
+            .map(it => `models/${it.name}`);
+          setSelectOptions(modelSelect, files, 'No models found');
+          modelSelect.dataset.loaded = 'true';
+        }catch(err){
+          setSelectOptions(modelSelect, [], 'Unable to load models');
+        }
+      }
+
+      if (!ontologySelect.dataset.loaded){
+        setSelectOptions(ontologySelect, [], 'Loading ontologies...');
+        try{
+          const files = (await getOntologyFileNames()).map(name => `ontologies/${name}`);
+          setSelectOptions(ontologySelect, files, 'No ontologies found');
+          ontologySelect.dataset.loaded = 'true';
+        }catch(err){
+          setSelectOptions(ontologySelect, [], 'Unable to load ontologies');
+        }
+      }
+    }
+
+    async function renderOntologyFile(path, viewerId){
+      const viewer = document.getElementById(viewerId);
+      viewer.innerHTML = '';
+      try{
+        const res = await fetch(repoAssetURL(path), { cache:'no-store' });
+        if(!res.ok) throw new Error('Failed to fetch ontology: ' + res.status);
+        const graph = await res.json();
+        renderOntologyGraph(graph, viewer);
+      }catch(err){
+        const url = rawGitURL(path);
+        viewer.innerHTML = `<div class='card'>Ontology graph unavailable. <a href='${url}' target='_blank'>Open in new tab</a><br><code>${err.message}</code></div>`;
+      }
+    }
+
+    function renderOntologyGraph(graph, viewer){
+      if (!window.vis || !window.vis.Network){
+        viewer.innerHTML = `<div class='card'>vis-network is not available.</div>`;
+        return;
+      }
+
+      const graphMount = document.createElement('div');
+      graphMount.className = 'ontology-graph';
+      const details = document.createElement('div');
+      details.className = 'ontology-details';
+      details.textContent = graph.description || graph.name || 'Ontology graph';
+      viewer.appendChild(graphMount);
+      viewer.appendChild(details);
+
+      const nodes = new vis.DataSet((graph.nodes || []).map(node => ({
+        shape: 'dot',
+        size: 18,
+        borderWidth: 1,
+        color: {
+          background: '#fff',
+          border: '#000',
+          highlight: { background: '#000', border: '#000' }
+        },
+        font: { face: 'CMU Serif, Times New Roman, serif', color: '#000' },
+        ...node
+      })));
+      const edges = new vis.DataSet((graph.edges || []).map(edge => ({
+        arrows: 'to',
+        color: { color: '#000', highlight: '#000' },
+        font: { face: 'CMU Serif, Times New Roman, serif', align: 'middle', background: '#fff' },
+        smooth: { type: 'dynamic' },
+        ...edge
+      })));
+
+      const network = new vis.Network(graphMount, { nodes, edges }, {
+        autoResize: true,
+        interaction: { hover: true, navigationButtons: true },
+        physics: {
+          enabled: true,
+          solver: 'forceAtlas2Based',
+          stabilization: { iterations: 120 }
+        },
+        nodes: { chosen: true },
+        edges: { chosen: true }
+      });
+
+      network.on('selectNode', params => {
+        const node = nodes.get(params.nodes[0]);
+        details.textContent = `${node.label || node.id}${node.group ? ' · ' + node.group : ''}${node.title ? ' · ' + node.title : ''}`;
+      });
+      network.on('deselectNode', () => {
+        details.textContent = graph.description || graph.name || 'Ontology graph';
+      });
+      setTimeout(() => network.fit({ animation: true }), 250);
     }
 
     // ===== Robust inline preview using PDF.js =====
@@ -293,7 +602,7 @@
           if(!res.ok) throw new Error('Failed to fetch PDF: ' + res.status);
           const buffer = await res.arrayBuffer();
           renderPdfWithPdfJs(buffer, viewer);
-        } else if (isBinary){
+        } else if (isBinary && /\.(png|jpe?g|svg)$/i.test(path)){
           const res = await fetch(url, { cache:'no-store' });
           if(!res.ok) throw new Error('Failed to fetch image: ' + res.status);
           const blob = await res.blob();
@@ -301,6 +610,8 @@
           const img = document.createElement('img');
           img.src = blobUrl; img.alt = path; img.style.maxWidth='100%'; img.style.maxHeight='100%';
           viewer.appendChild(img);
+        } else if (isBinary){
+          viewer.innerHTML = `<div class='card'>Inline preview is not available for this file type.<a href='${url}' target='_blank'>Open in new tab</a></div>`;
         } else {
           const res = await fetch(url, { cache:'no-store' });
           if(!res.ok) throw new Error('Failed to fetch text: ' + res.status);
@@ -379,19 +690,132 @@
     sendBtn.addEventListener('click', sendMessage);
     chatInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') sendMessage(); });
 
+    // ===== DEMO LAYOUT =====
+    const demoLayout = document.getElementById('demoLayout');
+    const settingsPanel = document.getElementById('settingsPanel');
+    const settingsToggle = document.getElementById('settingsToggle');
+    const settingsSplitter = document.getElementById('settingsSplitter');
+    const reportSplitter = document.getElementById('reportSplitter');
+    let settingsWidth = 300;
+    let reportWidth = 420;
+
+    function setDemoColumns(){
+      if (!demoLayout || demoLayout.classList.contains('settings-collapsed')) return;
+      demoLayout.style.gridTemplateColumns = `${settingsWidth}px 8px minmax(280px, 1fr) 8px ${reportWidth}px`;
+    }
+
+    function setupHorizontalSplitter(splitter, onMove){
+      if (!splitter || !demoLayout) return;
+      splitter.addEventListener('pointerdown', (event) => {
+        if (window.matchMedia('(max-width: 760px)').matches) return;
+        event.preventDefault();
+        splitter.classList.add('dragging');
+        splitter.setPointerCapture(event.pointerId);
+        const startX = event.clientX;
+        const startSettingsWidth = settingsWidth;
+        const startReportWidth = reportWidth;
+
+        const move = (moveEvent) => {
+          onMove(moveEvent.clientX - startX, startSettingsWidth, startReportWidth);
+          setDemoColumns();
+        };
+        const up = () => {
+          splitter.classList.remove('dragging');
+          splitter.removeEventListener('pointermove', move);
+          splitter.removeEventListener('pointerup', up);
+          splitter.removeEventListener('pointercancel', up);
+        };
+        splitter.addEventListener('pointermove', move);
+        splitter.addEventListener('pointerup', up);
+        splitter.addEventListener('pointercancel', up);
+      });
+    }
+
+    if (settingsToggle && settingsPanel && demoLayout){
+      settingsToggle.addEventListener('click', () => {
+        const collapsed = settingsPanel.classList.toggle('collapsed');
+        demoLayout.classList.toggle('settings-collapsed', collapsed);
+        settingsToggle.setAttribute('aria-expanded', String(!collapsed));
+        settingsToggle.textContent = collapsed ? 'Show Settings' : 'Settings';
+        if (!collapsed) setDemoColumns();
+      });
+    }
+
+    setupHorizontalSplitter(settingsSplitter, (delta, startSettingsWidth) => {
+      settingsWidth = Math.min(Math.max(startSettingsWidth + delta, 240), 420);
+    });
+    setupHorizontalSplitter(reportSplitter, (delta, startSettingsWidth, startReportWidth) => {
+      reportWidth = Math.min(Math.max(startReportWidth - delta, 260), 620);
+    });
+    setDemoColumns();
+
     // ===== REPORT BUTTON =====
     const reportBtn = document.getElementById('reportBtn');
+    const reportViewer = document.getElementById('reportViewer');
+    const reportActions = document.getElementById('reportActions');
+    const downloadReportBtn = document.getElementById('downloadReportBtn');
+    let reportPdfUrl = null;
+
+    function getReportSettings(){
+      const reportMode = document.getElementById('settingsReportMode');
+      const visualization3d = document.getElementById('settingsVisualization3d');
+      return {
+        model: document.getElementById('settingsModel').value,
+        ontology: document.getElementById('settingsOntology').value,
+        reportMode: reportMode.value,
+        reportModeLabel: reportMode.options[reportMode.selectedIndex].textContent,
+        aiModel: document.getElementById('settingsAiModel').value,
+        visualizationMode: visualization3d.checked ? '3D' : '2D'
+      };
+    }
+
+    function showReportPlaceholder(text){
+      if (!reportViewer) return;
+      reportViewer.innerHTML = `<div class="report-empty">${text}</div>`;
+      if (reportActions) reportActions.classList.add('hidden');
+    }
+
+    function showReportPdf(blob){
+      if (!reportViewer || !downloadReportBtn || !reportActions) return;
+      if (reportPdfUrl) URL.revokeObjectURL(reportPdfUrl);
+      reportPdfUrl = URL.createObjectURL(blob);
+      reportViewer.innerHTML = '';
+      const frame = document.createElement('iframe');
+      frame.title = 'Generated thesis report';
+      frame.src = reportPdfUrl;
+      reportViewer.appendChild(frame);
+      downloadReportBtn.href = reportPdfUrl;
+      downloadReportBtn.download = 'thesis-report.pdf';
+      reportActions.classList.remove('hidden');
+    }
+
     if (reportBtn){
       reportBtn.addEventListener('click', async ()=>{
-        const original = reportBtn.textContent; reportBtn.textContent = 'Generating…'; reportBtn.disabled = true;
+        const original = reportBtn.textContent;
+        const payload = getReportSettings();
+        if (!payload.model || !payload.ontology){
+          showReportPlaceholder('Choose the settings and generate a report.');
+          alert('Please choose a model and ontology before generating a report.');
+          return;
+        }
+        reportBtn.textContent = 'Generating...';
+        reportBtn.disabled = true;
+        showReportPlaceholder('Generating report...');
         try{
-          const res = await fetch(WEBHOOK_REPORT, { method:'GET' });
+          const res = await fetch(WEBHOOK_REPORT, {
+            method:'POST',
+            headers:{ 'Content-Type':'application/json' },
+            body: JSON.stringify(payload)
+          });
           if(!res.ok) throw new Error('Report request failed: ' + res.status);
           const blob = await res.blob();
           const ct = res.headers.get('content-type') || 'application/octet-stream';
-          const ext = ct.includes('pdf') ? 'pdf' : (ct.includes('zip') ? 'zip' : 'bin');
-          const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `thesis-report.${ext}`; document.body.appendChild(a); a.click(); a.remove();
-        }catch(err){ alert('Could not generate report: ' + err.message); }
+          if (!ct.includes('pdf') && !ct.includes('octet-stream')) throw new Error('Expected a PDF response, got: ' + ct);
+          showReportPdf(ct.includes('pdf') ? blob : new Blob([blob], { type:'application/pdf' }));
+        }catch(err){
+          showReportPlaceholder('Choose the settings and generate a report.');
+          alert('Could not generate report: ' + err.message);
+        }
         finally { reportBtn.textContent = original; reportBtn.disabled = false; }
       });
     }
