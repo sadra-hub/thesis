@@ -1,0 +1,3077 @@
+{
+  "name": "FMEA Decision Support Ontology",
+  "description": "Detailed ontology for Failure Mode and Effects Analysis. It is designed to help an AI model reason from system context and function to failure modes, causes, effects, controls, risk ratings, actions, evidence, and residual risk across mechanical, electrical, electronic, software, control, thermal, fluidic, chemical, material, human, process, interface, environmental, cybersecurity, data/AI, maintenance, and supply-chain failure domains.",
+  "references": [
+    {
+      "id": "iec-60812-2018",
+      "title": "IEC 60812:2018",
+      "use": "General FMEA/FMECA method anchor: planning, performing, documenting, maintaining, and identifying how items or processes fail to perform functions.",
+      "citation": "citeturn719636search0turn719636search8"
+    },
+    {
+      "id": "aiag-vda-fmea-handbook",
+      "title": "AIAG/VDA FMEA Handbook",
+      "use": "Seven-step FMEA workflow: planning and preparation, structure analysis, function analysis, failure analysis, risk analysis, optimization, and results documentation.",
+      "citation": "citeturn719636search5turn719636search13"
+    },
+    {
+      "id": "sae-j1739",
+      "title": "SAE J1739",
+      "use": "Design FMEA, Process FMEA, and supplemental FMEA-MSR reference.",
+      "citation": "citeturn719636search2turn719636search18"
+    },
+    {
+      "id": "iso-14971-risk-thinking",
+      "title": "ISO 14971 risk-management thinking",
+      "use": "Hazard, foreseeable sequence of events, hazardous situation, harm, and risk-control logic for safety-related contexts.",
+      "citation": "citeturn719636search15turn719636search19"
+    }
+  ],
+  "reasoning_rules": [
+    {
+      "id": "rule-01-function-first",
+      "statement": "Before proposing failure modes, identify the intended function, operating mode, environment, input, output, performance parameter, and requirement."
+    },
+    {
+      "id": "rule-02-separate-mode-cause-effect",
+      "statement": "Do not mix failure mode, cause, and effect. A failure mode is what goes wrong with the function; a cause is why it happens; an effect is what happens because of it."
+    },
+    {
+      "id": "rule-03-levels-of-effect",
+      "statement": "Always ask for local effect, next-higher-level effect, system effect, end-user effect, and safety/regulatory/business effect when relevant."
+    },
+    {
+      "id": "rule-04-cross-domain-sweep",
+      "statement": "For every important function, sweep across mechanical, electrical, electronic, software, control, thermal, fluidic, chemical, material, human, process, interface, environmental, cybersecurity, data/AI, maintenance, and supply-chain domains."
+    },
+    {
+      "id": "rule-05-interface-suspicion",
+      "statement": "Treat interfaces as high-risk zones because mismatched assumptions, timing, units, tolerance, protocol, or responsibility boundaries often create hidden failures."
+    },
+    {
+      "id": "rule-06-evidence-over-confidence",
+      "statement": "Ratings and claims about controls should cite evidence: test data, field data, simulations, inspections, process capability, supplier records, or expert rationale."
+    },
+    {
+      "id": "rule-07-current-control-specificity",
+      "statement": "A current control must state what it controls: cause prevention, failure detection, effect mitigation, diagnostic monitoring, or response."
+    },
+    {
+      "id": "rule-08-action-target",
+      "statement": "Every recommended action should explicitly target severity, occurrence, detection, diagnostic coverage, uncertainty, or traceability."
+    },
+    {
+      "id": "rule-09-residual-risk",
+      "statement": "After actions, reassess severity, occurrence, detection/action priority, and record residual risk with acceptance rationale."
+    },
+    {
+      "id": "rule-10-ai-follow-up",
+      "statement": "If key context is missing, ask targeted questions instead of inventing assumptions; if forced to proceed, mark assumptions explicitly."
+    }
+  ],
+  "nodes": [
+    {
+      "id": "fmea-ontology",
+      "label": "FMEA Ontology",
+      "group": "Ontology",
+      "title": "Semantic map for FMEA reasoning",
+      "description": "Connects system structure, functions, failure modes, causes, effects, controls, risk scoring, and AI question prompts."
+    },
+    {
+      "id": "ai-fmea-facilitator",
+      "label": "AI FMEA Facilitator",
+      "group": "Capability",
+      "title": "Guides an AI model to ask function-first failure analysis questions",
+      "description": "Uses the ontology to check missing context, classify failure types, detect weak causal reasoning, and suggest follow-up questions."
+    },
+    {
+      "id": "fmea-study",
+      "label": "FMEA Study",
+      "group": "Analysis",
+      "title": "A bounded FMEA activity for a specific item, process, service, or system",
+      "description": "Defines what is analyzed, why, by whom, under which assumptions, and with which scoring criteria."
+    },
+    {
+      "id": "fmea-record",
+      "label": "FMEA Record",
+      "group": "Artifact",
+      "title": "A single row or case in the FMEA table",
+      "description": "Links one function to one failure mode, its effects, causes, controls, ratings, actions, and residual risk."
+    },
+    {
+      "id": "iec-60812-2018",
+      "label": "IEC 60812:2018",
+      "group": "Standard",
+      "title": "International FMEA and FMECA procedure reference",
+      "description": "Useful as the general method anchor for planning, performing, documenting, maintaining FMEA/FMECA, and identifying how items or processes may fail to perform functions."
+    },
+    {
+      "id": "aiag-vda-fmea-handbook",
+      "label": "AIAG/VDA FMEA Handbook",
+      "group": "Standard",
+      "title": "Automotive seven-step FMEA structure",
+      "description": "Useful for structuring FMEA as planning, structure analysis, function analysis, failure analysis, risk analysis, optimization, and results documentation."
+    },
+    {
+      "id": "sae-j1739",
+      "label": "SAE J1739",
+      "group": "Standard",
+      "title": "DFMEA, PFMEA, and supplemental FMEA-MSR reference",
+      "description": "Useful for design, process, and monitoring/system-response FMEA in automotive and related engineering contexts."
+    },
+    {
+      "id": "iso-14971-risk-thinking",
+      "label": "ISO 14971 Risk Thinking",
+      "group": "Standard",
+      "title": "Hazard, hazardous situation, harm, and risk-control reasoning",
+      "description": "Useful when FMEA must connect technical failure modes to foreseeable sequences of events, hazards, harms, and risk controls, especially in medical or safety-related systems."
+    },
+    {
+      "id": "planning-preparation",
+      "label": "Planning and Preparation",
+      "group": "FMEA Step",
+      "title": "Define purpose, scope, team, assumptions, and analysis boundaries",
+      "description": "Prevents the AI from analyzing the whole universe; FMEA without scope becomes engineering soup."
+    },
+    {
+      "id": "structure-analysis",
+      "label": "Structure Analysis",
+      "group": "FMEA Step",
+      "title": "Break down the system, process, interfaces, and hierarchy",
+      "description": "Answers: what parts exist and how are they connected?"
+    },
+    {
+      "id": "function-analysis",
+      "label": "Function Analysis",
+      "group": "FMEA Step",
+      "title": "Identify intended functions, requirements, operating modes, and performance parameters",
+      "description": "Failure modes should be derived from functions, not guessed randomly."
+    },
+    {
+      "id": "failure-analysis",
+      "label": "Failure Analysis",
+      "group": "FMEA Step",
+      "title": "Identify failure modes, effects, causes, and mechanisms",
+      "description": "Connects what can go wrong, why it goes wrong, and what happens next."
+    },
+    {
+      "id": "risk-analysis",
+      "label": "Risk Analysis",
+      "group": "FMEA Step",
+      "title": "Score or rank severity, occurrence, detection, criticality, or action priority",
+      "description": "Helps prioritize the scary monsters instead of treating every gremlin equally."
+    },
+    {
+      "id": "optimization",
+      "label": "Optimization",
+      "group": "FMEA Step",
+      "title": "Select and verify actions that reduce risk",
+      "description": "Turns FMEA from a spreadsheet cemetery into actual engineering improvement."
+    },
+    {
+      "id": "results-documentation",
+      "label": "Results Documentation",
+      "group": "FMEA Step",
+      "title": "Capture decisions, evidence, residual risk, and lessons learned",
+      "description": "Makes the analysis reusable, auditable, and traceable."
+    },
+    {
+      "id": "scope",
+      "label": "Scope",
+      "group": "Context",
+      "title": "Defines what is inside and outside the FMEA",
+      "description": "Include product/process name, lifecycle phase, customer, use context, interfaces, exclusions, and depth of analysis.",
+      "ai_questions": [
+        "What exactly are we analyzing?",
+        "What is explicitly out of scope?",
+        "Why is this boundary chosen?"
+      ]
+    },
+    {
+      "id": "boundary",
+      "label": "System Boundary",
+      "group": "Context",
+      "title": "Separates the analyzed item from external systems",
+      "description": "Prevents blaming external systems without modeling the interface.",
+      "ai_questions": [
+        "Where does responsibility transfer to another system or team?",
+        "Which inputs and outputs cross the boundary?"
+      ]
+    },
+    {
+      "id": "item",
+      "label": "Item",
+      "group": "Structure",
+      "title": "The top-level object being analyzed",
+      "description": "Can be a product, process step, subsystem, software service, medical device, robot, manufacturing operation, or organization process."
+    },
+    {
+      "id": "system",
+      "label": "System",
+      "group": "Structure",
+      "title": "A set of interacting elements with a purpose",
+      "description": "The top object when FMEA is performed at system level."
+    },
+    {
+      "id": "subsystem",
+      "label": "Subsystem",
+      "group": "Structure",
+      "title": "A major part of a system",
+      "description": "Useful for hierarchical effects: local, next-level, system-level, user-level."
+    },
+    {
+      "id": "component",
+      "label": "Component",
+      "group": "Structure",
+      "title": "A physical, software, human, or process element",
+      "description": "Small enough to have concrete functions and failure modes."
+    },
+    {
+      "id": "interface",
+      "label": "Interface",
+      "group": "Structure",
+      "title": "Connection where energy, material, information, force, fluid, heat, or control crosses elements",
+      "description": "Many failures hide at interfaces because each side says, 'not my circus, not my monkeys.'",
+      "ai_questions": [
+        "What crosses this interface?",
+        "What assumptions does each side make?",
+        "What happens if the interface is late, noisy, leaky, blocked, reversed, overloaded, or incompatible?"
+      ]
+    },
+    {
+      "id": "environment",
+      "label": "Environment",
+      "group": "Context",
+      "title": "External physical, cyber, operational, regulatory, and organizational conditions",
+      "description": "Include temperature, humidity, vibration, EMC, contamination, users, network, workload, and maintenance setting."
+    },
+    {
+      "id": "lifecycle-phase",
+      "label": "Lifecycle Phase",
+      "group": "Context",
+      "title": "Phase where the failure can occur or be detected",
+      "description": "Examples: concept, design, manufacturing, transport, installation, operation, maintenance, update, decommissioning."
+    },
+    {
+      "id": "operating-mode",
+      "label": "Operating Mode",
+      "group": "Context",
+      "title": "Mode or state in which functions and failures differ",
+      "description": "Examples: startup, normal operation, degraded mode, emergency stop, calibration, cleaning, charging, shutdown."
+    },
+    {
+      "id": "use-scenario",
+      "label": "Use Scenario",
+      "group": "Context",
+      "title": "A realistic sequence of user, system, and environment interactions",
+      "description": "Useful for finding context-dependent failures."
+    },
+    {
+      "id": "stakeholder",
+      "label": "Stakeholder",
+      "group": "Context",
+      "title": "Person or organization affected by the function, failure, risk, or decision",
+      "description": "Examples: user, patient, operator, maintainer, manufacturer, regulator, supplier, service team."
+    },
+    {
+      "id": "requirement",
+      "label": "Requirement",
+      "group": "Artifact",
+      "title": "A documented need, constraint, or performance expectation",
+      "description": "Failure analysis should trace back to requirements when possible.",
+      "ai_questions": [
+        "Which requirement is violated if this function fails?",
+        "Is the requirement measurable or ambiguous?"
+      ]
+    },
+    {
+      "id": "assumption",
+      "label": "Assumption",
+      "group": "Context",
+      "title": "A condition believed true but not yet proven",
+      "description": "Assumptions should be visible because hidden assumptions are failure-mode factories."
+    },
+    {
+      "id": "function",
+      "label": "Function",
+      "group": "Function",
+      "title": "Intended action of an item under defined conditions",
+      "description": "Write as verb + object + measurable target when possible, e.g., 'limit motor current below 5 A'.",
+      "ai_questions": [
+        "What must this item do?",
+        "Why does this function matter?",
+        "What measurable parameter proves it works?"
+      ]
+    },
+    {
+      "id": "primary-function",
+      "label": "Primary Function",
+      "group": "Function",
+      "title": "Main reason the item exists",
+      "description": "Failure of a primary function often drives high severity."
+    },
+    {
+      "id": "secondary-function",
+      "label": "Secondary Function",
+      "group": "Function",
+      "title": "Supporting function needed for operation, usability, safety, or compliance",
+      "description": "Often forgotten until it fails spectacularly, like a tiny screw with main-character energy."
+    },
+    {
+      "id": "safety-function",
+      "label": "Safety Function",
+      "group": "Function",
+      "title": "Function that prevents or reduces harm",
+      "description": "Examples: stop motion, isolate energy, limit temperature, alarm user, enter safe state."
+    },
+    {
+      "id": "diagnostic-function",
+      "label": "Diagnostic Function",
+      "group": "Function",
+      "title": "Function that detects, reports, or isolates faults",
+      "description": "Important for detection rating and monitoring-response FMEA."
+    },
+    {
+      "id": "performance-parameter",
+      "label": "Performance Parameter",
+      "group": "Metric",
+      "title": "Measurable variable that defines function quality",
+      "description": "Examples: torque, voltage, response time, accuracy, temperature, flow rate, pressure, current, latency."
+    },
+    {
+      "id": "functional-chain",
+      "label": "Functional Chain",
+      "group": "Function",
+      "title": "Ordered set of functions across components or process steps",
+      "description": "Useful to ask: if upstream output fails, what downstream function fails next?"
+    },
+    {
+      "id": "input",
+      "label": "Input",
+      "group": "Structure",
+      "title": "Energy, material, information, command, or condition entering a function",
+      "description": "Inputs can fail by being absent, wrong, noisy, late, early, too high, too low, or incompatible."
+    },
+    {
+      "id": "output",
+      "label": "Output",
+      "group": "Structure",
+      "title": "Energy, material, information, command, product state, or service result produced by a function",
+      "description": "Outputs become effects or causes for other elements."
+    },
+    {
+      "id": "constraint",
+      "label": "Constraint",
+      "group": "Requirement",
+      "title": "A limit on function, design, process, or operation",
+      "description": "Examples: mass limit, cost limit, regulatory limit, voltage limit, sterilization condition."
+    },
+    {
+      "id": "failure-mode",
+      "label": "Failure Mode",
+      "group": "Failure Logic",
+      "title": "The specific way a function, item, or process can fail",
+      "description": "Best phrased as a deviation from intended function: no, partial, degraded, intermittent, unintended, wrong, early, late, unstable, or out-of-tolerance.",
+      "ai_questions": [
+        "How can this function fail?",
+        "Is this phrased as a problem, not a cause or effect?",
+        "What would an observer see?"
+      ]
+    },
+    {
+      "id": "failure-effect",
+      "label": "Failure Effect",
+      "group": "Failure Logic",
+      "title": "Consequence of a failure mode",
+      "description": "Effects should be described at local, next-higher, system, user, safety, business, and regulatory levels where relevant.",
+      "ai_questions": [
+        "What happens immediately?",
+        "Who notices?",
+        "What is the worst credible consequence?"
+      ]
+    },
+    {
+      "id": "local-effect",
+      "label": "Local Effect",
+      "group": "Failure Logic",
+      "title": "Effect on the same component or process step",
+      "description": "Useful for technical diagnosis."
+    },
+    {
+      "id": "next-higher-level-effect",
+      "label": "Next Higher Level Effect",
+      "group": "Failure Logic",
+      "title": "Effect on subsystem, process output, or downstream function",
+      "description": "Connects local faults to system behavior."
+    },
+    {
+      "id": "end-user-effect",
+      "label": "End User Effect",
+      "group": "Failure Logic",
+      "title": "Effect experienced by customer, user, patient, operator, or maintainer",
+      "description": "Important for severity and communication."
+    },
+    {
+      "id": "failure-cause",
+      "label": "Failure Cause",
+      "group": "Failure Logic",
+      "title": "Reason the failure mode occurs",
+      "description": "Should be controllable or testable when possible, not vague like 'bad design'.",
+      "ai_questions": [
+        "Why would this failure mode happen?",
+        "Can this cause be prevented, detected, or verified?"
+      ]
+    },
+    {
+      "id": "root-cause",
+      "label": "Root Cause",
+      "group": "Failure Logic",
+      "title": "Deeper cause that explains the origin of one or more direct causes",
+      "description": "Useful for corrective action and lessons learned."
+    },
+    {
+      "id": "failure-mechanism",
+      "label": "Failure Mechanism",
+      "group": "Failure Logic",
+      "title": "Physical, logical, chemical, human, cyber, or process mechanism causing failure",
+      "description": "Examples: fatigue crack growth, corrosion, memory leak, adhesive cure failure, calibration drift."
+    },
+    {
+      "id": "hazard",
+      "label": "Hazard",
+      "group": "Risk Concept",
+      "title": "Potential source of harm",
+      "description": "Examples: electrical energy, sharp edge, stored pressure, toxic substance, moving actuator, wrong medical advice."
+    },
+    {
+      "id": "hazardous-situation",
+      "label": "Hazardous Situation",
+      "group": "Risk Concept",
+      "title": "Circumstance where people, assets, or environment are exposed to a hazard",
+      "description": "Connects technical failures to real-world harm scenarios."
+    },
+    {
+      "id": "harm",
+      "label": "Harm",
+      "group": "Risk Concept",
+      "title": "Injury, damage, loss, or adverse impact",
+      "description": "Can include safety, mission, financial, legal, environmental, reputational, or user-trust harm."
+    },
+    {
+      "id": "risk",
+      "label": "Risk Concept",
+      "group": "Risk Concept",
+      "title": "Combination of severity and likelihood, with detectability or controllability where the method uses it",
+      "description": "Risk should not be a vibe. Vibes are for music, not safety decisions."
+    },
+    {
+      "id": "severity",
+      "label": "Severity",
+      "group": "Rating",
+      "title": "Seriousness of the effect if the failure occurs",
+      "description": "Usually based on worst credible effect, not how easy the fix is."
+    },
+    {
+      "id": "occurrence",
+      "label": "Occurrence",
+      "group": "Rating",
+      "title": "Estimated likelihood or frequency of the cause or failure mode",
+      "description": "Should use evidence such as field data, test data, process capability, supplier history, or expert judgment."
+    },
+    {
+      "id": "detection-rating",
+      "label": "Detection Rating",
+      "group": "Rating",
+      "title": "Ability of current controls to detect cause or failure before the effect reaches the user",
+      "description": "High detectability lowers risk priority only if detection is realistic and timely."
+    },
+    {
+      "id": "rpn",
+      "label": "Risk Priority Number",
+      "group": "Rating",
+      "title": "Traditional score calculated from severity, occurrence, and detection",
+      "description": "Useful but can hide priority differences; do not use blindly."
+    },
+    {
+      "id": "action-priority",
+      "label": "Action Priority",
+      "group": "Rating",
+      "title": "Priority classification for action based on severity, occurrence, and detection",
+      "description": "Often preferred in AIAG/VDA-style FMEA over relying only on RPN."
+    },
+    {
+      "id": "criticality",
+      "label": "Criticality",
+      "group": "Rating",
+      "title": "Severity-weighted likelihood or mission/safety importance of a failure mode",
+      "description": "Common in FMECA or reliability-centered analyses."
+    },
+    {
+      "id": "risk-acceptance-criteria",
+      "label": "Risk Acceptance Criteria",
+      "group": "Decision Rule",
+      "title": "Defined threshold or rationale for acceptable residual risk",
+      "description": "Must be explicit before arguing that a scary thing is 'probably fine'."
+    },
+    {
+      "id": "current-control",
+      "label": "Current Control",
+      "group": "Control",
+      "title": "Existing prevention, detection, verification, or monitoring activity",
+      "description": "Controls must be specific and linked to causes or failure modes."
+    },
+    {
+      "id": "prevention-control",
+      "label": "Prevention Control",
+      "group": "Control",
+      "title": "Control that reduces occurrence by preventing the cause",
+      "description": "Examples: design margin, derating, poka-yoke, supplier control, validated procedure."
+    },
+    {
+      "id": "detection-control",
+      "label": "Detection Control",
+      "group": "Control",
+      "title": "Control that increases chance of detecting cause, failure mode, or effect",
+      "description": "Examples: inspection, test, diagnostic, alarm, end-of-line validation."
+    },
+    {
+      "id": "diagnostic-monitoring",
+      "label": "Diagnostic Monitoring",
+      "group": "Control",
+      "title": "Runtime detection, isolation, prediction, or response to faults",
+      "description": "Important for monitored systems, connected products, robots, AI services, and safety-critical software."
+    },
+    {
+      "id": "recommended-action",
+      "label": "Recommended Action",
+      "group": "Action",
+      "title": "Risk-reduction action assigned after analysis",
+      "description": "Should target severity, occurrence, or detection with clear owner and evidence."
+    },
+    {
+      "id": "action-owner",
+      "label": "Action Owner",
+      "group": "Action",
+      "title": "Person or role responsible for completing the action",
+      "description": "No owner means the action is an orphan. Orphans do not close risks."
+    },
+    {
+      "id": "action-deadline",
+      "label": "Action Deadline",
+      "group": "Action",
+      "title": "Due date or decision milestone for the action",
+      "description": "Connects FMEA to project execution."
+    },
+    {
+      "id": "verification-evidence",
+      "label": "Verification Evidence",
+      "group": "Evidence",
+      "title": "Proof that action or control works",
+      "description": "Examples: test report, simulation result, inspection data, requirement trace, field data, audit record."
+    },
+    {
+      "id": "residual-risk",
+      "label": "Residual Risk",
+      "group": "Risk Concept",
+      "title": "Risk remaining after controls and actions",
+      "description": "Must be accepted, reduced further, transferred, or escalated."
+    },
+    {
+      "id": "lessons-learned",
+      "label": "Lessons Learned",
+      "group": "Knowledge",
+      "title": "Reusable learning from failure, testing, field data, or previous FMEAs",
+      "description": "Prevents the organization from stepping on the same rake with enthusiasm."
+    },
+    {
+      "id": "system-fmea",
+      "label": "System FMEA",
+      "group": "FMEA Type",
+      "title": "Analyzes failures at system architecture and interaction level",
+      "description": "Best for early design, interfaces, functions, emergent behavior, and system-level hazards."
+    },
+    {
+      "id": "dfmea",
+      "label": "Design FMEA",
+      "group": "FMEA Type",
+      "title": "Analyzes product or design failure modes before design release",
+      "description": "Focuses on whether the design itself can meet functions and requirements."
+    },
+    {
+      "id": "pfmea",
+      "label": "Process FMEA",
+      "group": "FMEA Type",
+      "title": "Analyzes manufacturing, assembly, service, or business-process failure modes",
+      "description": "Focuses on process steps, human actions, equipment, materials, methods, measurements, and environment."
+    },
+    {
+      "id": "fmea-msr",
+      "label": "FMEA-MSR",
+      "group": "FMEA Type",
+      "title": "Supplemental FMEA for monitoring and system response",
+      "description": "Focuses on runtime faults, diagnostic coverage, warning strategy, safe state, and controllability."
+    },
+    {
+      "id": "software-fmea",
+      "label": "Software FMEA",
+      "group": "FMEA Type",
+      "title": "Analyzes software failure modes and their effects",
+      "description": "Includes logic errors, timing, data, concurrency, interface, configuration, update, and exception handling failures."
+    },
+    {
+      "id": "hardware-fmea",
+      "label": "Hardware FMEA",
+      "group": "FMEA Type",
+      "title": "Analyzes electronic, electrical, mechanical, and physical component failures",
+      "description": "Often linked with reliability data, stress, derating, diagnostics, and environmental conditions."
+    },
+    {
+      "id": "fmeca",
+      "label": "FMECA",
+      "group": "FMEA Type",
+      "title": "FMEA with criticality analysis",
+      "description": "Adds criticality ranking or quantitative consequence/likelihood emphasis."
+    },
+    {
+      "id": "fmeda",
+      "label": "FMEDA",
+      "group": "FMEA Type",
+      "title": "Failure Modes, Effects, and Diagnostic Analysis",
+      "description": "Adds diagnostic coverage and failure-rate allocation, often used for safety integrity analysis."
+    },
+    {
+      "id": "human-factors-fmea",
+      "label": "Human Factors FMEA",
+      "group": "FMEA Type",
+      "title": "Analyzes user, operator, maintainer, and organizational interaction failures",
+      "description": "Useful for use error, poor instructions, cognitive load, alarms, training, and maintenance."
+    },
+    {
+      "id": "mechanical-failure",
+      "label": "Mechanical Failure",
+      "group": "Failure Domain",
+      "title": "Failure involving force, motion, geometry, structure, vibration, wear, tolerance, fatigue, or contact",
+      "description": "Ask about loads, cycles, alignment, lubrication, vibration, clearance, stress concentration, and assembly fit."
+    },
+    {
+      "id": "electrical-failure",
+      "label": "Electrical Failure",
+      "group": "Failure Domain",
+      "title": "Failure involving power, voltage, current, grounding, insulation, wiring, or energy distribution",
+      "description": "Ask about shorts, opens, overload, transients, grounding, connector quality, insulation, and supply margins."
+    },
+    {
+      "id": "electronic-failure",
+      "label": "Electronic Failure",
+      "group": "Failure Domain",
+      "title": "Failure involving electronic components, PCBs, sensors, actuators, ICs, solder, or EMC",
+      "description": "Ask about drift, noise, component aging, ESD, EMI, thermal stress, firmware-hardware interaction, and diagnostic coverage."
+    },
+    {
+      "id": "software-failure",
+      "label": "Software Failure",
+      "group": "Failure Domain",
+      "title": "Failure involving code, algorithms, configuration, state, timing, data, APIs, or updates",
+      "description": "Ask about assumptions, exceptions, race conditions, invalid states, rollback, versioning, logging, and test coverage."
+    },
+    {
+      "id": "control-failure",
+      "label": "Control/System Dynamics Failure",
+      "group": "Failure Domain",
+      "title": "Failure involving feedback loops, stability, estimation, actuation, or control logic",
+      "description": "Ask about sensor delay, actuator saturation, model mismatch, unstable loop, calibration, and failover."
+    },
+    {
+      "id": "thermal-failure",
+      "label": "Thermal Failure",
+      "group": "Failure Domain",
+      "title": "Failure involving heat generation, heat transfer, cooling, thermal runaway, or temperature limits",
+      "description": "Ask about hotspots, cooling path, duty cycle, ambient temperature, insulation, and thermal derating."
+    },
+    {
+      "id": "fluidic-failure",
+      "label": "Fluidic/Pneumatic/Hydraulic Failure",
+      "group": "Failure Domain",
+      "title": "Failure involving liquid, gas, pressure, flow, valves, pumps, seals, or contamination",
+      "description": "Ask about leakage, blockage, cavitation, pressure spikes, filter clogging, viscosity, and seal compatibility."
+    },
+    {
+      "id": "chemical-failure",
+      "label": "Chemical Failure",
+      "group": "Failure Domain",
+      "title": "Failure involving reaction, degradation, corrosion, contamination, toxicity, flammability, or material compatibility",
+      "description": "Ask about chemicals, exposure, cleaning agents, humidity, pH, oxidation, and storage conditions."
+    },
+    {
+      "id": "material-failure",
+      "label": "Material Failure",
+      "group": "Failure Domain",
+      "title": "Failure involving material selection, defects, aging, microstructure, creep, fatigue, or environmental degradation",
+      "description": "Ask about material grade, supplier variation, heat treatment, defects, fatigue curves, and aging."
+    },
+    {
+      "id": "human-error",
+      "label": "Human Error / Use Error",
+      "group": "Failure Domain",
+      "title": "Failure involving user, operator, maintainer, or team action/inaction",
+      "description": "Ask whether the system invites the error, not whether humans are 'stupid'. Usually the interface is the sneaky raccoon."
+    },
+    {
+      "id": "process-failure",
+      "label": "Process Failure",
+      "group": "Failure Domain",
+      "title": "Failure involving manufacturing, assembly, service, logistics, business workflow, or quality process",
+      "description": "Ask about process step, method, machine, material, measurement, manpower, and environment."
+    },
+    {
+      "id": "interface-failure",
+      "label": "Interface Failure",
+      "group": "Failure Domain",
+      "title": "Failure at the boundary between components, teams, systems, users, or organizations",
+      "description": "Ask about incompatible assumptions, timing, units, protocols, tolerances, physical fit, and responsibility handoff."
+    },
+    {
+      "id": "environmental-failure",
+      "label": "Environmental Failure",
+      "group": "Failure Domain",
+      "title": "Failure caused or triggered by environment",
+      "description": "Ask about temperature, humidity, dust, water, vibration, shock, altitude, salt fog, radiation, EMC, biofouling, and cleaning."
+    },
+    {
+      "id": "cybersecurity-failure",
+      "label": "Cybersecurity Failure",
+      "group": "Failure Domain",
+      "title": "Failure caused by malicious or unauthorized digital interaction",
+      "description": "Ask about spoofing, tampering, denial of service, privilege misuse, insecure update, secrets, and data exfiltration."
+    },
+    {
+      "id": "data-ai-failure",
+      "label": "Data / AI Failure",
+      "group": "Failure Domain",
+      "title": "Failure involving data quality, model behavior, AI output, learning system drift, or decision support",
+      "description": "Ask about bias, missing data, hallucination, confidence, monitoring, fallback, human override, and auditability."
+    },
+    {
+      "id": "maintenance-failure",
+      "label": "Maintenance Failure",
+      "group": "Failure Domain",
+      "title": "Failure caused by inadequate, incorrect, delayed, or impossible maintenance",
+      "description": "Ask about maintainability, access, intervals, tooling, instructions, spare parts, and condition monitoring."
+    },
+    {
+      "id": "supply-chain-failure",
+      "label": "Supply Chain Failure",
+      "group": "Failure Domain",
+      "title": "Failure caused by supplier, counterfeit, logistics, inventory, or specification mismatch",
+      "description": "Ask about supplier qualification, change notification, traceability, substitute parts, and incoming inspection."
+    },
+    {
+      "id": "loss-of-function",
+      "label": "Loss of Function",
+      "group": "Failure Mode Category",
+      "title": "Function is completely absent",
+      "description": "Examples: motor does not start, software service unavailable, valve fails to open."
+    },
+    {
+      "id": "partial-function",
+      "label": "Partial Function",
+      "group": "Failure Mode Category",
+      "title": "Function occurs but below required level",
+      "description": "Examples: insufficient torque, weak signal, incomplete weld, low flow."
+    },
+    {
+      "id": "degraded-function",
+      "label": "Degraded Function",
+      "group": "Failure Mode Category",
+      "title": "Function quality worsens over time",
+      "description": "Examples: sensor drift, wear, battery capacity loss, increasing latency."
+    },
+    {
+      "id": "intermittent-function",
+      "label": "Intermittent Function",
+      "group": "Failure Mode Category",
+      "title": "Function appears and disappears unpredictably",
+      "description": "Examples: loose connector, race condition, thermal intermittent fault."
+    },
+    {
+      "id": "unintended-function",
+      "label": "Unintended Function",
+      "group": "Failure Mode Category",
+      "title": "Item performs a function when it should not",
+      "description": "Examples: actuator moves unexpectedly, alarm triggers falsely, software sends duplicate command."
+    },
+    {
+      "id": "wrong-function",
+      "label": "Wrong Function",
+      "group": "Failure Mode Category",
+      "title": "Wrong output, value, action, target, unit, state, or decision",
+      "description": "Examples: wrong dose, wrong unit conversion, reversed polarity, wrong user record."
+    },
+    {
+      "id": "early-function",
+      "label": "Early Function",
+      "group": "Failure Mode Category",
+      "title": "Function occurs too early",
+      "description": "Examples: premature release, early trigger, message sent before confirmation."
+    },
+    {
+      "id": "late-function",
+      "label": "Late Function",
+      "group": "Failure Mode Category",
+      "title": "Function occurs too late",
+      "description": "Examples: delayed brake signal, slow alarm, late data synchronization."
+    },
+    {
+      "id": "unstable-function",
+      "label": "Unstable / Oscillatory Function",
+      "group": "Failure Mode Category",
+      "title": "Function oscillates, hunts, diverges, or becomes unstable",
+      "description": "Examples: control loop instability, vibration chatter, repeated retry storm."
+    },
+    {
+      "id": "out-of-tolerance",
+      "label": "Out of Tolerance",
+      "group": "Failure Mode Category",
+      "title": "Output or geometry outside allowed tolerance",
+      "description": "Examples: dimension out of spec, voltage ripple high, temperature outside range."
+    },
+    {
+      "id": "leakage",
+      "label": "Leakage",
+      "group": "Failure Mode Category",
+      "title": "Unwanted escape of fluid, gas, energy, signal, current, or data",
+      "description": "Examples: hydraulic leak, current leakage, memory leak, confidential data leak."
+    },
+    {
+      "id": "blockage",
+      "label": "Blockage / Obstruction",
+      "group": "Failure Mode Category",
+      "title": "Flow, movement, signal, or access is obstructed",
+      "description": "Examples: clogged filter, blocked nozzle, jammed route, firewall blocking required traffic."
+    },
+    {
+      "id": "fracture",
+      "label": "Fracture / Breakage",
+      "group": "Mechanical Failure Mode",
+      "title": "Crack, rupture, or break of a part",
+      "description": "Ask about stress, defects, impact, fatigue, material, notch, and overload."
+    },
+    {
+      "id": "fatigue",
+      "label": "Fatigue",
+      "group": "Mechanical Failure Mode",
+      "title": "Progressive damage under cyclic loading",
+      "description": "Ask about load cycles, vibration, stress concentration, surface finish, and fatigue limit."
+    },
+    {
+      "id": "wear",
+      "label": "Wear",
+      "group": "Mechanical Failure Mode",
+      "title": "Material loss or surface degradation due to contact and motion",
+      "description": "Ask about lubrication, hardness, particles, alignment, contact pressure, and duty cycle."
+    },
+    {
+      "id": "corrosion",
+      "label": "Corrosion",
+      "group": "Chemical/Material Failure Mode",
+      "title": "Material degradation due to chemical or electrochemical reaction",
+      "description": "Ask about humidity, salt, galvanic couples, coatings, cleaning agents, and exposure time."
+    },
+    {
+      "id": "loosening",
+      "label": "Loosening",
+      "group": "Mechanical Failure Mode",
+      "title": "Fastener, connector, or fit loses intended retention",
+      "description": "Ask about torque, vibration, locking method, thermal cycle, and assembly procedure."
+    },
+    {
+      "id": "jamming",
+      "label": "Jamming / Sticking",
+      "group": "Mechanical Failure Mode",
+      "title": "Moving part cannot move or remains stuck",
+      "description": "Ask about clearance, debris, lubrication, tolerance stack-up, deformation, and ice/dust."
+    },
+    {
+      "id": "overheating",
+      "label": "Overheating",
+      "group": "Thermal Failure Mode",
+      "title": "Temperature exceeds safe or functional limits",
+      "description": "Ask about power dissipation, cooling, ambient, duty cycle, thermal path, and blocked ventilation."
+    },
+    {
+      "id": "short-circuit",
+      "label": "Short Circuit",
+      "group": "Electrical Failure Mode",
+      "title": "Unintended low-resistance electrical path",
+      "description": "Ask about insulation, moisture, contamination, connector damage, solder bridge, and protection."
+    },
+    {
+      "id": "open-circuit",
+      "label": "Open Circuit",
+      "group": "Electrical Failure Mode",
+      "title": "Unintended interruption in electrical path",
+      "description": "Ask about broken wire, connector disengagement, solder crack, fuse, switch, and vibration."
+    },
+    {
+      "id": "insulation-breakdown",
+      "label": "Insulation Breakdown",
+      "group": "Electrical Failure Mode",
+      "title": "Loss of dielectric separation",
+      "description": "Ask about voltage stress, aging, temperature, humidity, creepage, clearance, and contamination."
+    },
+    {
+      "id": "emi-emc-susceptibility",
+      "label": "EMI/EMC Susceptibility",
+      "group": "Electronic Failure Mode",
+      "title": "Performance affected by electromagnetic interference",
+      "description": "Ask about shielding, grounding, cable routing, filtering, ESD, and immunity testing."
+    },
+    {
+      "id": "sensor-drift",
+      "label": "Sensor Drift",
+      "group": "Electronic/Control Failure Mode",
+      "title": "Sensor output gradually deviates from true value",
+      "description": "Ask about calibration, temperature, aging, contamination, and self-diagnostics."
+    },
+    {
+      "id": "actuator-stuck",
+      "label": "Actuator Stuck",
+      "group": "Mechanical/Control Failure Mode",
+      "title": "Actuator remains stuck on, off, open, closed, or at a position",
+      "description": "Ask about command signal, mechanical blockage, power loss, valve stiction, and fail-safe position."
+    },
+    {
+      "id": "power-loss",
+      "label": "Power Loss / Brownout",
+      "group": "Electrical Failure Mode",
+      "title": "Power absent, unstable, or below required level",
+      "description": "Ask about supply margin, battery, wiring, fuse, inrush, load transient, and backup power."
+    },
+    {
+      "id": "communication-loss",
+      "label": "Communication Loss",
+      "group": "Interface/Software Failure Mode",
+      "title": "Required data exchange unavailable, delayed, corrupted, or incompatible",
+      "description": "Ask about protocol, timeout, retry, bandwidth, network, message schema, and fallback."
+    },
+    {
+      "id": "software-crash",
+      "label": "Software Crash",
+      "group": "Software Failure Mode",
+      "title": "Process, service, task, or controller stops unexpectedly",
+      "description": "Ask about exceptions, memory, watchdog, resource exhaustion, dependency failure, and recovery."
+    },
+    {
+      "id": "timing-race-condition",
+      "label": "Timing / Race Condition",
+      "group": "Software/Control Failure Mode",
+      "title": "Behavior depends on unsafe timing or event ordering",
+      "description": "Ask about concurrency, locks, interrupts, asynchronous messages, scheduling, and state transitions."
+    },
+    {
+      "id": "data-corruption",
+      "label": "Data Corruption",
+      "group": "Data Failure Mode",
+      "title": "Stored or transmitted data becomes wrong, incomplete, stale, duplicated, or inconsistent",
+      "description": "Ask about validation, checksum, transaction, schema, time stamp, synchronization, and recovery."
+    },
+    {
+      "id": "model-misclassification",
+      "label": "AI Model Misclassification",
+      "group": "AI Failure Mode",
+      "title": "AI model produces wrong class, recommendation, or interpretation",
+      "description": "Ask about training data, distribution shift, confidence, edge cases, explainability, and human review."
+    },
+    {
+      "id": "requirement-ambiguity",
+      "label": "Requirement Ambiguity",
+      "group": "Cause Category",
+      "title": "Requirement is unclear, incomplete, conflicting, unverifiable, or interpreted differently",
+      "description": "Ask: which word can two engineers interpret differently? That word is probably the tiny chaos goblin."
+    },
+    {
+      "id": "design-weakness",
+      "label": "Design Weakness",
+      "group": "Cause Category",
+      "title": "Design lacks margin, robustness, compatibility, diagnosability, or safe behavior",
+      "description": "Ask whether the failure is designed-in rather than produced by manufacturing."
+    },
+    {
+      "id": "manufacturing-defect",
+      "label": "Manufacturing Defect",
+      "group": "Cause Category",
+      "title": "Part or product deviates from design intent during manufacturing",
+      "description": "Examples: wrong dimension, poor solder, void, burr, incorrect cure, contamination."
+    },
+    {
+      "id": "assembly-error",
+      "label": "Assembly Error",
+      "group": "Cause Category",
+      "title": "Incorrect assembly, orientation, torque, connection, routing, or configuration",
+      "description": "Ask about poka-yoke, work instructions, fixtures, visual inspection, and training."
+    },
+    {
+      "id": "contamination",
+      "label": "Contamination",
+      "group": "Cause Category",
+      "title": "Unwanted material affects function",
+      "description": "Examples: dust, oil, water, particles, microbes, flux residue, metal shavings."
+    },
+    {
+      "id": "overload",
+      "label": "Overload",
+      "group": "Cause Category",
+      "title": "Load, stress, current, pressure, data traffic, or usage exceeds design capability",
+      "description": "Ask about worst-case assumptions and abnormal but foreseeable use."
+    },
+    {
+      "id": "aging-degradation",
+      "label": "Aging / Degradation",
+      "group": "Cause Category",
+      "title": "Performance reduces over time due to aging, wear, chemical change, or fatigue",
+      "description": "Ask about lifetime, cycles, storage, maintenance, and degradation monitoring."
+    },
+    {
+      "id": "supplier-variation",
+      "label": "Supplier Variation",
+      "group": "Cause Category",
+      "title": "Supplier part, material, process, or documentation varies from expectation",
+      "description": "Ask about specification, qualification, substitutions, certificates, and change notification."
+    },
+    {
+      "id": "user-misuse",
+      "label": "Use Error / Misuse",
+      "group": "Cause Category",
+      "title": "User action differs from intended use, including foreseeable misuse",
+      "description": "Ask whether design, labeling, training, or workflow makes the misuse likely."
+    },
+    {
+      "id": "inadequate-maintenance",
+      "label": "Inadequate Maintenance",
+      "group": "Cause Category",
+      "title": "Maintenance is omitted, late, wrong, undocumented, or impossible under real conditions",
+      "description": "Ask about access, tools, intervals, instructions, and condition-based monitoring."
+    },
+    {
+      "id": "external-event",
+      "label": "External Event",
+      "group": "Cause Category",
+      "title": "External shock, outage, disaster, regulatory change, cyber event, or environmental condition triggers failure",
+      "description": "Ask what external events are credible, not just convenient."
+    },
+    {
+      "id": "cyberattack",
+      "label": "Cyberattack",
+      "group": "Cause Category",
+      "title": "Malicious digital action causes unsafe, unavailable, incorrect, or unauthorized behavior",
+      "description": "Ask about threat actor, attack surface, authentication, logging, and isolation."
+    },
+    {
+      "id": "software-defect",
+      "label": "Software Defect",
+      "group": "Cause Category",
+      "title": "Bug, configuration error, logic error, dependency problem, or update fault causes failure",
+      "description": "Ask about tests, versioning, rollback, observability, and exception handling."
+    },
+    {
+      "id": "design-review",
+      "label": "Design Review",
+      "group": "Control Method",
+      "title": "Structured review of design intent, interfaces, assumptions, margins, and failure logic",
+      "description": "Good for catching conceptual and interface failures early."
+    },
+    {
+      "id": "simulation-analysis",
+      "label": "Simulation / Analysis",
+      "group": "Control Method",
+      "title": "Model-based analysis of behavior under nominal, worst-case, and fault conditions",
+      "description": "Examples: dynamics simulation, circuit simulation, thermal model, process simulation."
+    },
+    {
+      "id": "tolerance-analysis",
+      "label": "Tolerance Stack-up Analysis",
+      "group": "Control Method",
+      "title": "Checks whether geometric and process variation can break function",
+      "description": "Useful for fit, alignment, leakage, jamming, and out-of-tolerance failures."
+    },
+    {
+      "id": "finite-element-analysis",
+      "label": "Finite Element Analysis",
+      "group": "Control Method",
+      "title": "Analyzes stress, strain, vibration, thermal behavior, or structural margins",
+      "description": "Useful for fracture, fatigue, deformation, and thermal-mechanical problems."
+    },
+    {
+      "id": "fault-tree-analysis",
+      "label": "Fault Tree Analysis",
+      "group": "Control Method",
+      "title": "Top-down logic analysis from undesired event to combinations of causes",
+      "description": "Complements FMEA by asking how causes combine."
+    },
+    {
+      "id": "test-validation",
+      "label": "Test and Validation",
+      "group": "Control Method",
+      "title": "Empirical proof under defined conditions that item or process meets needs",
+      "description": "Must be tied to requirements, failure modes, and acceptance criteria."
+    },
+    {
+      "id": "inspection",
+      "label": "Inspection",
+      "group": "Control Method",
+      "title": "Examination, measurement, or audit to detect defects or nonconformance",
+      "description": "Can be visual, dimensional, electrical, software, document, or process inspection."
+    },
+    {
+      "id": "poka-yoke",
+      "label": "Poka-Yoke / Error Proofing",
+      "group": "Control Method",
+      "title": "Design or process feature that prevents incorrect action or assembly",
+      "description": "Best when humans are involved and mistakes are predictable."
+    },
+    {
+      "id": "redundancy",
+      "label": "Redundancy",
+      "group": "Control Method",
+      "title": "Additional element or path that maintains function after a failure",
+      "description": "Can reduce severity or occurrence of system effect but may add complexity."
+    },
+    {
+      "id": "derating",
+      "label": "Derating",
+      "group": "Control Method",
+      "title": "Operating component below maximum rating to improve reliability",
+      "description": "Common for electrical, thermal, mechanical, and material stress."
+    },
+    {
+      "id": "safety-margin",
+      "label": "Safety Margin",
+      "group": "Control Method",
+      "title": "Difference between expected load/stress and capability/limit",
+      "description": "Useful but should be justified by evidence, not optimism wearing a lab coat."
+    },
+    {
+      "id": "fail-safe-state",
+      "label": "Fail-Safe State",
+      "group": "Control Method",
+      "title": "Defined state that minimizes harm when failure is detected or likely",
+      "description": "Examples: stop motion, open valve, close valve, isolate power, disable output."
+    },
+    {
+      "id": "graceful-degradation",
+      "label": "Graceful Degradation",
+      "group": "Control Method",
+      "title": "Reduced but controlled functionality after partial failure",
+      "description": "Useful for resilience and user trust."
+    },
+    {
+      "id": "alarm-alert",
+      "label": "Alarm / Alert",
+      "group": "Control Method",
+      "title": "Signal that informs user, operator, maintainer, or system about abnormal condition",
+      "description": "Must be timely, understandable, actionable, and not alarm-spam confetti."
+    },
+    {
+      "id": "maintenance-plan",
+      "label": "Maintenance Plan",
+      "group": "Control Method",
+      "title": "Scheduled or condition-based tasks to preserve function",
+      "description": "Includes inspection, replacement, calibration, cleaning, lubrication, and software updates."
+    },
+    {
+      "id": "training-instruction",
+      "label": "Training / Instruction",
+      "group": "Control Method",
+      "title": "Human guidance for correct operation, assembly, service, or response",
+      "description": "Should not be the only control for high-severity risks if design control is possible."
+    },
+    {
+      "id": "change-control",
+      "label": "Change Control",
+      "group": "Control Method",
+      "title": "Process for evaluating and approving changes to design, process, software, supplier, or requirement",
+      "description": "Prevents 'small harmless change' from becoming a dragon with a clipboard."
+    },
+    {
+      "id": "traceability",
+      "label": "Traceability",
+      "group": "Control Method",
+      "title": "Links requirements, functions, design elements, tests, risks, actions, and evidence",
+      "description": "Helps AI explain why a failure matters and what evidence closes it."
+    },
+    {
+      "id": "question-context",
+      "label": "Context Questions",
+      "group": "AI Question Template",
+      "title": "Questions that define scope, environment, lifecycle, assumptions, and stakeholders",
+      "description": "Use before generating failure modes."
+    },
+    {
+      "id": "question-function",
+      "label": "Function Questions",
+      "group": "AI Question Template",
+      "title": "Questions that elicit intended function, measurable outputs, and operating modes",
+      "description": "Use to derive failure modes from what the item must do."
+    },
+    {
+      "id": "question-interface",
+      "label": "Interface Questions",
+      "group": "AI Question Template",
+      "title": "Questions about exchanged energy, material, information, force, heat, fluid, or control",
+      "description": "Use to find failures hidden between parts, teams, or systems."
+    },
+    {
+      "id": "question-failure-mode",
+      "label": "Failure Mode Questions",
+      "group": "AI Question Template",
+      "title": "Questions that transform each function into possible deviations",
+      "description": "Use patterns: no, partial, degraded, intermittent, unintended, wrong, early, late, unstable, out-of-tolerance."
+    },
+    {
+      "id": "question-effect",
+      "label": "Effect Questions",
+      "group": "AI Question Template",
+      "title": "Questions that trace consequences from local effect to end-user or harm",
+      "description": "Use to avoid confusing effects with causes."
+    },
+    {
+      "id": "question-cause",
+      "label": "Cause Questions",
+      "group": "AI Question Template",
+      "title": "Questions that find physical, logical, process, human, environmental, and cyber causes",
+      "description": "Use repeated 'why' carefully until a controllable or testable cause appears."
+    },
+    {
+      "id": "question-control",
+      "label": "Control Questions",
+      "group": "AI Question Template",
+      "title": "Questions that identify prevention, detection, diagnostic, monitoring, and response controls",
+      "description": "Use to check whether current controls actually target the cause or failure mode."
+    },
+    {
+      "id": "question-evidence",
+      "label": "Evidence Questions",
+      "group": "AI Question Template",
+      "title": "Questions about data, tests, simulation, inspections, field history, and confidence",
+      "description": "Use to separate engineering knowledge from confident guessing."
+    },
+    {
+      "id": "question-counterfactual",
+      "label": "Counterfactual Questions",
+      "group": "AI Question Template",
+      "title": "Questions that ask what must be true for the failure not to occur",
+      "description": "Useful for finding missing controls and assumptions."
+    },
+    {
+      "id": "question-cross-domain",
+      "label": "Cross-Domain Questions",
+      "group": "AI Question Template",
+      "title": "Questions that force review across mechanical, electrical, software, human, process, cyber, and environmental domains",
+      "description": "Useful because failures love wearing disguises."
+    },
+    {
+      "id": "question-missing-info",
+      "label": "Missing Information Questions",
+      "group": "AI Question Template",
+      "title": "Questions that identify unknowns blocking reliable analysis",
+      "description": "Use to ask for drawings, requirements, schematics, process maps, data, supplier specs, and operating context."
+    },
+    {
+      "id": "question-prioritization",
+      "label": "Prioritization Questions",
+      "group": "AI Question Template",
+      "title": "Questions that rank risks and actions",
+      "description": "Use to decide what to address first based on severity, occurrence, detection, criticality, uncertainty, and stakeholder impact."
+    }
+  ],
+  "edges": [
+    {
+      "from": "iec-60812-2018",
+      "to": "fmea-ontology",
+      "label": "informs"
+    },
+    {
+      "from": "aiag-vda-fmea-handbook",
+      "to": "fmea-ontology",
+      "label": "informs"
+    },
+    {
+      "from": "sae-j1739",
+      "to": "fmea-ontology",
+      "label": "informs"
+    },
+    {
+      "from": "iso-14971-risk-thinking",
+      "to": "fmea-ontology",
+      "label": "informs"
+    },
+    {
+      "from": "fmea-ontology",
+      "to": "ai-fmea-facilitator",
+      "label": "enables"
+    },
+    {
+      "from": "ai-fmea-facilitator",
+      "to": "fmea-study",
+      "label": "guides"
+    },
+    {
+      "from": "fmea-study",
+      "to": "fmea-record",
+      "label": "contains"
+    },
+    {
+      "from": "planning-preparation",
+      "to": "structure-analysis",
+      "label": "precedes"
+    },
+    {
+      "from": "structure-analysis",
+      "to": "function-analysis",
+      "label": "precedes"
+    },
+    {
+      "from": "function-analysis",
+      "to": "failure-analysis",
+      "label": "precedes"
+    },
+    {
+      "from": "failure-analysis",
+      "to": "risk-analysis",
+      "label": "precedes"
+    },
+    {
+      "from": "risk-analysis",
+      "to": "optimization",
+      "label": "precedes"
+    },
+    {
+      "from": "optimization",
+      "to": "results-documentation",
+      "label": "precedes"
+    },
+    {
+      "from": "aiag-vda-fmea-handbook",
+      "to": "planning-preparation",
+      "label": "uses step"
+    },
+    {
+      "from": "aiag-vda-fmea-handbook",
+      "to": "structure-analysis",
+      "label": "uses step"
+    },
+    {
+      "from": "aiag-vda-fmea-handbook",
+      "to": "function-analysis",
+      "label": "uses step"
+    },
+    {
+      "from": "aiag-vda-fmea-handbook",
+      "to": "failure-analysis",
+      "label": "uses step"
+    },
+    {
+      "from": "aiag-vda-fmea-handbook",
+      "to": "risk-analysis",
+      "label": "uses step"
+    },
+    {
+      "from": "aiag-vda-fmea-handbook",
+      "to": "optimization",
+      "label": "uses step"
+    },
+    {
+      "from": "aiag-vda-fmea-handbook",
+      "to": "results-documentation",
+      "label": "uses step"
+    },
+    {
+      "from": "planning-preparation",
+      "to": "scope",
+      "label": "defines"
+    },
+    {
+      "from": "planning-preparation",
+      "to": "boundary",
+      "label": "defines"
+    },
+    {
+      "from": "planning-preparation",
+      "to": "stakeholder",
+      "label": "defines"
+    },
+    {
+      "from": "planning-preparation",
+      "to": "lifecycle-phase",
+      "label": "defines"
+    },
+    {
+      "from": "planning-preparation",
+      "to": "assumption",
+      "label": "defines"
+    },
+    {
+      "from": "planning-preparation",
+      "to": "risk-acceptance-criteria",
+      "label": "defines"
+    },
+    {
+      "from": "structure-analysis",
+      "to": "item",
+      "label": "identifies"
+    },
+    {
+      "from": "structure-analysis",
+      "to": "system",
+      "label": "identifies"
+    },
+    {
+      "from": "structure-analysis",
+      "to": "subsystem",
+      "label": "identifies"
+    },
+    {
+      "from": "structure-analysis",
+      "to": "component",
+      "label": "identifies"
+    },
+    {
+      "from": "structure-analysis",
+      "to": "interface",
+      "label": "identifies"
+    },
+    {
+      "from": "structure-analysis",
+      "to": "environment",
+      "label": "identifies"
+    },
+    {
+      "from": "function-analysis",
+      "to": "requirement",
+      "label": "identifies"
+    },
+    {
+      "from": "function-analysis",
+      "to": "function",
+      "label": "identifies"
+    },
+    {
+      "from": "function-analysis",
+      "to": "primary-function",
+      "label": "identifies"
+    },
+    {
+      "from": "function-analysis",
+      "to": "secondary-function",
+      "label": "identifies"
+    },
+    {
+      "from": "function-analysis",
+      "to": "safety-function",
+      "label": "identifies"
+    },
+    {
+      "from": "function-analysis",
+      "to": "diagnostic-function",
+      "label": "identifies"
+    },
+    {
+      "from": "function-analysis",
+      "to": "performance-parameter",
+      "label": "identifies"
+    },
+    {
+      "from": "function-analysis",
+      "to": "functional-chain",
+      "label": "identifies"
+    },
+    {
+      "from": "function-analysis",
+      "to": "input",
+      "label": "identifies"
+    },
+    {
+      "from": "function-analysis",
+      "to": "output",
+      "label": "identifies"
+    },
+    {
+      "from": "function-analysis",
+      "to": "constraint",
+      "label": "identifies"
+    },
+    {
+      "from": "function-analysis",
+      "to": "operating-mode",
+      "label": "identifies"
+    },
+    {
+      "from": "function-analysis",
+      "to": "use-scenario",
+      "label": "identifies"
+    },
+    {
+      "from": "failure-analysis",
+      "to": "failure-mode",
+      "label": "identifies"
+    },
+    {
+      "from": "failure-analysis",
+      "to": "failure-effect",
+      "label": "identifies"
+    },
+    {
+      "from": "failure-analysis",
+      "to": "failure-cause",
+      "label": "identifies"
+    },
+    {
+      "from": "failure-analysis",
+      "to": "failure-mechanism",
+      "label": "identifies"
+    },
+    {
+      "from": "failure-analysis",
+      "to": "hazard",
+      "label": "identifies"
+    },
+    {
+      "from": "failure-analysis",
+      "to": "hazardous-situation",
+      "label": "identifies"
+    },
+    {
+      "from": "failure-analysis",
+      "to": "harm",
+      "label": "identifies"
+    },
+    {
+      "from": "risk-analysis",
+      "to": "severity",
+      "label": "evaluates"
+    },
+    {
+      "from": "risk-analysis",
+      "to": "occurrence",
+      "label": "evaluates"
+    },
+    {
+      "from": "risk-analysis",
+      "to": "detection-rating",
+      "label": "evaluates"
+    },
+    {
+      "from": "risk-analysis",
+      "to": "rpn",
+      "label": "evaluates"
+    },
+    {
+      "from": "risk-analysis",
+      "to": "action-priority",
+      "label": "evaluates"
+    },
+    {
+      "from": "risk-analysis",
+      "to": "criticality",
+      "label": "evaluates"
+    },
+    {
+      "from": "risk-analysis",
+      "to": "risk",
+      "label": "evaluates"
+    },
+    {
+      "from": "optimization",
+      "to": "recommended-action",
+      "label": "improves"
+    },
+    {
+      "from": "optimization",
+      "to": "prevention-control",
+      "label": "improves"
+    },
+    {
+      "from": "optimization",
+      "to": "detection-control",
+      "label": "improves"
+    },
+    {
+      "from": "optimization",
+      "to": "diagnostic-monitoring",
+      "label": "improves"
+    },
+    {
+      "from": "optimization",
+      "to": "residual-risk",
+      "label": "improves"
+    },
+    {
+      "from": "results-documentation",
+      "to": "verification-evidence",
+      "label": "captures"
+    },
+    {
+      "from": "results-documentation",
+      "to": "lessons-learned",
+      "label": "captures"
+    },
+    {
+      "from": "results-documentation",
+      "to": "traceability",
+      "label": "captures"
+    },
+    {
+      "from": "scope",
+      "to": "boundary",
+      "label": "sets"
+    },
+    {
+      "from": "scope",
+      "to": "lifecycle-phase",
+      "label": "applies to"
+    },
+    {
+      "from": "scope",
+      "to": "operating-mode",
+      "label": "applies to"
+    },
+    {
+      "from": "scope",
+      "to": "environment",
+      "label": "includes"
+    },
+    {
+      "from": "system",
+      "to": "subsystem",
+      "label": "contains"
+    },
+    {
+      "from": "subsystem",
+      "to": "component",
+      "label": "contains"
+    },
+    {
+      "from": "component",
+      "to": "interface",
+      "label": "has"
+    },
+    {
+      "from": "system",
+      "to": "interface",
+      "label": "has"
+    },
+    {
+      "from": "interface",
+      "to": "input",
+      "label": "transfers"
+    },
+    {
+      "from": "interface",
+      "to": "output",
+      "label": "transfers"
+    },
+    {
+      "from": "environment",
+      "to": "operating-mode",
+      "label": "influences"
+    },
+    {
+      "from": "use-scenario",
+      "to": "operating-mode",
+      "label": "contains"
+    },
+    {
+      "from": "stakeholder",
+      "to": "requirement",
+      "label": "states or owns"
+    },
+    {
+      "from": "requirement",
+      "to": "function",
+      "label": "constrains"
+    },
+    {
+      "from": "constraint",
+      "to": "function",
+      "label": "limits"
+    },
+    {
+      "from": "item",
+      "to": "function",
+      "label": "performs"
+    },
+    {
+      "from": "component",
+      "to": "function",
+      "label": "performs"
+    },
+    {
+      "from": "system",
+      "to": "primary-function",
+      "label": "performs"
+    },
+    {
+      "from": "component",
+      "to": "secondary-function",
+      "label": "performs"
+    },
+    {
+      "from": "safety-function",
+      "to": "hazard",
+      "label": "controls"
+    },
+    {
+      "from": "diagnostic-function",
+      "to": "detection-control",
+      "label": "implements"
+    },
+    {
+      "from": "function",
+      "to": "performance-parameter",
+      "label": "is measured by"
+    },
+    {
+      "from": "functional-chain",
+      "to": "function",
+      "label": "orders"
+    },
+    {
+      "from": "input",
+      "to": "function",
+      "label": "feeds"
+    },
+    {
+      "from": "function",
+      "to": "output",
+      "label": "produces"
+    },
+    {
+      "from": "operating-mode",
+      "to": "function",
+      "label": "conditions"
+    },
+    {
+      "from": "environment",
+      "to": "function",
+      "label": "conditions"
+    },
+    {
+      "from": "function",
+      "to": "failure-mode",
+      "label": "can deviate as",
+      "question_prompt": "For this function, what does no/partial/degraded/intermittent/unintended/wrong/early/late/unstable/out-of-tolerance look like?"
+    },
+    {
+      "from": "failure-mode",
+      "to": "failure-effect",
+      "label": "causes"
+    },
+    {
+      "from": "failure-effect",
+      "to": "local-effect",
+      "label": "can be classified as"
+    },
+    {
+      "from": "failure-effect",
+      "to": "next-higher-level-effect",
+      "label": "can be classified as"
+    },
+    {
+      "from": "failure-effect",
+      "to": "end-user-effect",
+      "label": "can be classified as"
+    },
+    {
+      "from": "local-effect",
+      "to": "next-higher-level-effect",
+      "label": "propagates to"
+    },
+    {
+      "from": "next-higher-level-effect",
+      "to": "end-user-effect",
+      "label": "propagates to"
+    },
+    {
+      "from": "failure-cause",
+      "to": "failure-mode",
+      "label": "causes"
+    },
+    {
+      "from": "root-cause",
+      "to": "failure-cause",
+      "label": "explains"
+    },
+    {
+      "from": "failure-mechanism",
+      "to": "failure-cause",
+      "label": "mechanistically explains"
+    },
+    {
+      "from": "hazard",
+      "to": "hazardous-situation",
+      "label": "can lead to"
+    },
+    {
+      "from": "hazardous-situation",
+      "to": "harm",
+      "label": "can result in"
+    },
+    {
+      "from": "failure-effect",
+      "to": "hazard",
+      "label": "may create"
+    },
+    {
+      "from": "harm",
+      "to": "severity",
+      "label": "drives"
+    },
+    {
+      "from": "failure-cause",
+      "to": "occurrence",
+      "label": "drives"
+    },
+    {
+      "from": "current-control",
+      "to": "detection-rating",
+      "label": "influences"
+    },
+    {
+      "from": "prevention-control",
+      "to": "occurrence",
+      "label": "reduces"
+    },
+    {
+      "from": "detection-control",
+      "to": "detection-rating",
+      "label": "improves"
+    },
+    {
+      "from": "diagnostic-monitoring",
+      "to": "detection-rating",
+      "label": "improves"
+    },
+    {
+      "from": "severity",
+      "to": "risk",
+      "label": "contributes to"
+    },
+    {
+      "from": "occurrence",
+      "to": "risk",
+      "label": "contributes to"
+    },
+    {
+      "from": "detection-rating",
+      "to": "risk",
+      "label": "modifies prioritization of"
+    },
+    {
+      "from": "severity",
+      "to": "rpn",
+      "label": "multiplies into"
+    },
+    {
+      "from": "occurrence",
+      "to": "rpn",
+      "label": "multiplies into"
+    },
+    {
+      "from": "detection-rating",
+      "to": "rpn",
+      "label": "multiplies into"
+    },
+    {
+      "from": "severity",
+      "to": "action-priority",
+      "label": "contributes to"
+    },
+    {
+      "from": "occurrence",
+      "to": "action-priority",
+      "label": "contributes to"
+    },
+    {
+      "from": "detection-rating",
+      "to": "action-priority",
+      "label": "contributes to"
+    },
+    {
+      "from": "criticality",
+      "to": "risk",
+      "label": "prioritizes"
+    },
+    {
+      "from": "risk-acceptance-criteria",
+      "to": "residual-risk",
+      "label": "judges"
+    },
+    {
+      "from": "recommended-action",
+      "to": "failure-cause",
+      "label": "should target"
+    },
+    {
+      "from": "recommended-action",
+      "to": "failure-mode",
+      "label": "may target"
+    },
+    {
+      "from": "recommended-action",
+      "to": "failure-effect",
+      "label": "may reduce severity of"
+    },
+    {
+      "from": "recommended-action",
+      "to": "action-owner",
+      "label": "assigned to"
+    },
+    {
+      "from": "recommended-action",
+      "to": "action-deadline",
+      "label": "has"
+    },
+    {
+      "from": "recommended-action",
+      "to": "verification-evidence",
+      "label": "is verified by"
+    },
+    {
+      "from": "verification-evidence",
+      "to": "residual-risk",
+      "label": "supports reassessment of"
+    },
+    {
+      "from": "residual-risk",
+      "to": "results-documentation",
+      "label": "is recorded in"
+    },
+    {
+      "from": "lessons-learned",
+      "to": "fmea-study",
+      "label": "improves future"
+    },
+    {
+      "from": "iec-60812-2018",
+      "to": "fmeca",
+      "label": "covers"
+    },
+    {
+      "from": "sae-j1739",
+      "to": "dfmea",
+      "label": "covers"
+    },
+    {
+      "from": "sae-j1739",
+      "to": "pfmea",
+      "label": "covers"
+    },
+    {
+      "from": "sae-j1739",
+      "to": "fmea-msr",
+      "label": "covers"
+    },
+    {
+      "from": "dfmea",
+      "to": "design-weakness",
+      "label": "focuses on"
+    },
+    {
+      "from": "pfmea",
+      "to": "process-failure",
+      "label": "focuses on"
+    },
+    {
+      "from": "fmea-msr",
+      "to": "diagnostic-monitoring",
+      "label": "focuses on"
+    },
+    {
+      "from": "system-fmea",
+      "to": "interface-failure",
+      "label": "emphasizes"
+    },
+    {
+      "from": "software-fmea",
+      "to": "software-failure",
+      "label": "focuses on"
+    },
+    {
+      "from": "hardware-fmea",
+      "to": "electrical-failure",
+      "label": "includes"
+    },
+    {
+      "from": "hardware-fmea",
+      "to": "mechanical-failure",
+      "label": "includes"
+    },
+    {
+      "from": "hardware-fmea",
+      "to": "electronic-failure",
+      "label": "includes"
+    },
+    {
+      "from": "fmeca",
+      "to": "criticality",
+      "label": "adds"
+    },
+    {
+      "from": "fmeda",
+      "to": "diagnostic-monitoring",
+      "label": "adds"
+    },
+    {
+      "from": "human-factors-fmea",
+      "to": "human-error",
+      "label": "focuses on"
+    },
+    {
+      "from": "iso-14971-risk-thinking",
+      "to": "hazard",
+      "label": "emphasizes"
+    },
+    {
+      "from": "iso-14971-risk-thinking",
+      "to": "hazardous-situation",
+      "label": "emphasizes"
+    },
+    {
+      "from": "iso-14971-risk-thinking",
+      "to": "harm",
+      "label": "emphasizes"
+    },
+    {
+      "from": "iso-14971-risk-thinking",
+      "to": "risk",
+      "label": "emphasizes"
+    },
+    {
+      "from": "failure-mode",
+      "to": "mechanical-failure",
+      "label": "can be classified as"
+    },
+    {
+      "from": "failure-mode",
+      "to": "electrical-failure",
+      "label": "can be classified as"
+    },
+    {
+      "from": "failure-mode",
+      "to": "electronic-failure",
+      "label": "can be classified as"
+    },
+    {
+      "from": "failure-mode",
+      "to": "software-failure",
+      "label": "can be classified as"
+    },
+    {
+      "from": "failure-mode",
+      "to": "control-failure",
+      "label": "can be classified as"
+    },
+    {
+      "from": "failure-mode",
+      "to": "thermal-failure",
+      "label": "can be classified as"
+    },
+    {
+      "from": "failure-mode",
+      "to": "fluidic-failure",
+      "label": "can be classified as"
+    },
+    {
+      "from": "failure-mode",
+      "to": "chemical-failure",
+      "label": "can be classified as"
+    },
+    {
+      "from": "failure-mode",
+      "to": "material-failure",
+      "label": "can be classified as"
+    },
+    {
+      "from": "failure-mode",
+      "to": "human-error",
+      "label": "can be classified as"
+    },
+    {
+      "from": "failure-mode",
+      "to": "process-failure",
+      "label": "can be classified as"
+    },
+    {
+      "from": "failure-mode",
+      "to": "interface-failure",
+      "label": "can be classified as"
+    },
+    {
+      "from": "failure-mode",
+      "to": "environmental-failure",
+      "label": "can be classified as"
+    },
+    {
+      "from": "failure-mode",
+      "to": "cybersecurity-failure",
+      "label": "can be classified as"
+    },
+    {
+      "from": "failure-mode",
+      "to": "data-ai-failure",
+      "label": "can be classified as"
+    },
+    {
+      "from": "failure-mode",
+      "to": "maintenance-failure",
+      "label": "can be classified as"
+    },
+    {
+      "from": "failure-mode",
+      "to": "supply-chain-failure",
+      "label": "can be classified as"
+    },
+    {
+      "from": "mechanical-failure",
+      "to": "fracture",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "mechanical-failure",
+      "to": "fatigue",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "mechanical-failure",
+      "to": "wear",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "mechanical-failure",
+      "to": "loosening",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "mechanical-failure",
+      "to": "jamming",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "mechanical-failure",
+      "to": "out-of-tolerance",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "mechanical-failure",
+      "to": "blockage",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "mechanical-failure",
+      "to": "leakage",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "electrical-failure",
+      "to": "short-circuit",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "electrical-failure",
+      "to": "open-circuit",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "electrical-failure",
+      "to": "insulation-breakdown",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "electrical-failure",
+      "to": "power-loss",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "electrical-failure",
+      "to": "overheating",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "electrical-failure",
+      "to": "leakage",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "electronic-failure",
+      "to": "emi-emc-susceptibility",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "electronic-failure",
+      "to": "sensor-drift",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "electronic-failure",
+      "to": "overheating",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "electronic-failure",
+      "to": "short-circuit",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "electronic-failure",
+      "to": "open-circuit",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "software-failure",
+      "to": "software-crash",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "software-failure",
+      "to": "timing-race-condition",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "software-failure",
+      "to": "data-corruption",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "software-failure",
+      "to": "communication-loss",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "software-failure",
+      "to": "wrong-function",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "software-failure",
+      "to": "late-function",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "control-failure",
+      "to": "sensor-drift",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "control-failure",
+      "to": "actuator-stuck",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "control-failure",
+      "to": "unstable-function",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "control-failure",
+      "to": "late-function",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "control-failure",
+      "to": "wrong-function",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "thermal-failure",
+      "to": "overheating",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "thermal-failure",
+      "to": "degraded-function",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "thermal-failure",
+      "to": "out-of-tolerance",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "fluidic-failure",
+      "to": "leakage",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "fluidic-failure",
+      "to": "blockage",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "fluidic-failure",
+      "to": "actuator-stuck",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "fluidic-failure",
+      "to": "partial-function",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "chemical-failure",
+      "to": "corrosion",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "chemical-failure",
+      "to": "contamination",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "chemical-failure",
+      "to": "degraded-function",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "material-failure",
+      "to": "fracture",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "material-failure",
+      "to": "fatigue",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "material-failure",
+      "to": "wear",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "material-failure",
+      "to": "corrosion",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "material-failure",
+      "to": "aging-degradation",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "human-error",
+      "to": "user-misuse",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "human-error",
+      "to": "assembly-error",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "human-error",
+      "to": "inadequate-maintenance",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "human-error",
+      "to": "wrong-function",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "human-error",
+      "to": "late-function",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "process-failure",
+      "to": "manufacturing-defect",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "process-failure",
+      "to": "assembly-error",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "process-failure",
+      "to": "contamination",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "process-failure",
+      "to": "out-of-tolerance",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "process-failure",
+      "to": "supplier-variation",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "interface-failure",
+      "to": "communication-loss",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "interface-failure",
+      "to": "leakage",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "interface-failure",
+      "to": "blockage",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "interface-failure",
+      "to": "wrong-function",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "interface-failure",
+      "to": "late-function",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "interface-failure",
+      "to": "emi-emc-susceptibility",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "environmental-failure",
+      "to": "overheating",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "environmental-failure",
+      "to": "corrosion",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "environmental-failure",
+      "to": "emi-emc-susceptibility",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "environmental-failure",
+      "to": "contamination",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "environmental-failure",
+      "to": "external-event",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "cybersecurity-failure",
+      "to": "cyberattack",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "cybersecurity-failure",
+      "to": "communication-loss",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "cybersecurity-failure",
+      "to": "data-corruption",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "cybersecurity-failure",
+      "to": "wrong-function",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "data-ai-failure",
+      "to": "model-misclassification",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "data-ai-failure",
+      "to": "data-corruption",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "data-ai-failure",
+      "to": "wrong-function",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "data-ai-failure",
+      "to": "degraded-function",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "maintenance-failure",
+      "to": "inadequate-maintenance",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "maintenance-failure",
+      "to": "wear",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "maintenance-failure",
+      "to": "corrosion",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "maintenance-failure",
+      "to": "sensor-drift",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "maintenance-failure",
+      "to": "aging-degradation",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "supply-chain-failure",
+      "to": "supplier-variation",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "supply-chain-failure",
+      "to": "manufacturing-defect",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "supply-chain-failure",
+      "to": "material-failure",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "supply-chain-failure",
+      "to": "wrong-function",
+      "label": "has typical mode or cause"
+    },
+    {
+      "from": "function",
+      "to": "loss-of-function",
+      "label": "can fail by"
+    },
+    {
+      "from": "function",
+      "to": "partial-function",
+      "label": "can fail by"
+    },
+    {
+      "from": "function",
+      "to": "degraded-function",
+      "label": "can fail by"
+    },
+    {
+      "from": "function",
+      "to": "intermittent-function",
+      "label": "can fail by"
+    },
+    {
+      "from": "function",
+      "to": "unintended-function",
+      "label": "can fail by"
+    },
+    {
+      "from": "function",
+      "to": "wrong-function",
+      "label": "can fail by"
+    },
+    {
+      "from": "function",
+      "to": "early-function",
+      "label": "can fail by"
+    },
+    {
+      "from": "function",
+      "to": "late-function",
+      "label": "can fail by"
+    },
+    {
+      "from": "function",
+      "to": "unstable-function",
+      "label": "can fail by"
+    },
+    {
+      "from": "function",
+      "to": "out-of-tolerance",
+      "label": "can fail by"
+    },
+    {
+      "from": "input",
+      "to": "leakage",
+      "label": "can be affected by"
+    },
+    {
+      "from": "output",
+      "to": "leakage",
+      "label": "can be affected by"
+    },
+    {
+      "from": "input",
+      "to": "blockage",
+      "label": "can be affected by"
+    },
+    {
+      "from": "output",
+      "to": "blockage",
+      "label": "can be affected by"
+    },
+    {
+      "from": "requirement-ambiguity",
+      "to": "failure-cause",
+      "label": "is a category of"
+    },
+    {
+      "from": "design-weakness",
+      "to": "failure-cause",
+      "label": "is a category of"
+    },
+    {
+      "from": "manufacturing-defect",
+      "to": "failure-cause",
+      "label": "is a category of"
+    },
+    {
+      "from": "assembly-error",
+      "to": "failure-cause",
+      "label": "is a category of"
+    },
+    {
+      "from": "contamination",
+      "to": "failure-cause",
+      "label": "is a category of"
+    },
+    {
+      "from": "overload",
+      "to": "failure-cause",
+      "label": "is a category of"
+    },
+    {
+      "from": "aging-degradation",
+      "to": "failure-cause",
+      "label": "is a category of"
+    },
+    {
+      "from": "supplier-variation",
+      "to": "failure-cause",
+      "label": "is a category of"
+    },
+    {
+      "from": "user-misuse",
+      "to": "failure-cause",
+      "label": "is a category of"
+    },
+    {
+      "from": "inadequate-maintenance",
+      "to": "failure-cause",
+      "label": "is a category of"
+    },
+    {
+      "from": "external-event",
+      "to": "failure-cause",
+      "label": "is a category of"
+    },
+    {
+      "from": "cyberattack",
+      "to": "failure-cause",
+      "label": "is a category of"
+    },
+    {
+      "from": "software-defect",
+      "to": "failure-cause",
+      "label": "is a category of"
+    },
+    {
+      "from": "requirement-ambiguity",
+      "to": "wrong-function",
+      "label": "can cause"
+    },
+    {
+      "from": "design-weakness",
+      "to": "loss-of-function",
+      "label": "can cause"
+    },
+    {
+      "from": "manufacturing-defect",
+      "to": "out-of-tolerance",
+      "label": "can cause"
+    },
+    {
+      "from": "assembly-error",
+      "to": "loosening",
+      "label": "can cause"
+    },
+    {
+      "from": "contamination",
+      "to": "blockage",
+      "label": "can cause"
+    },
+    {
+      "from": "overload",
+      "to": "fracture",
+      "label": "can cause"
+    },
+    {
+      "from": "aging-degradation",
+      "to": "degraded-function",
+      "label": "can cause"
+    },
+    {
+      "from": "supplier-variation",
+      "to": "material-failure",
+      "label": "can cause"
+    },
+    {
+      "from": "user-misuse",
+      "to": "overload",
+      "label": "can cause"
+    },
+    {
+      "from": "inadequate-maintenance",
+      "to": "wear",
+      "label": "can cause"
+    },
+    {
+      "from": "external-event",
+      "to": "environmental-failure",
+      "label": "can trigger"
+    },
+    {
+      "from": "cyberattack",
+      "to": "cybersecurity-failure",
+      "label": "can cause"
+    },
+    {
+      "from": "software-defect",
+      "to": "software-crash",
+      "label": "can cause"
+    },
+    {
+      "from": "design-review",
+      "to": "current-control",
+      "label": "can be used as"
+    },
+    {
+      "from": "simulation-analysis",
+      "to": "current-control",
+      "label": "can be used as"
+    },
+    {
+      "from": "tolerance-analysis",
+      "to": "current-control",
+      "label": "can be used as"
+    },
+    {
+      "from": "finite-element-analysis",
+      "to": "current-control",
+      "label": "can be used as"
+    },
+    {
+      "from": "fault-tree-analysis",
+      "to": "current-control",
+      "label": "can be used as"
+    },
+    {
+      "from": "test-validation",
+      "to": "current-control",
+      "label": "can be used as"
+    },
+    {
+      "from": "inspection",
+      "to": "current-control",
+      "label": "can be used as"
+    },
+    {
+      "from": "poka-yoke",
+      "to": "current-control",
+      "label": "can be used as"
+    },
+    {
+      "from": "redundancy",
+      "to": "current-control",
+      "label": "can be used as"
+    },
+    {
+      "from": "derating",
+      "to": "current-control",
+      "label": "can be used as"
+    },
+    {
+      "from": "safety-margin",
+      "to": "current-control",
+      "label": "can be used as"
+    },
+    {
+      "from": "fail-safe-state",
+      "to": "current-control",
+      "label": "can be used as"
+    },
+    {
+      "from": "graceful-degradation",
+      "to": "current-control",
+      "label": "can be used as"
+    },
+    {
+      "from": "alarm-alert",
+      "to": "current-control",
+      "label": "can be used as"
+    },
+    {
+      "from": "maintenance-plan",
+      "to": "current-control",
+      "label": "can be used as"
+    },
+    {
+      "from": "training-instruction",
+      "to": "current-control",
+      "label": "can be used as"
+    },
+    {
+      "from": "change-control",
+      "to": "current-control",
+      "label": "can be used as"
+    },
+    {
+      "from": "traceability",
+      "to": "current-control",
+      "label": "can be used as"
+    },
+    {
+      "from": "design-review",
+      "to": "requirement-ambiguity",
+      "label": "can detect"
+    },
+    {
+      "from": "simulation-analysis",
+      "to": "control-failure",
+      "label": "can evaluate"
+    },
+    {
+      "from": "tolerance-analysis",
+      "to": "jamming",
+      "label": "can evaluate"
+    },
+    {
+      "from": "finite-element-analysis",
+      "to": "fracture",
+      "label": "can evaluate"
+    },
+    {
+      "from": "finite-element-analysis",
+      "to": "fatigue",
+      "label": "can evaluate"
+    },
+    {
+      "from": "fault-tree-analysis",
+      "to": "hazard",
+      "label": "can analyze top event for"
+    },
+    {
+      "from": "test-validation",
+      "to": "verification-evidence",
+      "label": "produces"
+    },
+    {
+      "from": "inspection",
+      "to": "manufacturing-defect",
+      "label": "can detect"
+    },
+    {
+      "from": "poka-yoke",
+      "to": "assembly-error",
+      "label": "can prevent"
+    },
+    {
+      "from": "redundancy",
+      "to": "loss-of-function",
+      "label": "can mitigate"
+    },
+    {
+      "from": "derating",
+      "to": "overheating",
+      "label": "can prevent"
+    },
+    {
+      "from": "safety-margin",
+      "to": "overload",
+      "label": "can mitigate"
+    },
+    {
+      "from": "fail-safe-state",
+      "to": "harm",
+      "label": "can reduce"
+    },
+    {
+      "from": "graceful-degradation",
+      "to": "end-user-effect",
+      "label": "can reduce"
+    },
+    {
+      "from": "alarm-alert",
+      "to": "hazardous-situation",
+      "label": "can warn about"
+    },
+    {
+      "from": "maintenance-plan",
+      "to": "aging-degradation",
+      "label": "can manage"
+    },
+    {
+      "from": "training-instruction",
+      "to": "user-misuse",
+      "label": "can reduce"
+    },
+    {
+      "from": "change-control",
+      "to": "supplier-variation",
+      "label": "can control"
+    },
+    {
+      "from": "traceability",
+      "to": "requirement",
+      "label": "links to"
+    },
+    {
+      "from": "traceability",
+      "to": "verification-evidence",
+      "label": "links to"
+    },
+    {
+      "from": "traceability",
+      "to": "recommended-action",
+      "label": "links to"
+    },
+    {
+      "from": "ai-fmea-facilitator",
+      "to": "question-context",
+      "label": "asks"
+    },
+    {
+      "from": "ai-fmea-facilitator",
+      "to": "question-function",
+      "label": "asks"
+    },
+    {
+      "from": "ai-fmea-facilitator",
+      "to": "question-interface",
+      "label": "asks"
+    },
+    {
+      "from": "ai-fmea-facilitator",
+      "to": "question-failure-mode",
+      "label": "asks"
+    },
+    {
+      "from": "ai-fmea-facilitator",
+      "to": "question-effect",
+      "label": "asks"
+    },
+    {
+      "from": "ai-fmea-facilitator",
+      "to": "question-cause",
+      "label": "asks"
+    },
+    {
+      "from": "ai-fmea-facilitator",
+      "to": "question-control",
+      "label": "asks"
+    },
+    {
+      "from": "ai-fmea-facilitator",
+      "to": "question-evidence",
+      "label": "asks"
+    },
+    {
+      "from": "ai-fmea-facilitator",
+      "to": "question-counterfactual",
+      "label": "asks"
+    },
+    {
+      "from": "ai-fmea-facilitator",
+      "to": "question-cross-domain",
+      "label": "asks"
+    },
+    {
+      "from": "ai-fmea-facilitator",
+      "to": "question-missing-info",
+      "label": "asks"
+    },
+    {
+      "from": "ai-fmea-facilitator",
+      "to": "question-prioritization",
+      "label": "asks"
+    },
+    {
+      "from": "question-context",
+      "to": "scope",
+      "label": "clarifies",
+      "question_prompt": "What exactly is the item, boundary, lifecycle phase, use scenario, and environment?"
+    },
+    {
+      "from": "question-function",
+      "to": "function",
+      "label": "elicits",
+      "question_prompt": "What must the item do, for whom, under which mode, and how is success measured?"
+    },
+    {
+      "from": "question-interface",
+      "to": "interface",
+      "label": "probes",
+      "question_prompt": "What crosses the interface, in which direction, under which timing, tolerance, protocol, or compatibility assumption?"
+    },
+    {
+      "from": "question-failure-mode",
+      "to": "failure-mode",
+      "label": "generates",
+      "question_prompt": "For each function, how can it be absent, partial, degraded, intermittent, unintended, wrong, early, late, unstable, or out-of-tolerance?"
+    },
+    {
+      "from": "question-effect",
+      "to": "failure-effect",
+      "label": "traces",
+      "question_prompt": "What happens locally, downstream, at system level, to the user, and in the worst credible case?"
+    },
+    {
+      "from": "question-cause",
+      "to": "failure-cause",
+      "label": "elicits",
+      "question_prompt": "Why would this failure mode occur mechanically, electrically, electronically, in software, by process, by user interaction, by environment, by supplier, or by cyber event?"
+    },
+    {
+      "from": "question-control",
+      "to": "current-control",
+      "label": "checks",
+      "question_prompt": "What currently prevents the cause, detects the failure, alerts the user, isolates the fault, or moves the system to a safe state?"
+    },
+    {
+      "from": "question-evidence",
+      "to": "verification-evidence",
+      "label": "requests",
+      "question_prompt": "What data, test, simulation, inspection, field history, or expert source supports the rating and control claim?"
+    },
+    {
+      "from": "question-counterfactual",
+      "to": "prevention-control",
+      "label": "suggests",
+      "question_prompt": "What design, process, interface, monitoring, or training change would make this failure impossible or less likely?"
+    },
+    {
+      "from": "question-cross-domain",
+      "to": "failure-mode",
+      "label": "broadens",
+      "question_prompt": "Could this same effect be caused by mechanical, electrical, software, human, process, environmental, cyber, or data/AI failure?"
+    },
+    {
+      "from": "question-missing-info",
+      "to": "assumption",
+      "label": "surfaces",
+      "question_prompt": "What are we assuming because drawings, requirements, schematics, logs, test data, supplier specs, or process maps are missing?"
+    },
+    {
+      "from": "question-prioritization",
+      "to": "recommended-action",
+      "label": "prioritizes",
+      "question_prompt": "Which action is justified first given severity, occurrence, detection, uncertainty, stakeholder harm, and feasibility?"
+    }
+  ]
+}
