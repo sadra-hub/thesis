@@ -297,6 +297,7 @@
     const BRANCH      = 'master';
     const MODEL_MANIFEST = 'models/manifest.json';
     const ONTOLOGY_MANIFEST = 'ontologies/manifest.json';
+    const SESSION_ID_KEY = 'thesis-demo-session-id';
     let modelFiles = [];
     let currentModelPreviewCleanup = null;
 
@@ -360,6 +361,14 @@
     }
     function repoAssetURL(path){
       return encodeURI(path);
+    }
+    function getSessionId(){
+      let sessionId = sessionStorage.getItem(SESSION_ID_KEY);
+      if (!sessionId){
+        sessionId = crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+        sessionStorage.setItem(SESSION_ID_KEY, sessionId);
+      }
+      return sessionId;
     }
     async function fetchRepoAsset(path, options){
       const localRes = await fetch(repoAssetURL(path), options);
@@ -927,6 +936,7 @@
     function getReportSettings(){
       const reportMode = document.getElementById('settingsReportMode');
       return {
+        sessionId: getSessionId(),
         model: document.getElementById('settingsModel').value,
         ontology: document.getElementById('settingsOntology').value,
         reportMode: reportMode.value,
