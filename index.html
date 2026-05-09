@@ -879,7 +879,9 @@
       const msg = chatInput.value.trim();
       if(!msg) return; addMsg(msg, true); chatInput.value='';
       try{
-        const url = new URL(WEBHOOK_CHAT); url.searchParams.set('message', msg);
+        const url = new URL(WEBHOOK_CHAT);
+        url.searchParams.set('message', msg);
+        url.searchParams.set('sessionId', getSessionId());
         const res = await fetch(url.toString(), { method:'GET' });
         let reply = ''; const ct = res.headers.get('content-type') || '';
         if(ct.includes('application/json')){ const data = await res.json(); reply = data.response || data.result || JSON.stringify(data); }
