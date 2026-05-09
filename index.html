@@ -4,7 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Thesis Project — Data-Driven Decision Support</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/computer-modern-web-font@1.0.0/css/cmun-roman.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <!-- PDF.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- vis-network: open-source dynamic graph visualization library -->
@@ -30,7 +32,7 @@
   <style>
     :root{
       --bg:#fff; --fg:#000; --overlay:rgba(0,0,0,.96); --line:#000; --lightgray:#f2f2f2;
-      --font-serif:'CMU Serif','Computer Modern Roman','Times New Roman',serif;
+      --font-serif:'Open Sans',Arial,sans-serif;
       --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
     *{box-sizing:border-box}
@@ -101,11 +103,13 @@
     pre{background:#fff;border:0;margin:0;padding:12px;overflow:visible;font-family:var(--font-mono);font-size:13px;line-height:1.5}
     .demo-page{max-width:none;width:100%;height:100vh;overflow:hidden;padding:76px 24px 24px}
     .demo-page.active{display:flex;flex-direction:column}
-    .demo-layout{display:grid;grid-template-columns:var(--settings-width,300px) 8px minmax(280px,1fr) 8px minmax(260px,420px);flex:1;min-height:0;overflow:hidden}
-    .demo-layout.settings-collapsed{grid-template-columns:44px 8px minmax(280px,1fr) 8px minmax(260px,420px)}
+    .demo-layout{display:grid;grid-template-columns:var(--settings-width,300px) 8px minmax(280px,1fr) 8px minmax(260px,420px);flex:1;min-height:0;overflow:hidden;position:relative}
+    .demo-layout.settings-collapsed{grid-template-columns:26px 8px minmax(280px,1fr) 8px minmax(260px,420px)}
     .settings-panel,.chat-panel,.report-panel{border:1px solid #000;background:#fff;min-height:0;overflow:hidden}
     .settings-panel,.report-panel{display:flex;flex-direction:column}
     .settings-panel{position:relative}
+    .demo-layout.settings-collapsed .settings-panel{display:none}
+    .demo-layout.settings-collapsed #settingsSplitter{display:none}
     .settings-panel.collapsed .settings-scroll,.settings-panel.collapsed .settings-actions{display:none}
     .settings-toggle{border:0;border-bottom:1px solid #000;background:#fff;color:#000;padding:9px 10px;font-family:var(--font-serif);font-size:15px;text-align:left;cursor:pointer}
     .settings-panel.collapsed .settings-toggle{height:100%;border-bottom:0;writing-mode:vertical-rl;text-orientation:mixed;text-align:center}
@@ -122,6 +126,11 @@
     .chat-panel.disabled{background:var(--lightgray)}
     .chat-panel.disabled .chat-box,.chat-panel.disabled .chat-input{opacity:.35;pointer-events:none}
     .chat-disabled-message{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:#333;background:var(--lightgray);z-index:1}
+    .loading-overlay{position:absolute;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;gap:12px;text-align:center;padding:24px;color:#333;background:var(--lightgray);z-index:3}
+    .loading-spinner{width:34px;height:34px;border:2px solid #bbb;border-top-color:#000;border-radius:999px;animation:spin .8s linear infinite}
+    .loading-text{font-size:14px}
+    .chat-panel.loading .chat-loading,.report-viewer.loading .report-loading{display:flex}
+    @keyframes spin{to{transform:rotate(360deg)}}
     .chat-panel:not(.disabled) .chat-disabled-message{display:none}
     .chat-box{border:1px solid #000;flex:1;min-height:0;overflow:auto;padding:16px;background:#fff}
     .msg{margin:10px 0}
@@ -139,6 +148,11 @@
     .report-actions.hidden{display:none !important}
     .splitter{background:#fff;border:1px solid #000;border-top:0;border-bottom:0;cursor:col-resize;min-height:0}
     .splitter:hover,.splitter.dragging{background:var(--lightgray)}
+    .settings-edge-toggle{display:none;border:1px solid #000;background:#fff;color:#000;font-family:var(--font-serif);font-size:13px;writing-mode:vertical-rl;text-orientation:mixed;cursor:pointer}
+    .demo-layout.settings-collapsed .settings-edge-toggle{display:block}
+    .demo-layout.settings-collapsed .chat-panel{grid-column:3}
+    .demo-layout.settings-collapsed #reportSplitter{grid-column:4}
+    .demo-layout.settings-collapsed .report-panel{grid-column:5}
     .hidden{display:none !important}
     .relative{position:relative}
     .right-actions{float:right}
@@ -149,10 +163,10 @@
       .model-preview{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) minmax(260px,42%)}
       .model-source{border-right:0;border-bottom:1px solid #000}
       .demo-page{padding-left:16px;padding-right:16px}
-      .demo-layout,.demo-layout.settings-collapsed{grid-template-columns:1fr;grid-template-rows:minmax(220px,30%) 0 minmax(260px,1fr) 0 minmax(260px,1fr)}
+      .demo-layout{grid-template-columns:1fr;grid-template-rows:minmax(220px,30%) 0 minmax(260px,1fr) 0 minmax(260px,1fr)}
+      .demo-layout.settings-collapsed{grid-template-columns:1fr;grid-template-rows:30px 8px minmax(260px,1fr) 0 minmax(260px,1fr)}
       .splitter{display:none}
-      .settings-panel.collapsed{min-height:44px}
-      .settings-panel.collapsed .settings-toggle{writing-mode:horizontal-tb;height:auto;border-bottom:0}
+      .settings-edge-toggle{writing-mode:horizontal-tb}
     }
   </style>
 </head>
@@ -231,6 +245,7 @@
 
     <section class="page demo-page" id="page-demo" aria-labelledby="demoTitle">
       <div class="demo-layout" id="demoLayout">
+        <button id="settingsEdgeToggle" class="settings-edge-toggle" type="button" aria-label="Show settings">Settings</button>
         <aside class="settings-panel" id="settingsPanel" aria-label="Report settings">
           <button id="settingsToggle" class="settings-toggle" type="button" aria-expanded="true">Settings</button>
           <div class="settings-scroll">
@@ -270,6 +285,10 @@
 
         <section class="chat-panel disabled" id="chatPanel" aria-label="Chat">
           <div class="chat-disabled-message">Generate a report to activate chat.</div>
+          <div class="loading-overlay chat-loading">
+            <div class="loading-spinner" aria-hidden="true"></div>
+            <div class="loading-text">Generating report...</div>
+          </div>
           <div id="chatBox" class="chat-box" aria-live="polite"></div>
           <div class="chat-input">
             <input id="chatInput" type="text" placeholder="Type a message…" />
@@ -281,6 +300,10 @@
         <aside class="report-panel" aria-label="Generated PDF report">
           <div id="reportViewer" class="report-viewer">
             <div class="report-empty">Choose the settings and generate a report.</div>
+            <div class="loading-overlay report-loading">
+              <div class="loading-spinner" aria-hidden="true"></div>
+              <div class="loading-text">Generating report...</div>
+            </div>
           </div>
           <div id="reportActions" class="report-actions hidden">
             <a id="downloadReportBtn" class="btn" href="#" download="thesis-report.pdf">Download PDF</a>
@@ -871,13 +894,18 @@
     const demoLayout = document.getElementById('demoLayout');
     const settingsPanel = document.getElementById('settingsPanel');
     const settingsToggle = document.getElementById('settingsToggle');
+    const settingsEdgeToggle = document.getElementById('settingsEdgeToggle');
     const settingsSplitter = document.getElementById('settingsSplitter');
     const reportSplitter = document.getElementById('reportSplitter');
     let settingsWidth = 300;
     let reportWidth = 420;
 
     function setDemoColumns(){
-      if (!demoLayout || demoLayout.classList.contains('settings-collapsed')) return;
+      if (!demoLayout) return;
+      if (demoLayout.classList.contains('settings-collapsed')){
+        demoLayout.style.gridTemplateColumns = `26px 8px minmax(280px, 1fr) 8px ${reportWidth}px`;
+        return;
+      }
       demoLayout.style.gridTemplateColumns = `${settingsWidth}px 8px minmax(280px, 1fr) 8px ${reportWidth}px`;
     }
 
@@ -908,14 +936,22 @@
       });
     }
 
+    function setSettingsCollapsed(collapsed){
+      if (!settingsPanel || !demoLayout || !settingsToggle) return;
+      settingsPanel.classList.toggle('collapsed', collapsed);
+      demoLayout.classList.toggle('settings-collapsed', collapsed);
+      settingsToggle.setAttribute('aria-expanded', String(!collapsed));
+      settingsToggle.textContent = collapsed ? 'Show Settings' : 'Settings';
+      setDemoColumns();
+    }
+
     if (settingsToggle && settingsPanel && demoLayout){
       settingsToggle.addEventListener('click', () => {
-        const collapsed = settingsPanel.classList.toggle('collapsed');
-        demoLayout.classList.toggle('settings-collapsed', collapsed);
-        settingsToggle.setAttribute('aria-expanded', String(!collapsed));
-        settingsToggle.textContent = collapsed ? 'Show Settings' : 'Settings';
-        if (!collapsed) setDemoColumns();
+        setSettingsCollapsed(!demoLayout.classList.contains('settings-collapsed'));
       });
+    }
+    if (settingsEdgeToggle){
+      settingsEdgeToggle.addEventListener('click', () => setSettingsCollapsed(false));
     }
 
     setupHorizontalSplitter(settingsSplitter, (delta, startSettingsWidth) => {
@@ -933,6 +969,11 @@
     const downloadReportBtn = document.getElementById('downloadReportBtn');
     let reportPdfUrl = null;
 
+    function setReportLoading(isLoading){
+      if (chatPanel) chatPanel.classList.toggle('loading', isLoading);
+      if (reportViewer) reportViewer.classList.toggle('loading', isLoading);
+    }
+
     function getReportSettings(){
       const reportMode = document.getElementById('settingsReportMode');
       return {
@@ -947,7 +988,7 @@
 
     function showReportPlaceholder(text){
       if (!reportViewer) return;
-      reportViewer.innerHTML = `<div class="report-empty">${text}</div>`;
+      reportViewer.innerHTML = `<div class="report-empty">${text}</div><div class="loading-overlay report-loading"><div class="loading-spinner" aria-hidden="true"></div><div class="loading-text">Generating report...</div></div>`;
       if (reportActions) reportActions.classList.add('hidden');
       if (chatPanel) chatPanel.classList.add('disabled');
     }
@@ -979,6 +1020,7 @@
         reportBtn.textContent = 'Generating...';
         reportBtn.disabled = true;
         showReportPlaceholder('Generating report...');
+        setReportLoading(true);
         try{
           const res = await fetch(WEBHOOK_REPORT, {
             method:'POST',
@@ -994,7 +1036,11 @@
           showReportPlaceholder('Choose the settings and generate a report.');
           alert('Could not generate report: ' + err.message);
         }
-        finally { reportBtn.textContent = original; reportBtn.disabled = false; }
+        finally {
+          setReportLoading(false);
+          reportBtn.textContent = original;
+          reportBtn.disabled = false;
+        }
       });
     }
   </script>
