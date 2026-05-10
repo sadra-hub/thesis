@@ -143,9 +143,7 @@
     .chat-input button:hover{background:#000;color:#fff}
     .report-viewer{flex:1;min-height:0;overflow:hidden;background:var(--lightgray);position:relative}
     .report-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:#333}
-    .report-viewer iframe,.report-viewer embed{width:100%;height:100%;border:0;display:block;background:#fff}
-    .report-actions{border-top:1px solid #000;padding:12px 14px;background:#fff;display:flex;justify-content:flex-end}
-    .report-actions.hidden{display:none !important}
+    .report-viewer iframe{width:100%;height:100%;border:0;display:block;background:#fff}
     .splitter{background:#fff;border-top:0;border-bottom:0;cursor:col-resize;min-height:0}
     .splitter:hover,.splitter.dragging{background:var(--lightgray)}
     .settings-edge-toggle{display:none;border:1px solid #000;background:#fff;color:#000;font-family:var(--font-serif);font-size:13px;writing-mode:vertical-rl;text-orientation:mixed;cursor:pointer}
@@ -297,16 +295,13 @@
         </section>
         <div class="splitter" id="reportSplitter" role="separator" aria-label="Resize report viewer"></div>
 
-        <aside class="report-panel" aria-label="Generated PDF report">
+        <aside class="report-panel" aria-label="Generated HTML report">
           <div id="reportViewer" class="report-viewer">
             <div class="report-empty">Choose the settings and generate a report.</div>
             <div class="loading-overlay report-loading">
               <div class="loading-spinner" aria-hidden="true"></div>
               <div class="loading-text">Generating report...</div>
             </div>
-          </div>
-          <div id="reportActions" class="report-actions hidden">
-            <a id="downloadReportBtn" class="btn" href="#" download="thesis-report.pdf">Download PDF</a>
           </div>
         </aside>
       </div>
@@ -867,6 +862,8 @@
     const chatBox = document.getElementById('chatBox');
     const chatInput = document.getElementById('chatInput');
     const sendBtn = document.getElementById('sendBtn');
+    let currentReportHtml = '';
+
     function addMsg(text, me=false){
       const wrap = document.createElement('div');
       wrap.className = 'msg' + (me ? ' me' : '');
@@ -874,20 +871,46 @@
       b.className = 'bubble'; b.textContent = text;
       wrap.appendChild(b); chatBox.appendChild(wrap); chatBox.scrollTop = chatBox.scrollHeight;
     }
+
+    function getChatReply(data){
+      if (typeof data === 'string') return data;
+      if (data && typeof data.response === 'string') return data.response;
+      if (data && typeof data.reply === 'string') return data.reply;
+      if (data && typeof data.result === 'string') return data.result;
+      return data ? JSON.stringify(data) : '';
+    }
+
     async function sendMessage(){
       if (chatPanel && chatPanel.classList.contains('disabled')) return;
       const msg = chatInput.value.trim();
       if(!msg) return; addMsg(msg, true); chatInput.value='';
+      if (sendBtn) sendBtn.disabled = true;
       try{
-        const url = new URL(WEBHOOK_CHAT);
-        url.searchParams.set('message', msg);
-        url.searchParams.set('sessionId', getSessionId());
-        const res = await fetch(url.toString(), { method:'GET' });
-        let reply = ''; const ct = res.headers.get('content-type') || '';
-        if(ct.includes('application/json')){ const data = await res.json(); reply = data.response || data.result || JSON.stringify(data); }
-        else { reply = await res.text(); }
-        addMsg(reply || '[No response]');
-      }catch(err){ addMsg('[Error] ' + err.message); }
+        const res = await fetch(WEBHOOK_CHAT, {
+          method:'POST',
+          headers:{ 'Content-Type':'application/json' },
+          body: JSON.stringify({
+            sessionId: getSessionId(),
+            message: msg,
+            html: currentReportHtml
+          })
+        });
+        if(!res.ok) throw new Error('Chat request failed: ' + res.status);
+
+        const ct = res.headers.get('content-type') || '';
+        if(ct.includes('application/json')){
+          const data = await res.json();
+          addMsg(getChatReply(data) || '[No response]');
+          const updatedHtml = getReportHtmlFromData(data);
+          if (updatedHtml) showReportHtml(updatedHtml);
+        } else {
+          addMsg(await res.text() || '[No response]');
+        }
+      }catch(err){
+        addMsg('[Error] ' + err.message);
+      } finally {
+        if (sendBtn) sendBtn.disabled = false;
+      }
     }
     sendBtn.addEventListener('click', sendMessage);
     chatInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') sendMessage(); });
@@ -967,9 +990,6 @@
     // ===== REPORT BUTTON =====
     const reportBtn = document.getElementById('reportBtn');
     const reportViewer = document.getElementById('reportViewer');
-    const reportActions = document.getElementById('reportActions');
-    const downloadReportBtn = document.getElementById('downloadReportBtn');
-    let reportPdfUrl = null;
 
     function setReportLoading(isLoading){
       if (chatPanel) chatPanel.classList.toggle('loading', isLoading);
@@ -990,23 +1010,92 @@
 
     function showReportPlaceholder(text){
       if (!reportViewer) return;
+      currentReportHtml = '';
       reportViewer.innerHTML = `<div class="report-empty">${text}</div><div class="loading-overlay report-loading"><div class="loading-spinner" aria-hidden="true"></div><div class="loading-text">Generating report...</div></div>`;
-      if (reportActions) reportActions.classList.add('hidden');
       if (chatPanel) chatPanel.classList.add('disabled');
     }
 
-    function showReportPdf(blob){
-      if (!reportViewer || !downloadReportBtn || !reportActions) return;
-      if (reportPdfUrl) URL.revokeObjectURL(reportPdfUrl);
-      reportPdfUrl = URL.createObjectURL(blob);
+    function makeResponsiveReportHtml(html){
+      const styleOpen = '<' + 'style>';
+      const styleClose = '</' + 'style>';
+      const headOpen = '<' + 'head>';
+      const headClose = '</' + 'head>';
+      const bodyOpen = '<' + 'body>';
+      const bodyClose = '</' + 'body>';
+      const htmlOpen = '<' + 'html>';
+      const htmlClose = '</' + 'html>';
+      const responsiveStyle = `
+        ${styleOpen}
+          html, body {
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            overflow-x: hidden;
+            box-sizing: border-box;
+          }
+          *, *::before, *::after {
+            box-sizing: inherit;
+            max-width: 100%;
+          }
+          body {
+            padding: 16px;
+            overflow-wrap: anywhere;
+          }
+          img, svg, video, canvas, iframe, embed, object, table, pre, code {
+            max-width: 100%;
+          }
+          img, svg, video, canvas, iframe, embed, object {
+            height: auto;
+          }
+          pre, code {
+            white-space: pre-wrap;
+          }
+          table {
+            width: 100%;
+            table-layout: auto;
+            border-collapse: collapse;
+          }
+        ${styleClose}`;
+
+      if (/<head[^>]*>/i.test(html)){
+        return html.replace(/<head([^>]*)>/i, `<head$1>${responsiveStyle}`);
+      }
+      if (/<html[^>]*>/i.test(html)){
+        return html.replace(/<html([^>]*)>/i, `<html$1>${headOpen}${responsiveStyle}${headClose}`);
+      }
+      return `<!doctype html>${htmlOpen}${headOpen}${responsiveStyle}${headClose}${bodyOpen}${html}${bodyClose}${htmlClose}`;
+    }
+
+    function getReportHtmlFromData(data){
+      if (typeof data === 'string') return data;
+      if (data && typeof data.html === 'string') return data.html;
+      if (data && typeof data.updatedHtml === 'string') return data.updatedHtml;
+      if (data && typeof data.reportHtml === 'string') return data.reportHtml;
+      if (data && typeof data.report === 'string') return data.report;
+      return '';
+    }
+
+    function extractReportHtml(data){
+      return getReportHtmlFromData(data) || JSON.stringify(data, null, 2);
+    }
+
+    async function readReportHtmlResponse(res){
+      const ct = res.headers.get('content-type') || '';
+      if (ct.includes('application/json')){
+        return extractReportHtml(await res.json());
+      }
+      return res.text();
+    }
+
+    function showReportHtml(html){
+      if (!reportViewer) return;
+      currentReportHtml = html;
       reportViewer.innerHTML = '';
       const frame = document.createElement('iframe');
-      frame.title = 'Generated thesis report';
-      frame.src = reportPdfUrl;
+      frame.title = 'Generated HTML report';
+      frame.setAttribute('sandbox', '');
+      frame.srcdoc = makeResponsiveReportHtml(html);
       reportViewer.appendChild(frame);
-      downloadReportBtn.href = reportPdfUrl;
-      downloadReportBtn.download = 'thesis-report.pdf';
-      reportActions.classList.remove('hidden');
       if (chatPanel) chatPanel.classList.remove('disabled');
     }
 
@@ -1030,10 +1119,7 @@
             body: JSON.stringify(payload)
           });
           if(!res.ok) throw new Error('Report request failed: ' + res.status);
-          const blob = await res.blob();
-          const ct = res.headers.get('content-type') || 'application/octet-stream';
-          if (!ct.includes('pdf') && !ct.includes('octet-stream')) throw new Error('Expected a PDF response, got: ' + ct);
-          showReportPdf(ct.includes('pdf') ? blob : new Blob([blob], { type:'application/pdf' }));
+          showReportHtml(await readReportHtmlResponse(res));
         }catch(err){
           showReportPlaceholder('Choose the settings and generate a report.');
           alert('Could not generate report: ' + err.message);
